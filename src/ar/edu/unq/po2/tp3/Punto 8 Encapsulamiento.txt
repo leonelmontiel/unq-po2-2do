@@ -1,0 +1,8 @@
+1. Responder: Si un objeto cualquiera que le pide la edad a una Persona: ¿Conoce cómo ésta calcula u obtiene tal valor? ¿Cómo se llama
+el mecanismo de abstracción que permite esto?
+
+
+	Si un objeto cualquiera pide la edad de una Persona, este objeto no sabrá como está implementado el método, solo conocerá el valor que
+	retorna el llamado a getEdad(). El cálculo realizado dentro del cuerpo del método solo es conocido por el objeto Persona.
+	El mecanismo de abstracción que permite esto se denomina Encapsulamiento, ya que la clase Persona solo permite que sea visible el valor
+	que retorna getEdad(), pero bloquea la visibilidad de setEdad(), evitando que el usuario u otro objeto modifique su valor.

@@ -1,0 +1,13 @@
+1. ¿Cómo están organizadas en el sistema de archivos?
+
+	A pesar de que en el Package Explorer los tres paquetes se encuentren al mismo nivel de la jerarquía, dentro del sistema de
+	archivos existe una carpeta "model" en donde allí alberga un archivo correspondiente a una clase del paquete, y
+	dos carpetas más llamadas "gui" y "stack". 
+
+-------
+
+2. ¿Encuentra alguna relación entre el nombre del paquete y la ubicación de los archivos fuentes de las clases (.java)
+y los archivos compilados (.class)?
+
+	La relación que encuentro es que el nombre del paquete permite enlazar el .java y el .class de cada una de las clases. Un archivo contiene el
+	código fuente de la clase y el otro realiza la compilación de este.

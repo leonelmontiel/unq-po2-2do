@@ -1,0 +1,30 @@
+1. ¿Qué son los tipos de datos primitivos?
+
+	Los tipos de datos primitivos son tipos de datos originales del lenguaje, son modificadores de variables, que justamente determinan de qué
+	tipo es el valor que estas van a almacenar.
+	Esto se debe a que Java es estáticamente tipado, se necesita indicar el tipo antes de declarar una variable.
+	
+	-----
+
+2. ¿Cuál es la diferencia entre un int y un Integer?
+
+	La diferencia es que un int es un dato primitivo, y un Integer es una clase que permite convertir un int en un objeto.
+	
+	-----
+
+3. ¿Si se define una variable de instancia de tipo int cual sería su valor predeterminado? ¿Y si se
+define una de tipo Integer? Haga la prueba en Eclipse.
+
+	El valor predeterminado de un int es 0. Por otro lado, el de un integer es null. En la clase "PruebaPunto3" de este mismo paquete, podemos
+	ver una prueba de ello, donde se puede ver en pantalla:
+	
+	int: 0
+	Integer: null
+	
+	-----
+
+4. Responder la pregunta del punto anterior (3), pero ahora en lugar de definir una variable de
+instancia se define una variable de método.
+
+	Los valores predeterminados para los dos tipos, son los mismos que cuando se define una variable de instancia. La diferencia es que en una
+	variable local se está obligado a darle un valor inicial (0 para int y null para Integer), sino no compila.
