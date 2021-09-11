@@ -1,7 +1,6 @@
 package ar.edu.unq.po2.tp3;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Counter {
