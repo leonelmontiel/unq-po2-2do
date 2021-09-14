@@ -56,5 +56,36 @@ class RectanguloTest {
 		
 		assertEquals(perimetro, 16);
 	}
+	
+	@Test
+	void testRectanguloNoEsVertical() {
+		boolean esVertical = rectangulo.esVertical();
+		
+		assertFalse(esVertical);
+	}
+	
+	@Test
+	void testRectanguloEsHorizontal() {
+		boolean esHorizontal = rectangulo.esHorizontal();
+		
+		assertTrue(esHorizontal);
+	}
+	
+	// para estos dos siguientes test, creo un nuevo rectángulo con otros valores de base y altura
+	@Test
+	void testRectanguloEsVertical() {
+		Rectangulo rect = new Rectangulo(2, 10);
+		boolean esVertical = rect.esVertical();
+		
+		assertTrue(esVertical);
+	}
+	
+	@Test
+	void testRectanguloNoEsHorizontal() {
+		Rectangulo rect = new Rectangulo(2, 10);
+		boolean esHorizontal = rect.esHorizontal();
+		
+		assertFalse(esHorizontal);
+	}
 
 }

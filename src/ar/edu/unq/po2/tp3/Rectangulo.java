@@ -80,6 +80,14 @@ public class Rectangulo {
 		return (2 * getBase()) + (2 * getAltura());
 	}
 
+	public boolean esVertical() {
+		return getAltura() > getBase();
+	}
+
+	public boolean esHorizontal() {
+		return getBase() > getAltura();
+	}
+
 	
 
 }
