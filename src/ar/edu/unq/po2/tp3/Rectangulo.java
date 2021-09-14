@@ -2,16 +2,28 @@ package ar.edu.unq.po2.tp3;
 
 
 public class Rectangulo {
+	private int base;
+	private int altura;
 	private Punto puntoA;
 	private Punto puntoB;
 	private Punto puntoC;
-	private Punto puntoD;
+	private Punto puntoD;	
 
 	public Rectangulo(int b, int a) { // tamaño: base x altura
-		this.setPuntoA(); // la creación del rectángulo comienza en el punto origen (0, 0)
-		this.setPuntoB(b, a);
-		this.setPuntoC(b, a);
-		this.setPuntoD(b, a);
+		setBase(b);
+		setAltura(a);
+		setPuntoA(); // la creación del rectángulo comienza en el punto origen (0, 0)
+		setPuntoB(b, a);
+		setPuntoC(b, a);
+		setPuntoD(b, a);
+	}
+
+	private void setBase(int b) {
+		this.base = b;		
+	}
+
+	private void setAltura(int a) {
+		this.altura = a;		
 	}
 
 	public Punto getPuntoA() {
@@ -51,5 +63,23 @@ public class Rectangulo {
 		int coordY = a;
 		this.puntoD = new Punto(coordX, coordY);
 	}
+
+	public int getArea() {
+		return getBase() * getAltura();
+	}
+	
+	private int getBase() {
+		return this.base;
+	}
+
+	private int getAltura() {
+		return this.altura;
+	}
+
+	public int getPerimetro() {
+		return (2 * getBase()) + (2 * getAltura());
+	}
+
+	
 
 }

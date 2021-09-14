@@ -42,5 +42,19 @@ class RectanguloTest {
 		 assertEquals(getPuntoC.getCoordenadas(), puntoC.getCoordenadas());
 		 assertEquals(getPuntoD.getCoordenadas(), puntoD.getCoordenadas());
 	}
+	
+	@Test
+	void testArea() {
+		int area = rectangulo.getArea();
+		
+		assertEquals(area, 15);
+	}
+	
+	@Test
+	void testPerimetro() {
+		int perimetro = rectangulo.getPerimetro();
+		
+		assertEquals(perimetro, 16);
+	}
 
 }
