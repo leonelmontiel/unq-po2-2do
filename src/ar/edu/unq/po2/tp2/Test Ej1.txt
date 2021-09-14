@@ -1,0 +1,41 @@
+import empresa.*
+import empleado.*
+import recibo.*
+import concepto.*
+
+describe "Inicializacion" {
+	const contratado
+	const trabajadorPer
+	const trabajadorTemp
+	const empresa
+	
+	fixture {
+		contratado = new EmpleadoContratado(nombre = "Jorge", direccion = "sadas", estadoCivil = casado, fechaDeNacimiento = new Date(day = 25, month = 1, year = 1996), sueldoBasico = 1500, numContrato = 2, medioDePago = "Cheque")
+		
+		trabajadorPer = new EmpleadoPermanente(nombre = "Leo", direccion = "sadas", estadoCivil = casado, fechaDeNacimiento = new Date(day = 25, month = 1, year = 1996), sueldoBasico = 1500, cantHijos = 2, antiguedad = 52)
+			
+		trabajadorTemp = new EmpleadoTemporario(nombre = "Luna", direccion = "sadas", estadoCivil = soltero, fechaDeNacimiento = new Date(day = 15, month = 12, year = 1995), sueldoBasico = 1000, fechaDesignacion = new Date(),cantHorasExtras = 20)
+
+		empresa = new Empresa(nombre = "tec", cuit = 123456, empleados = #{})
+		
+		empresa.addEmpleado(contratado)
+		empresa.addEmpleado(trabajadorPer)
+		empresa.addEmpleado(trabajadorTemp)
+	}
+
+	test "liquidación de sueldos" {
+		empresa.liquidacionDeSueldos()
+		assert.equals(1, trabajadorPer.recibos().size())
+		assert.equals(1, trabajadorTemp.recibos().size())
+		assert.equals(1, contratado.recibos().size())
+		empresa.liquidacionDeSueldos()
+		assert.equals(2, trabajadorPer.recibos().size())
+		assert.equals(2, trabajadorTemp.recibos().size())
+		assert.equals(2, contratado.recibos().size())
+	}
+	
+	test "total de sueldos" {
+		empresa.montoTotal()
+		assert.equals(1450 + 3335 + 1430, empresa.montoTotal())
+	}
+}

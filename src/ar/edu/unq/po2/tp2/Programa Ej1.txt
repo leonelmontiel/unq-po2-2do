@@ -1,0 +1,145 @@
+import empleado.*
+import recibo.*
+
+class Empresa {
+	const nombre
+	const cuit
+	var property empleados = #{}
+	
+	method addEmpleado(empleado) = self.empleados().add(empleado)
+
+	method montoTotal() {
+		return empleados.sum({empleado => empleado.sueldoNeto()})
+	}
+	method montoSueldosBrutos() {
+		return empleados.sum({empleado => empleado.sueldoBruto()})
+	}
+	method montoTotalRetenciones() {
+		return empleados.sum({empleado => empleado.retenciones()})
+	}
+	
+	method liquidacionDeSueldos() {
+		empleados.forEach({empleado => empleado.reciboDeHaberes()})
+	}
+}
+
+---------------------------------------------------------
+
+import recibo.*
+
+class Empleado {
+	const property nombre
+	const property direccion
+	var estadoCivil
+	const property fechaDeNacimiento
+	var property sueldoBasico
+	var property recibos = []
+	
+	method edad() {
+		const hoy = new Date()
+		
+		return hoy.year() - fechaDeNacimiento.year()
+	}
+	method sueldoNeto() = return self.sueldoBruto() - self.retenciones()
+	method retenciones() = return self.descuentoObraSocial() + self.descuentoAportesJubilatorios()
+	method gastosAdministrativos() = return 0
+	
+	method sueldoBruto()
+	method descuentoObraSocial()
+	method descuentoAportesJubilatorios()
+		
+	// problema con hacer que el empleado genere su recibo de sueldo y lo guarde
+	
+	method reciboDeHaberes() {
+		const recibo = new ReciboDeHaberes(empleado = self, fechaEmision = new Date())
+		
+		self.recibos().add(recibo)
+		return recibo
+	} 
+}
+
+class EmpleadoPermanente inherits Empleado {
+	var property cantHijos
+	var property antiguedad
+	
+	override method sueldoBruto() = return self.sueldoBasico() + self.salarioFamiliar()
+	override method descuentoObraSocial() = return ((self.sueldoBruto() * 10) /100) + cantHijos * 20
+	override method descuentoAportesJubilatorios() = return (self.sueldoBruto() * 15) / 100 
+	
+	method salarioFamiliar() = self.asignacionPorHijo() + self.asignacionPorConyuge() + self.bonoPorAntiguedad()
+	method asignacionPorHijo() = return cantHijos * 150
+	method asignacionPorConyuge() = return if (self.tieneConyuge()) 100 else 0
+	method bonoPorAntiguedad() = return antiguedad * 50
+	
+	method tieneConyuge() = return estadoCivil == casado
+	
+}
+
+class EmpleadoTemporario inherits Empleado {
+	const fechaDesignacion
+	var property cantHorasExtras
+	
+	override method sueldoBruto() = return self.sueldoBasico() + (cantHorasExtras * 40) // 1800
+	override method descuentoObraSocial() = return ((self.sueldoBruto() * 10) /100) + self.descuentoMayor50Anios() // 180
+	override method descuentoAportesJubilatorios() = return ((self.sueldoBruto() * 5) /100) + (cantHorasExtras * 5) // 190
+	
+	method superaLos50Anios() = return self.edad() > 50
+	method descuentoMayor50Anios() = return if (self.superaLos50Anios()) 25 else 0
+}
+
+class EmpleadoContratado inherits Empleado {
+	const numContrato
+	const medioDePago // string: cheque o transferencia
+	
+	override method gastosAdministrativos() = return 50
+	
+	override method sueldoBruto() = return self.sueldoBasico()
+	override method retenciones() = super() + self.gastosAdministrativos()
+	override method descuentoObraSocial() = return 0 //es recién contratado, no tiene
+	override method descuentoAportesJubilatorios() = return 0 //es recién contratado, no tiene
+}
+
+object soltero {}
+object casado {}
+
+----------------------------------------------
+
+import empleado.*
+import concepto.*
+
+class ReciboDeHaberes {
+	const empleado
+	const fechaEmision
+	var property conceptos = #{}
+	
+	method nombreEmpleado() = return empleado.nombre()
+	method direccion() = return empleado.direccion()
+	method sueldoBruto() = return empleado.sueldoBruto()
+	method sueldoNeto() = return empleado.sueldoNeto()
+	
+	method addConcepto(concepto) = self.conceptos().add(concepto)
+	
+	method desgloceDeConceptos(){
+		const sueldoBruto = new Concepto(descripcion = "Sueldo Bruto", monto = empleado.sueldoBruto())
+		const sueldoNeto = new Concepto(descripcion = "Sueldo Neto", monto = empleado.sueldoNeto())
+		const obraSocial = new Concepto(descripcion = "Descuento por obra social", monto = empleado.descuentoObraSocial())
+		const aportes = new Concepto(descripcion = "Descuento por aporte jubilatorio", monto = empleado.descuentoAportesJubilatorios())
+		const gastosAdmCon = new Concepto(descripcion = "Gastos administrativos contractuales", monto = empleado.gastosAdministrativos())
+		
+		self.addConcepto(sueldoBruto)
+		self.addConcepto(sueldoNeto)
+		self.addConcepto(obraSocial)
+		self.addConcepto(aportes)
+		self.addConcepto(gastosAdmCon)
+		return self.conceptos()
+	} 
+}
+
+
+------------------------------------------------
+
+class Concepto {
+	const property descripcion
+	const property monto
+	
+}

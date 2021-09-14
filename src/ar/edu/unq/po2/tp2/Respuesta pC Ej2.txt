@@ -1,0 +1,2 @@
+No fue necesario modificar la clase Empresa, ya que los métodos instanciados en ella no se vieron afectados por la inclusión de una subclase de Empleado.
+Por otra parte, sí fue conveniente cambiar y agregar algunos métodos en la clase padre Empleado. Por ejemplo, el nuevo EmpleadoContratado no percibe descuentos por obra social ni por aportes jubilatorios, entonces se tuvieron que inicializar esas instancias en 0. De todas maneras en las otras subclases se realizan overrides para establecer los valores necesarios.
