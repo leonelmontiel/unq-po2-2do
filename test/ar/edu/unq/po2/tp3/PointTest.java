@@ -30,7 +30,7 @@ class PointTest {
 	
 	@Test
 	void testCoordEstablecida() {
-		// las coordenada de prueba establecidas en el test se encuentran en el setUp
+		// la coordenada de prueba establecida en el test se encuentra en el setUp
 		coord = puntoB.getCoordenadas();
 		assertEquals(coord, coordCuatroCinco);
 	}
