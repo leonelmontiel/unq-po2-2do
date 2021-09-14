@@ -80,6 +80,7 @@ public class Rectangulo {
 		return (2 * getBase()) + (2 * getAltura());
 	}
 
+	// estos métodos de posicionamiento son inútiles para una clase cuadrado, ya que no se puede lo puede considerar vertical u horizontal
 	public boolean esVertical() {
 		return getAltura() > getBase();
 	}
