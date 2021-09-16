@@ -15,18 +15,22 @@ public class Counter {
 		return numeros.size();		
 	}
 	
-	Integer getEvenOcurrences() {
-		int impares = 0;
+	Integer getEvenOcurrences() { //par
+		int pares = 0;
 		
 		for (int num:numeros) {
-			if (num % 2 == 1) {
-				impares++;
+			if (this.esPar(num)) {
+				pares++;
 			}
 		}
-		return impares;
+		return pares;
 	}
 	
-	Integer getOddOcurrences() {		
+	private boolean esPar(int num) {
+		return num % 2 == 0;
+	}
+
+	Integer getOddOcurrences() { //impar		
 		return (int) (cantTotal() - getEvenOcurrences());
 	}
 	

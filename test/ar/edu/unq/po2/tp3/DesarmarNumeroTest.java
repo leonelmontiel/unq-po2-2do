@@ -23,10 +23,39 @@ class DesarmarNumeroTest {
 	}
 
 	@Test
-	void test() {
+	void testNumConMasPares() {
 		int n = desarmador.numConMasPares(arregloNumeros);
 		
-		assertEquals(n, 6248);
+		assertEquals(6248, n);
+	}
+	
+	@Test
+	void testNumComMasPares() {
+		int i = 6248;
+		int j = 4567;
+		
+		assertEquals(6248, desarmador.numeroConMasParesEntre(i, j));
+	}
+	
+	@Test
+	void tesCantParesDeConCuatroPares() {
+		int n = 6248;
+		
+		assertEquals(4, desarmador.cantParesDe(n));
+	}
+	
+	@Test
+	void tesCantParesDeConUnPar() {
+		int n = 3525;
+		
+		assertEquals(1, desarmador.cantParesDe(n));
+	}
+	
+	@Test
+	void tesCantDeCifras() {
+		int n = 6248;
+		
+		assertEquals(4, desarmador.cantCifras(n));
 	}
 
 }
