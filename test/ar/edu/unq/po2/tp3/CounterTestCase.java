@@ -35,24 +35,24 @@ private Counter counter;
 		// Getting the even occurrences
 		int amount = counter.getEvenOcurrences();
 		// I check the amount is the expected one
-		assertEquals(amount, 9);
+		assertEquals(1, amount);
 	}
 
 	@Test
 	public void testCantidadTotal() {
 		long amount = counter.cantTotal();
-		assertEquals(amount, 10);
+		assertEquals(10, amount);
 	}
 	
 	@Test
 	public void testOddNumbers() {
 		int amount = counter.getOddOcurrences();
-		assertEquals(amount, 1);
+		assertEquals(9, amount);
 	}
 	
 	@Test
 	public void testMultiplesOf() {
-		long amount = counter.multiplesOf(9);
-		assertEquals(amount, 7);
+		long amount = counter.multiplesOf(3);
+		assertEquals(2, amount);
 	}
 }
