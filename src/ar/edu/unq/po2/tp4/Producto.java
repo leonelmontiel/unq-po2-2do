@@ -8,6 +8,11 @@ public class Producto {
 	protected boolean esPrecioCuidado;
 	
 	public Producto() {}
+	
+	public Producto(String nombre, double precio) {
+		setNombre(nombre);
+		setPrecio(precio);
+	}
 
 	public Producto(String nombre, double precio, boolean pCuidado) {
 		setNombre(nombre);
@@ -25,11 +30,6 @@ public class Producto {
 
 	private void setNombre(String nombre) {
 		this.nombre = nombre;		
-	}
-
-	public Producto(String nombre, double precio) {
-		setNombre(nombre);
-		setPrecio(precio);
 	}
 
 	public Object getNombre() {
