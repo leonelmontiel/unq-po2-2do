@@ -2,14 +2,14 @@ package ar.edu.unq.po2.tp4;
 
 public class ProductoPrimeraNecesidad extends Producto{
 
-	public ProductoPrimeraNecesidad(String nombre, double precio, boolean pCuidado) {
+	public ProductoPrimeraNecesidad(String nombre, double precio, boolean pCuidado, double descuento) {
 		super();
-		setPrecio(precio);
+		setPrecio(precio, descuento);
 	}
 	
-	@Override
-	protected void setPrecio(double precio) {
-		this.precio = precio * 0.9;
+	private void setPrecio(double precio, double descuento) {
+		double formula = 1 - (descuento / 100);
+		this.precio = precio * (formula);
 	}
 
 }

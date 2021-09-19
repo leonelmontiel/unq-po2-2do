@@ -11,12 +11,19 @@ public class ProductoPrimeraNecesidadTest {
 	
 	@BeforeEach
 	public void setUp() {
-		leche = new ProductoPrimeraNecesidad("Leche", 8d, false);
 	}
 	
 	@SuppressWarnings("removal")
 	@Test
-	public void testCalcularPrecio() {
+	public void testCalcularPrecioDescuentoDel10() {
+		leche = new ProductoPrimeraNecesidad("Leche", 8d, false, 10);
 		assertEquals(new Double(7.2), leche.getPrecio());
+	}
+	
+	@SuppressWarnings("removal")
+	@Test
+	public void testCalcularPrecioDescuentoDel25() {
+		leche = new ProductoPrimeraNecesidad("Leche", 8d, false, 25);
+		assertEquals(new Double(6), leche.getPrecio());
 	}
 }
