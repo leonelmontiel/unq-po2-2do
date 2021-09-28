@@ -1,0 +1,27 @@
+1. ¿Qué ventajas, en cuanto a polimorfismo, brindan las interfaces en Java?
+
+Una de las ventajas principales en cuanto al polimorfismo, es que las interfaces funcionan como contratos entre clases. Por ejemplo, dos clases comparten un mismo mensaje, pero no el mismo estado y/o comportamiento como para ser heredadas de una misma súper clase. Entonces, definiendo una interfaz, estas logran compartir un mismo mensaje en dónde cada una lo implementará a su conveniencia (usando la palabra clave "implements" luego del nombre de la clase).
+Además es que una misma clase puede implentar "x" cantidad de interfaces.
+Otra ventaja es que una interfaz puede heredarse de otra interfaz (usando "extends"), la sintáxis es la misma que para heredar clases.
+También permite que un objeto pueda enviar mensajes a otro sin importar su tipo, porque cuando una clase implementa una interfaz, hace posesión de ese tipo y también del propio. Por ejemplo, si se define una impresora que imprime solo documentos, no va a poder realizar su trabajo con una foto. Pero esto seriá posible si definimos una interfaz llamada "Imprimible", hacemos que la clase "Documento" y la clase "Ilustración" compartan el método "imprimir()", y le indicamos a la impresora que ahora puede imprimir todo objetos que sea de tipo "Imprimible".
+
+2. ¿Por qué no siempre puedo utilizar clases abstractas para agrupar clases polimórficas?
+
+Porque quizás una clase extendida de una clase abstracta no necesite heredar los atributos o todos los métodos definidos en ella. Si se hace esto, la clase tendrá un comportamiento y/o estado que no debería tener. (?)
+
+3. ¿Qué ventajas tienen las clases abstractas sobre las interfaces?
+
+Las clases abstractas pueden definir atributos no finales e implementar métodos de antemano, mientras que las interfaces no admiten esto, ya que solo definen mensajes y constantes.
+Una clase abstracta puede proporcionar la implementación de una interfaz, pero una interfaz no puede proporcionar la implementación de una clase abstracta.
+
+4. ¿Se puede instanciar una interface?
+
+Las interfaces no se pueden instanciar. Solo es posible definirlas para que una clase las implemente, o ser extendidas por otras interfaces.
+
+5. ¿Por qué no es recomendable incrementar o modificar las firmas definidas en un interface?
+
+No es recomendable ya que al modificar una de las firmas, el contrato entre clases se quiebra. Es necesario que todas las clases involucradas también modifiquen esa misma firma que deberán implementar.
+
+6. ¿Por qué, en lenguajes como Smalltalk, no es necesaria la implementación de interfaces?
+
+Porque el polimorfismo es mucho mayor en Smalltalk o Wollok, ya que no son estáticamente tipados como Java. No hay problemas en pasar por parámetro cualquier tipo de dato. En Java es necesario crear una interfaz para agrupar clases y absorver el tipo de la interfaz, además del propio que contiene la clase.
