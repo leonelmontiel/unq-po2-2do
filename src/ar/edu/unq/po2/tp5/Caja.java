@@ -26,7 +26,7 @@ public class Caja {
 		return getMontoACobrar();
 	}
 
-	private double getMontoACobrar() {
+	public double getMontoACobrar() {
 		return this.montoACobrar;
 	}
 
