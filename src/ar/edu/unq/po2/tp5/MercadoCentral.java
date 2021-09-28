@@ -1,11 +1,10 @@
 package ar.edu.unq.po2.tp5;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.unq.po2.tp4.Producto;
-
 public class MercadoCentral {
-	List<Producto> stock;
+	List<Producto> stock = new ArrayList<Producto>();
 	
 	public void addProducto(Producto producto) {
 		stock.add(producto);
@@ -17,6 +16,10 @@ public class MercadoCentral {
 
 	public void decrementarStockDe(Producto producto) {
 		stock.remove(producto);		
+	}
+
+	public List<Producto> getStock() {
+		return this.stock;
 	}	
 
 }
