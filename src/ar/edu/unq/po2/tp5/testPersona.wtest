@@ -1,0 +1,18 @@
+import Persona.*
+
+test "testEdadDeUnaPersona" {
+	const persona = new Persona(nombre = "Leo", fechaNacimiento = new Date(day= 1, month=8, year = 1988))
+	assert.equals(33, persona.edad())
+}
+
+test "testMenorQueOtraPersona" {
+	const persona = new Persona(nombre ="Leo", fechaNacimiento = new Date(day=25, month=1, year=1996))
+	const otraPersona = new Persona(nombre ="alguien", fechaNacimiento = new Date(day= 1, month=8, year = 1988))
+	assert.that(persona.esMenorQue(otraPersona))
+}
+
+test "testNoEsMenorQueOtraPersona" {
+	const persona = new Persona(nombre ="Leo", fechaNacimiento = new Date(day=25, month=1, year=1996))
+	const otraPersona = new Persona(nombre ="alguien", fechaNacimiento = new Date(day= 1, month=8, year = 1988))
+	assert.notThat(otraPersona.esMenorQue(persona))
+}

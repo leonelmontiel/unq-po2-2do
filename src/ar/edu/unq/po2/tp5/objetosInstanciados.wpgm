@@ -1,0 +1,20 @@
+import Persona.*
+import Mascota.*
+
+program objetosInstanciados {
+
+	const persona1 = new Persona(nombre = "Leo", fechaNacimiento= new Date(day= 1, month= 1, year= 1992))
+	const persona2 = new Persona(nombre = "Axel", fechaNacimiento= new Date(day= 1, month= 1, year= 1992))
+	const mascota1 = new Mascota(nombre = "Kira", raza= "gato")
+	const mascota2 = new Mascota(nombre = "Mora", raza= "perro")
+	
+	const lista = []
+	
+	lista.add(persona1)
+	lista.add(persona2)
+	lista.add(mascota1)
+	lista.add(mascota2)
+	
+	lista.forEach({integrante => console.println(integrante.nombre())})
+
+}
