@@ -1,12 +1,10 @@
 package ar.edu.unq.po2.tp5;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Caja {
+public class Caja implements Agencia{
 	double montoACobrar;
 	MercadoCentral mercado;
-	List<Producto> productosCobrados = new ArrayList<Producto>();
 	
 	public Caja(MercadoCentral mercado) {
 		setMercado(mercado);
@@ -42,16 +40,24 @@ public class Caja {
 		if (mercado.hayStockDe(producto)) {
 			mercado.decrementarStockDe(producto);
 			cobrarProducto(producto);
-			guardarProductoEnHistorial(producto);
 		}
 	}
 	
 	public void cobrarProducto(Producto producto) {
 		setMontoACobrar(getMontoACobrar() + producto.getPrecio());
 	}
-	
-	private void guardarProductoEnHistorial(Producto producto) {
-		productosCobrados.add(producto);
+
+	@Override
+	public void registrarPago(Factura factura) {
+		setMontoACobrar(factura.getMontoAPagar());
+		notificarPagoAAgencia(factura);		
+	}
+
+	private void notificarPagoAAgencia(Factura factura) {
+		// No sé como implementar este método para que lo pueda testear luego en los test, ya que Agencia es una interface
+		// y no un objeto al que le podamos enviar mensajes. Se me ocurre así:
+		System.out.println("Se ha notificado a la Agencia Recaudadora el cobro de: " + factura.getDescripcion());
+		System.out.println("El monto cobrado es: $" + factura.getMontoAPagar());
 	}
 
 }
