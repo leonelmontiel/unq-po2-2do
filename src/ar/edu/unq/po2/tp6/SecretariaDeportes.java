@@ -49,6 +49,16 @@ public class SecretariaDeportes {
 		this.actividades.add(actividad);	
 	}
 	
-	
+	public List<ActividadSemanal> getActividadesDeFutbol() {
+		List<ActividadSemanal> listaFutbol = actividades.stream().filter(actividad -> actividad.getDeporte() == Deporte.FUTBOL)
+																	.toList();
+		return listaFutbol;
+	}
+
+	public List<ActividadSemanal> getActividadesSegunComplejidad(int complejidad) {
+		List<ActividadSemanal> listaSegunComplejidad = actividades.stream().filter(actividad -> actividad.getComplejidad() == complejidad)
+																			.toList();
+		return listaSegunComplejidad;
+	}
 
 }
