@@ -1,5 +1,6 @@
 package ar.edu.unq.po2.tp6;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +60,14 @@ public class SecretariaDeportes {
 		List<ActividadSemanal> listaSegunComplejidad = actividades.stream().filter(actividad -> actividad.getComplejidad() == complejidad)
 																			.toList();
 		return listaSegunComplejidad;
+	}
+
+	public long getTotalDuracionActividades() {
+		Duration init = Duration.ofHours(0);
+		Duration sum = actividades.stream().map(ActividadSemanal::getDuracion).reduce(init, (acum, a) -> {
+							return acum.plus(a);
+							});
+		return sum.toHours();
 	}
 
 }

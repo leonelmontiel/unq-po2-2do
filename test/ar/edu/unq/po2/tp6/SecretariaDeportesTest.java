@@ -20,11 +20,11 @@ class SecretariaDeportesTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		secretaria = new SecretariaDeportes();
-		actividadLunes = new ActividadSemanal(DiaDeLaSemana.LUNES, LocalTime.of(20, 00), Duration.ofHours(1l), Deporte.FUTBOL);
-		actividadMartes = new ActividadSemanal(DiaDeLaSemana.MARTES, LocalTime.of(20, 00), Duration.ofHours(2l), Deporte.BASKET);
-		actividadJueves = new ActividadSemanal(DiaDeLaSemana.JUEVES, LocalTime.of(18, 30), Duration.ofHours(2l), Deporte.TENNIS);
-		actividadViernes = new ActividadSemanal(DiaDeLaSemana.VIERNES, LocalTime.of(20, 00), Duration.ofHours(1l), Deporte.FUTBOL);
-		actividadDomingo = new ActividadSemanal(DiaDeLaSemana.DOMINGO, LocalTime.of(19, 00), Duration.ofHours(1l), Deporte.JABALINA);
+		actividadLunes = new ActividadSemanal(DiaDeLaSemana.LUNES, LocalTime.of(20, 00), Duration.ofHours(1), Deporte.FUTBOL);
+		actividadMartes = new ActividadSemanal(DiaDeLaSemana.MARTES, LocalTime.of(20, 00), Duration.ofHours(2), Deporte.BASKET);
+		actividadJueves = new ActividadSemanal(DiaDeLaSemana.JUEVES, LocalTime.of(18, 30), Duration.ofHours(2), Deporte.TENNIS);
+		actividadViernes = new ActividadSemanal(DiaDeLaSemana.VIERNES, LocalTime.of(20, 00), Duration.ofHours(1), Deporte.FUTBOL);
+		actividadDomingo = new ActividadSemanal(DiaDeLaSemana.DOMINGO, LocalTime.of(19, 00), Duration.ofHours(1), Deporte.JABALINA);
 		
 		
 		
@@ -72,6 +72,7 @@ class SecretariaDeportesTest {
 	
 	@Test
 	void testListaActividadesFutbol2Elementos() {
+		// hacerlo genérico pasando un parámetro Enum DEPORTE
 		List<ActividadSemanal> actividadesFutbol = secretaria.getActividadesDeFutbol();
 		
 		assertEquals(2, actividadesFutbol.size());
@@ -79,6 +80,8 @@ class SecretariaDeportesTest {
 	
 	@Test
 	void testListaActividadesFutbolDias() {
+		
+		// transformar esto en un método de Secretaría
 		List<DiaDeLaSemana> diasDeFutbol = secretaria.getActividadesDeFutbol().stream()
 																				.map(actividad -> actividad.getDia())
 																				.toList();
@@ -92,12 +95,14 @@ class SecretariaDeportesTest {
 		// en este test usamos la complejidad 2 que pertenece tanto a fútbol como a basket.
 		List<ActividadSemanal> actividadesComplejidadDos = secretaria.getActividadesSegunComplejidad(2);
 		
-		// se espera que la lista obtenida contenga 3 DiaDeLaSemana (LUNES, MARTES y VIERNES) con Deporte de complejidad 2 (FUTBOL y BASKET).
+		// se espera que la lista obtenida contenga 3 ActividadesSemanales 
 		assertEquals(3, actividadesComplejidadDos.size());
 	}
 	
 	@Test
 	void testListaActividadesComplejidadDosDias() {
+		// transformar esto en un método de Secretaría
+		// con DiaDeLaSemana (LUNES, MARTES y VIERNES) con Deporte de complejidad 2 (FUTBOL y BASKET).
 		List<DiaDeLaSemana> diasSegunComplejidad = secretaria.getActividadesSegunComplejidad(2).stream()
 																								.map(actividad -> actividad.getDia())
 																								.toList();
@@ -105,6 +110,15 @@ class SecretariaDeportesTest {
 		assertTrue(diasSegunComplejidad.contains(DiaDeLaSemana.LUNES));
 		assertTrue(diasSegunComplejidad.contains(DiaDeLaSemana.MARTES));
 		assertTrue(diasSegunComplejidad.contains(DiaDeLaSemana.VIERNES));
+	}
+	
+	@Test
+	void testCantidadDeHorasTotalesDeActividades() {
+		long cantHorasActividades = 7;
+		long horasObtenidas = secretaria.getTotalHoraActividades();
+		
+		assertEquals(cantHorasActividades, horasObtenidas);
+		;
 	}
 
 }

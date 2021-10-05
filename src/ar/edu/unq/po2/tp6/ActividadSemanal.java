@@ -27,4 +27,8 @@ public class ActividadSemanal {
 	public DiaDeLaSemana getDia() {
 		return this.diaDeLaSemana;
 	}
+
+	public Duration getDuracion() {
+		return this.duracion;
+	}
 }
