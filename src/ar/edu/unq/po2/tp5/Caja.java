@@ -2,7 +2,7 @@ package ar.edu.unq.po2.tp5;
 
 import java.util.List;
 
-public class Caja implements Agencia{
+public class Caja {
 	double montoACobrar;
 	MercadoCentral mercado;
 	
@@ -47,17 +47,13 @@ public class Caja implements Agencia{
 		setMontoACobrar(getMontoACobrar() + producto.getPrecio());
 	}
 
-	@Override
-	public void registrarPago(Factura factura) {
+	public void registrarFactura(Factura factura, Agencia agencia) {
 		setMontoACobrar(factura.getMontoAPagar());
-		notificarPagoAAgencia(factura);		
+		notificarPagoAAgencia(factura, agencia);		
 	}
 
-	private void notificarPagoAAgencia(Factura factura) {
-		// No sé como implementar este método para que lo pueda testear luego en los test, ya que Agencia es una interface
-		// y no un objeto al que le podamos enviar mensajes. Se me ocurre así:
-		System.out.println("Se ha notificado a la Agencia Recaudadora el cobro de: " + factura.getDescripcion());
-		System.out.println("El monto cobrado es: $" + factura.getMontoAPagar());
+	private void notificarPagoAAgencia(Factura factura, Agencia agencia) {
+		agencia.registrarPago(factura);
 	}
 
 }
