@@ -50,16 +50,30 @@ public class SecretariaDeportes {
 		this.actividades.add(actividad);	
 	}
 	
-	public List<ActividadSemanal> getActividadesDeFutbol() {
-		List<ActividadSemanal> listaFutbol = actividades.stream().filter(actividad -> actividad.getDeporte() == Deporte.FUTBOL)
+	public List<ActividadSemanal> getActividadesDe_(Deporte deporte) {
+		List<ActividadSemanal> listaDeporte = actividades.stream().filter(actividad -> actividad.getDeporte() == deporte)
 																	.toList();
-		return listaFutbol;
+		return listaDeporte;
+	}
+	
+	public List<DiaDeLaSemana> getDiasActividadesDe_(Deporte deporte) {
+		List<DiaDeLaSemana> diasDeDeporte = getActividadesDe_(Deporte.FUTBOL).stream()
+																				.map(actividad -> actividad.getDia())
+																				.toList();
+		return diasDeDeporte;
 	}
 
-	public List<ActividadSemanal> getActividadesSegunComplejidad(int complejidad) {
+	public List<ActividadSemanal> getActividadesSegunComplejidad_(int complejidad) {
 		List<ActividadSemanal> listaSegunComplejidad = actividades.stream().filter(actividad -> actividad.getComplejidad() == complejidad)
 																			.toList();
 		return listaSegunComplejidad;
+	}
+	
+	public List<DiaDeLaSemana> getDiasActividadesSegunComplejidad_(int complejidad) {
+		List<DiaDeLaSemana> diasSegunComplejidad = getActividadesSegunComplejidad_(2).stream()
+																					.map(actividad -> actividad.getDia())
+																					.toList();
+		return diasSegunComplejidad;
 	}
 
 	public long getTotalDuracionActividades() {

@@ -73,18 +73,15 @@ class SecretariaDeportesTest {
 	@Test
 	void testListaActividadesFutbol2Elementos() {
 		// hacerlo genérico pasando un parámetro Enum DEPORTE
-		List<ActividadSemanal> actividadesFutbol = secretaria.getActividadesDeFutbol();
+		List<ActividadSemanal> actividadesFutbol = secretaria.getActividadesDe_(Deporte.FUTBOL);
 		
 		assertEquals(2, actividadesFutbol.size());
 	}
 	
 	@Test
 	void testListaActividadesFutbolDias() {
+		List<DiaDeLaSemana> diasDeFutbol = secretaria.getDiasActividadesDe_(Deporte.FUTBOL);
 		
-		// transformar esto en un método de Secretaría
-		List<DiaDeLaSemana> diasDeFutbol = secretaria.getActividadesDeFutbol().stream()
-																				.map(actividad -> actividad.getDia())
-																				.toList();
 		
 		assertTrue(diasDeFutbol.contains(DiaDeLaSemana.LUNES));
 		assertTrue(diasDeFutbol.contains(DiaDeLaSemana.VIERNES));
@@ -93,7 +90,7 @@ class SecretariaDeportesTest {
 	@Test
 	void testListaActividadesComplejidadDos3Elementos() {
 		// en este test usamos la complejidad 2 que pertenece tanto a fútbol como a basket.
-		List<ActividadSemanal> actividadesComplejidadDos = secretaria.getActividadesSegunComplejidad(2);
+		List<ActividadSemanal> actividadesComplejidadDos = secretaria.getActividadesSegunComplejidad_(2);
 		
 		// se espera que la lista obtenida contenga 3 ActividadesSemanales 
 		assertEquals(3, actividadesComplejidadDos.size());
@@ -103,9 +100,7 @@ class SecretariaDeportesTest {
 	void testListaActividadesComplejidadDosDias() {
 		// transformar esto en un método de Secretaría
 		// con DiaDeLaSemana (LUNES, MARTES y VIERNES) con Deporte de complejidad 2 (FUTBOL y BASKET).
-		List<DiaDeLaSemana> diasSegunComplejidad = secretaria.getActividadesSegunComplejidad(2).stream()
-																								.map(actividad -> actividad.getDia())
-																								.toList();
+		List<DiaDeLaSemana> diasSegunComplejidad = secretaria.getDiasActividadesSegunComplejidad_(2);
 		
 		assertTrue(diasSegunComplejidad.contains(DiaDeLaSemana.LUNES));
 		assertTrue(diasSegunComplejidad.contains(DiaDeLaSemana.MARTES));
@@ -115,7 +110,7 @@ class SecretariaDeportesTest {
 	@Test
 	void testCantidadDeHorasTotalesDeActividades() {
 		long cantHorasActividades = 7;
-		long horasObtenidas = secretaria.getTotalHoraActividades();
+		long horasObtenidas = secretaria.getTotalDuracionActividades();
 		
 		assertEquals(cantHorasActividades, horasObtenidas);
 		;
