@@ -3,7 +3,7 @@ package ar.edu.unq.po2.tp6;
 import java.time.Duration;
 import java.time.LocalTime;
 
-public class ActividadSemanal {
+public class ActividadSemanal{
 	private DiaDeLaSemana diaDeLaSemana;
 	private LocalTime hora;
 	private Duration duracion;

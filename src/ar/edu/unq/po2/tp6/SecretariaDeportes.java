@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Comparator;
 
 public class SecretariaDeportes {
 	
@@ -15,7 +16,7 @@ public class SecretariaDeportes {
 		establecerCostoXDia();
 	}
 	
-	public void establecerCostoXDia() {
+	private void establecerCostoXDia() {
 		costosDias.put(DiaDeLaSemana.LUNES, 500.0);
 		costosDias.put(DiaDeLaSemana.MARTES, 500.0);
 		costosDias.put(DiaDeLaSemana.MIERCOLES, 500.0);
@@ -70,7 +71,7 @@ public class SecretariaDeportes {
 	}
 	
 	public List<DiaDeLaSemana> getDiasActividadesSegunComplejidad_(int complejidad) {
-		List<DiaDeLaSemana> diasSegunComplejidad = getActividadesSegunComplejidad_(2).stream()
+		List<DiaDeLaSemana> diasSegunComplejidad = getActividadesSegunComplejidad_(complejidad).stream()
 																					.map(actividad -> actividad.getDia())
 																					.toList();
 		return diasSegunComplejidad;
@@ -84,4 +85,12 @@ public class SecretariaDeportes {
 		return sum.toHours();
 	}
 
+	public ActividadSemanal getActividadMinCostoDeporte_(Deporte deporte) {
+		// funcional pero súper horrible, no sé como hacer más simple la acción de devolver la ActividadSemanal con menor costo
+		// porque al mappear la actividad a double, ya se pierde la referencia con la actividad misma. Tiene que existir alguna forma mucho más directa
+		Double menorCostoAct = getActividadesDe_(deporte).stream().map(act -> costoActividad(act)).min(Comparator.naturalOrder()).get();
+		ActividadSemanal actMenorCosto = getActividadesDe_(deporte).stream().filter(act -> costoActividad(act) == menorCostoAct).toList().get(0);
+		
+		return actMenorCosto;
+	}
 }

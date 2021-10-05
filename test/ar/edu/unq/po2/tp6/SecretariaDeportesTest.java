@@ -115,5 +115,13 @@ class SecretariaDeportesTest {
 		assertEquals(cantHorasActividades, horasObtenidas);
 		;
 	}
+		
+	@Test
+	void testCostoMinDeFutbol() {
+		ActividadSemanal actividadMenorCosto = secretaria.getActividadMinCostoDeporte_(Deporte.FUTBOL);
+		
+		// la actividad de fútbol los lunes cuesta $900, y los viernes $1400
+		assertEquals(actividadLunes, actividadMenorCosto);
+	}
 
 }
