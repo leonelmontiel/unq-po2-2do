@@ -37,26 +37,50 @@ class LesionesTest {
 	
 	@Test
 	void testNivelRiesgoROJOoEs4() {
-		String nivel = LesionesDermatologicas.ROJO.nivelRiesgo();
-		assertEquals("4", nivel);
+		int nivel = LesionesDermatologicas.ROJO.nivelRiesgo();
+		assertEquals(4, nivel);
 	}
 	
 	@Test
 	void testNivelRiesgoGRISEs1() {
-		String nivel = LesionesDermatologicas.GRIS.nivelRiesgo();
-		assertEquals("1", nivel);
+		int nivel = LesionesDermatologicas.GRIS.nivelRiesgo();
+		assertEquals(1, nivel);
 	}
 	
 	@Test
 	void testNivelRiesgoAMARILLOEs2() {
-		String nivel = LesionesDermatologicas.AMARILLO.nivelRiesgo();
-		assertEquals("2", nivel);
+		int nivel = LesionesDermatologicas.AMARILLO.nivelRiesgo();
+		assertEquals(2, nivel);
 	}
 	
 	@Test
 	void testNivelRiesgoMIELEs3() {
-		String nivel = LesionesDermatologicas.MIEL.nivelRiesgo();
-		assertEquals("3", nivel);
+		int nivel = LesionesDermatologicas.MIEL.nivelRiesgo();
+		assertEquals(3, nivel);
+	}
+	
+	@Test
+	void testDescROJOEsLetal() {
+		String descr = LesionesDermatologicas.ROJO.descripcion();
+		assertEquals("Letal", descr);
+	}
+	
+	@Test
+	void testDescGRISEsSuperficial() {
+		String descr = LesionesDermatologicas.GRIS.descripcion();
+		assertEquals("Superficial", descr);
+	}
+	
+	@Test
+	void testDescAMARILLOEsGrave() {
+		String descr = LesionesDermatologicas.AMARILLO.descripcion();
+		assertEquals("Grave", descr);
+	}
+	
+	@Test
+	void testDescMIELEsMuyGrave() {
+		String descr = LesionesDermatologicas.MIEL.descripcion();
+		assertEquals("Muy grave", descr);
 	}
 
 }

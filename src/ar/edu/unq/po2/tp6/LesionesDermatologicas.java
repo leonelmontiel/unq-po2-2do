@@ -2,22 +2,22 @@ package ar.edu.unq.po2.tp6;
 
 public enum LesionesDermatologicas {
 	
-	ROJO("4"){
+	ROJO("Letal", 4){
 		@Override
 		public LesionesDermatologicas siguiente() {
 			return GRIS;
 		}
-	}, GRIS("1"){
+	}, GRIS("Superficial", 1){
 		@Override
 		public LesionesDermatologicas siguiente() {
 			return AMARILLO;
 		}
-	}, AMARILLO("2"){
+	}, AMARILLO("Grave", 2){
 		@Override
 		public LesionesDermatologicas siguiente() {
 			return MIEL;
 		}
-	}, MIEL("3"){
+	}, MIEL("Muy grave", 3){
 		@Override
 		public LesionesDermatologicas siguiente() {
 			return ROJO;
@@ -26,13 +26,19 @@ public enum LesionesDermatologicas {
 	
 	public abstract LesionesDermatologicas siguiente();
 	
-	String nivelRiesgo;
+	String descripcion;
+	int nivelRiesgo;
 	
-	LesionesDermatologicas(String nivel) {
+	LesionesDermatologicas(String desc, int nivel) {
+		this.descripcion = desc;
 		this.nivelRiesgo = nivel;
 	}
+	
+	String descripcion( ) {
+		return this.descripcion;
+	}
 
-	String nivelRiesgo() {
+	int nivelRiesgo() {
 		return this.nivelRiesgo;
 	}
 	
