@@ -177,4 +177,12 @@ class SecretariaDeportesTest {
 		assertEquals(stringEsperado, impresion);
 	}
 	
+	@Test
+	void testToStringActDomingoErrorDeDia() {
+		String stringEsperado = "Deporte: JABALINA. Día: MIERCOLES a las: 19:00. Duración: 1 hora(s)";
+		String impresion = actividadDomingo.toString();
+		
+		assertNotEquals(stringEsperado, impresion);
+	}
+	
 }
