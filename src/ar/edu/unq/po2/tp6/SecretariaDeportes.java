@@ -112,4 +112,8 @@ public class SecretariaDeportes {
 		
 		return actMasEconomica;
 	}
+
+	public void printAllActivities() {
+		actividades.stream().forEach(act -> System.out.println(act.toString()));		
+	}
 }

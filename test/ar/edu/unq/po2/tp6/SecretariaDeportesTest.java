@@ -180,9 +180,15 @@ class SecretariaDeportesTest {
 	@Test
 	void testToStringActDomingoErrorDeDia() {
 		String stringEsperado = "Deporte: JABALINA. Día: MIERCOLES a las: 19:00. Duración: 1 hora(s)";
-		String impresion = actividadDomingo.toString();
+		String print = actividadDomingo.toString();
 		
-		assertNotEquals(stringEsperado, impresion);
+		assertNotEquals(stringEsperado, print);
 	}
+	
+	//////////////////////
+	
+	@Test
+	void testImprimirTodasLasAct() {
+		secretaria.printAllActivities();	}
 	
 }

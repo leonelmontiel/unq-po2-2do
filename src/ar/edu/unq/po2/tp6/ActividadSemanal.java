@@ -34,8 +34,8 @@ public class ActividadSemanal{
 	
 	@Override
 	public String toString() {
-		String impresion = "Deporte: " + getDeporte() + ". Día: " + getDia() + " a las: " + getHora() + ". Duración: " + getDuracion() + " hora(s)";
-		return impresion;
+		String print = "Deporte: " + getDeporte() + ". Día: " + getDia() + " a las: " + getHora() + ". Duración: " + getDuracion() + " hora(s)";
+		return print;
 	}
 
 	private LocalTime getHora() {
