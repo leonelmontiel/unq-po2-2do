@@ -1,6 +1,5 @@
 package ar.edu.unq.po2.tp6;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,11 +78,11 @@ public class SecretariaDeportes {
 	}
 
 	public long getTotalDuracionActividades() {
-		Duration init = Duration.ofHours(0);
-		Duration sum = actividades.stream().map(ActividadSemanal::getDuracion).reduce(init, (acum, a) -> {
-							return acum.plus(a);
+		long init = 0;
+		long sum = actividades.stream().map(ActividadSemanal::getDuracion).reduce(init, (acum, a) -> {
+							return acum + a;
 							});
-		return sum.toHours();
+		return sum;
 	}
 
 	/*
@@ -103,5 +102,14 @@ public class SecretariaDeportes {
 																			.min(Comparator.comparing((ActividadSemanal act) -> costoActividad(act)));
 				
 		return menorCostoAct.get();
+	}
+
+	// no sé en dónde usar Collectors.groupingBy porque esto devuelve un Map<ObjetoA, List<ObjetoB> y el método a implementar
+	// debe devolver Map<Deporte, ActividadSemanal>, es decir, un deporte y su actividad semanal más económica.
+	public Map<Deporte, ActividadSemanal> getActMasEconomicaConDeporte_(Deporte deporte) {
+		Map<Deporte, ActividadSemanal> actMasEconomica = new HashMap<Deporte, ActividadSemanal>();
+		actMasEconomica.put(deporte, getActividadMenorCostoDeporte_(deporte));
+		
+		return actMasEconomica;
 	}
 }

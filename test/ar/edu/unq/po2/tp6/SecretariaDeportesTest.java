@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,6 +72,8 @@ class SecretariaDeportesTest {
 		assertEquals(1800, costoJabalina);
 	}
 	
+	///////////////////////
+	
 	@Test
 	void testListaActividadesFutbol2Elementos() {
 		// hacerlo genérico pasando un parámetro Enum DEPORTE
@@ -116,6 +120,8 @@ class SecretariaDeportesTest {
 		;
 	}
 	
+	///////////////////////
+	
 	/*
 	@Test
 	void testCostoMinDeFutbol() {
@@ -132,5 +138,43 @@ class SecretariaDeportesTest {
 		// la actividad de fútbol los lunes cuesta $900, y los viernes $1400
 		assertEquals(actividadLunes, actividadMenorCosto);
 	}
-
+	
+	@Test
+	void testCostoMenorDeJabalina() {
+		ActividadSemanal actividadMenorCosto = secretaria.getActividadMenorCostoDeporte_(Deporte.JABALINA);
+		
+		// la actividad de jabalina los domingo cuesta $1800, hay una sola actividad de jabalina registrada
+		assertEquals(actividadDomingo, actividadMenorCosto);
+	}
+	
+	///////////////////////
+	
+	@Test
+	void testActMasEconomicaFutbol() {
+		Map<Deporte, ActividadSemanal> actEsperada = new HashMap<Deporte, ActividadSemanal>();
+		actEsperada.put(Deporte.FUTBOL, actividadLunes);
+		
+		Map<Deporte, ActividadSemanal> actFutEconomica = secretaria.getActMasEconomicaConDeporte_(Deporte.FUTBOL);		
+		
+		assertEquals(actEsperada, actFutEconomica);
+	}
+	
+	//////////////////////
+	
+	@Test
+	void testToStringActMartes() {
+		String stringEsperado = "Deporte: BASKET. Día: MARTES a las: 20:00. Duración: 2 hora(s)";
+		String impresion = actividadMartes.toString();
+		
+		assertEquals(stringEsperado, impresion);
+	}
+	
+	@Test
+	void testToStringActDomingo() {
+		String stringEsperado = "Deporte: JABALINA. Día: DOMINGO a las: 19:00. Duración: 1 hora(s)";
+		String impresion = actividadDomingo.toString();
+		
+		assertEquals(stringEsperado, impresion);
+	}
+	
 }

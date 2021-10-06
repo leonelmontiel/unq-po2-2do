@@ -28,7 +28,17 @@ public class ActividadSemanal{
 		return this.diaDeLaSemana;
 	}
 
-	public Duration getDuracion() {
-		return this.duracion;
+	public long getDuracion() {
+		return this.duracion.toHours();
+	}
+	
+	@Override
+	public String toString() {
+		String impresion = "Deporte: " + getDeporte() + ". Día: " + getDia() + " a las: " + getHora() + ". Duración: " + getDuracion() + " hora(s)";
+		return impresion;
+	}
+
+	private LocalTime getHora() {
+		return this.hora;
 	}
 }
