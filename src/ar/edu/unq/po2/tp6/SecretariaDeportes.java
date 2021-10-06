@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Comparator;
 
 public class SecretariaDeportes {
@@ -85,6 +86,7 @@ public class SecretariaDeportes {
 		return sum.toHours();
 	}
 
+	/*
 	public ActividadSemanal getActividadMinCostoDeporte_(Deporte deporte) {
 		// funcional pero súper horrible, no sé como hacer más simple la acción de devolver la ActividadSemanal con menor costo
 		// porque al mappear la actividad a double, ya se pierde la referencia con la actividad misma. Tiene que existir alguna forma mucho más directa
@@ -92,5 +94,14 @@ public class SecretariaDeportes {
 		ActividadSemanal actMenorCosto = getActividadesDe_(deporte).stream().filter(act -> costoActividad(act) == menorCostoAct).toList().get(0);
 		
 		return actMenorCosto;
+	}*/
+	
+	public ActividadSemanal getActividadMenorCostoDeporte_(Deporte deporte) {
+		// arriba está el código inicial que era feo, pero investigando como usar el comparing y como pasar un opcional a una entidad,
+		// pude hacerlo más simple
+		Optional<ActividadSemanal> menorCostoAct = getActividadesDe_(deporte).stream()
+																			.min(Comparator.comparing((ActividadSemanal act) -> costoActividad(act)));
+				
+		return menorCostoAct.get();
 	}
 }
