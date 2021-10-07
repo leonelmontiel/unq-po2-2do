@@ -2,9 +2,11 @@ package ar.edu.unq.po2.tp6;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.Comparator;
 
 public class SecretariaDeportes {
@@ -104,6 +106,7 @@ public class SecretariaDeportes {
 		return menorCostoAct.get();
 	}
 
+	/*
 	// no sé en dónde usar Collectors.groupingBy porque esto devuelve un Map<ObjetoA, List<ObjetoB> y el método a implementar
 	// debe devolver Map<Deporte, ActividadSemanal>, es decir, un deporte y su actividad semanal más económica.
 	public Map<Deporte, ActividadSemanal> getActMasEconomicaConDeporte_(Deporte deporte) {
@@ -111,6 +114,18 @@ public class SecretariaDeportes {
 		actMasEconomica.put(deporte, getActividadMenorCostoDeporte_(deporte));
 		
 		return actMasEconomica;
+	}*/
+	
+	// no sé en dónde usar Collectors.groupingBy porque esto devuelve un Map<ObjetoA, List<ObjetoB> y el método a implementar
+	// debe devolver Map<Deporte, ActividadSemanal>, es decir, un deporte y su actividad semanal más económica.
+	public Map<Deporte, ActividadSemanal> getActMasEconomicaConDeporte_() {
+		List<Deporte> deportes = actividades.stream().map(act -> act.getDeporte()).toList();
+		Set<Deporte> setDeportes = new HashSet<Deporte>(deportes);
+		
+		Map<Deporte, ActividadSemanal> actEconomicas = new HashMap<Deporte, ActividadSemanal>();
+		setDeportes.forEach(dep -> actEconomicas.put(dep, getActividadMenorCostoDeporte_(dep)));
+		
+		return actEconomicas;
 	}
 
 	public void printAllActivities() {

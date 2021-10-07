@@ -37,6 +37,8 @@ public class ActividadSemanal{
 		String print = "Deporte: " + getDeporte() + ". Día: " + getDia() + " a las: " + getHora() + ". Duración: " + getDuracion() + " hora(s)";
 		return print;
 	}
+	
+	
 
 	private LocalTime getHora() {
 		return this.hora;

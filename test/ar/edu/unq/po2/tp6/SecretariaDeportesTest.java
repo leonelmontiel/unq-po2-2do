@@ -150,15 +150,18 @@ class SecretariaDeportesTest {
 	///////////////////////
 	
 	@Test
-	void testActMasEconomicaFutbol() {
-		Map<Deporte, ActividadSemanal> actEsperada = new HashMap<Deporte, ActividadSemanal>();
-		actEsperada.put(Deporte.FUTBOL, actividadLunes);
+	void testActMasEconomicasDeCadaDeporte() {
+		Map<Deporte, ActividadSemanal> actObtenidas = secretaria.getActMasEconomicaConDeporte_();
 		
-		Map<Deporte, ActividadSemanal> actFutEconomica = secretaria.getActMasEconomicaConDeporte_(Deporte.FUTBOL);		
+		Map<Deporte, ActividadSemanal> actEsperadas = new HashMap<Deporte, ActividadSemanal>();
+		actEsperadas.put(Deporte.FUTBOL, actividadLunes);
+		actEsperadas.put(Deporte.BASKET, actividadMartes);
+		actEsperadas.put(Deporte.TENNIS, actividadJueves);
+		actEsperadas.put(Deporte.JABALINA, actividadDomingo);
 		
-		assertEquals(actEsperada, actFutEconomica);
+		assertEquals(actEsperadas, actObtenidas);
 	}
-	
+		
 	//////////////////////
 	
 	@Test
@@ -189,6 +192,6 @@ class SecretariaDeportesTest {
 	
 	@Test
 	void testImprimirTodasLasAct() {
-		secretaria.printAllActivities();	}
-	
+		secretaria.printAllActivities();
+	}
 }
