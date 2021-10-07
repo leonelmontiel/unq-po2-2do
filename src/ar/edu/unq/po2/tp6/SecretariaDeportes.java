@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.Comparator;
 
 public class SecretariaDeportes {
@@ -119,11 +120,10 @@ public class SecretariaDeportes {
 	// no sé en dónde usar Collectors.groupingBy porque esto devuelve un Map<ObjetoA, List<ObjetoB> y el método a implementar
 	// debe devolver Map<Deporte, ActividadSemanal>, es decir, un deporte y su actividad semanal más económica.
 	public Map<Deporte, ActividadSemanal> getActMasEconomicaConDeporte_() {
-		List<Deporte> deportes = actividades.stream().map(act -> act.getDeporte()).toList();
-		Set<Deporte> setDeportes = new HashSet<Deporte>(deportes);
+		Set<Deporte> deportes = actividades.stream().map(act -> act.getDeporte()).collect(Collectors.toSet());
 		
 		Map<Deporte, ActividadSemanal> actEconomicas = new HashMap<Deporte, ActividadSemanal>();
-		setDeportes.forEach(dep -> actEconomicas.put(dep, getActividadMenorCostoDeporte_(dep)));
+		deportes.forEach(dep -> actEconomicas.put(dep, getActividadMenorCostoDeporte_(dep)));
 		
 		return actEconomicas;
 	}
