@@ -1,0 +1,55 @@
+No ocurre ningún problema si reemplazamos XXX, YYY, WWW y ZZZ con las clases ArrayList y LinkedList, ya que estas dos implementan la interfaz List. 
+Esta permite iterar, insertar, remover, buscar elementos, entre otras funciones más que los métodos creados en el ejercicio 3 del TP4 precisan.
+Cabe aclarar que List implementa la interfaz raíz Collection, que se utiliza normalmente para pasar colecciones y manipularlas donde se desea la máxima 
+generalidad.
+
+-------------------------------------
+
+Prueba para construir la respuesta:
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+public class prueba {
+	private static List<Integer> array = new ArrayList<Integer>();
+	private static List<Integer> linked = new LinkedList<Integer>();
+
+	public static Integer getFirstFrom(List<Integer> collection) {
+		return collection.get(0);
+	}
+
+	public static void addLast(Integer element, List<Integer> collection) {
+		collection.add(element);
+	}
+
+	public static List<Integer> getSubCollection(List<Integer> collection, int from, int to) {
+		return collection.subList(from,  to);
+	}
+
+	public static Boolean containsElement(List<Integer> collection, int element) {
+		return collection.contains(element);
+	}
+
+	public static void main (String[] args) {
+		Collections.addAll(array, 7, 10);
+		Collections.addAll(linked, 7, 10);
+
+		addLast(5, array);
+		addLast(5, linked);
+
+
+		System.out.println("Primero Array: " + getFirstFrom(array));
+		System.out.println("Primero Linked: " + getFirstFrom(linked));
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("Agregado �ltimo en Array: " + array.get(array.size()-1));
+		System.out.println("Agregado �ltimo en Linked: " + linked.get(linked.size()-1));
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("Nuevo array desde la posici�n 1 a 3: " + getSubCollection(array, 1, 3));
+		System.out.println("Nuevo linked desde la posici�n 1 a 3: " + getSubCollection(linked, 1, 3));
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("El array contiene el elemento 15: " + containsElement(array, 15));
+		System.out.println("El linked contiene el elemento 5: " + containsElement(linked, 5));
+	}
+} 
