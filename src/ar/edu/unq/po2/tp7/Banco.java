@@ -21,7 +21,7 @@ public class Banco {
 		return !this.getClientes().isEmpty();
 	}
 
-	public void agregar(Cliente cliente) {
+	public void agregarCliente(Cliente cliente) {
 		this.getClientes().add(cliente);
 	}
 
@@ -29,7 +29,7 @@ public class Banco {
 		return !this.getSolicitudes().isEmpty();
 	}
 
-	public void registrar(SolicitudCredito solicitud) {
+	public void registrarSolicitud(SolicitudCredito solicitud) {
 		this.getSolicitudes().add(solicitud);
 	}
 

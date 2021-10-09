@@ -31,7 +31,7 @@ class BancoTest {
 	
 	@Test
 	void testUnBancoAgregaUnCliente() {
-		this.banco.agregar(cliente);
+		this.banco.agregarCliente(cliente);
 		assertTrue(this.banco.tieneClientes());
 	}
 	
@@ -42,15 +42,15 @@ class BancoTest {
 	
 	@Test
 	void testUnBancoRegistraUnaSolicitud() {
-		this.banco.registrar(this.solicitud);
+		this.banco.registrarSolicitud(this.solicitud);
 		assertTrue(this.banco.tieneSolicitudes());
 	}
 	
 	@Test
 	void testMontoTotalADesenbolsar() {
-		this.banco.registrar(solicitud);
-		this.banco.registrar(solicitudA);
-		this.banco.registrar(solicitudR);
+		this.banco.registrarSolicitud(solicitud);
+		this.banco.registrarSolicitud(solicitudA);
+		this.banco.registrarSolicitud(solicitudR);
 		assertEquals(25000f, this.banco.getTotalADesembolsar());
 	}
 
