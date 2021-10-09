@@ -1,15 +1,15 @@
 package ar.edu.unq.po2.tp7;
 
 public class Inmueble {
-
+	
 	private String descripcion;
 	private String direccion;
 	private Float valorFiscal;
-
-	public Inmueble(String descripcion, String dir, Float valor) {
+	
+	public Inmueble(String descripcion, String direccion, Float valorFiscal) {
 		this.descripcion = descripcion;
-		this.direccion = dir;
-		this.valorFiscal = valor;
+		this.direccion = direccion;
+		this.valorFiscal = valorFiscal;
 	}
 
 	public String getDescripcion() {

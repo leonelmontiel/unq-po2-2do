@@ -2,28 +2,45 @@ package ar.edu.unq.po2.tp7;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Banco {
+	
+	List<Cliente> clientes = new ArrayList<Cliente>();
+	List<SolicitudCredito> solicitudes = new ArrayList<SolicitudCredito>();
+	
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
 
-	private List<Cliente> clientes = new ArrayList<Cliente>();
-	private List<SolicitudCredito> solicitudes  = new ArrayList<SolicitudCredito>();
+	public List<SolicitudCredito> getSolicitudes() {
+		return solicitudes;
+	}
 
 	public Boolean tieneClientes() {
-		return !clientes.isEmpty();
+		return !this.getClientes().isEmpty();
+	}
+
+	public void agregar(Cliente cliente) {
+		this.getClientes().add(cliente);
 	}
 
 	public Boolean tieneSolicitudes() {
-		return !solicitudes.isEmpty();
+		return !this.getSolicitudes().isEmpty();
 	}
 
-	public void agregarCliente(Cliente cliente) {
-		clientes.add(cliente);
-		
+	public void registrar(SolicitudCredito solicitud) {
+		this.getSolicitudes().add(solicitud);
 	}
 
-	public void registrarSolicitud(SolicitudCredito solicitud) {
-		solicitudes.add(solicitud);
-		
+	public Float getTotalADesembolsar() {
+		return this.getSolicitudesAprobadas().stream().map(SolicitudCredito::getMonto)
+				.reduce(0f, (acumulado, monto)-> {return acumulado + monto;});
+	}
+
+	private List<SolicitudCredito> getSolicitudesAprobadas() {
+		return this.getSolicitudes().stream().filter(solicitud-> solicitud.esAceptable())
+				.collect(Collectors.toList());
 	}
 
 }

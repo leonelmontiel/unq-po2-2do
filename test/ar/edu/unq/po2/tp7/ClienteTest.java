@@ -7,50 +7,49 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ClienteTest {
-
+	
 	private Cliente cliente;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		cliente = new Cliente("Leo", "Perez", 30, "Calle Falsa 123", 40000f);
+		this.cliente = new Cliente("Leo", "Perez", 30, "Calle Falsa 123", 20000f);
 	}
 
 	@Test
-	void testNombreLeo() {
-		assertEquals("Leo", cliente.getNombre());
+	void testGetNombre() {
+		assertEquals("Leo", this.cliente.getNombre());
 	}
 	
 	@Test
-	void testApellidoPerez() {
-		assertEquals("Perez", cliente.getApellido());
+	void testGetApellido() {
+		assertEquals("Perez", this.cliente.getApellido());
 	}
 	
 	@Test
-	void testEdad30() {
-		assertEquals(30, cliente.getEdad());
+	void testGetEdad() {
+		assertEquals(30, this.cliente.getEdad());
+	}
+
+	@Test
+	void testGetDireccion() {
+		assertEquals("Calle Falsa 123", this.cliente.getDireccion());
 	}
 	
 	@Test
-	void testDireccionCalleFalsa() {
-		assertEquals("Calle Falsa 123", cliente.getDireccion());
+	void testGetSueldoNeto() {
+		assertEquals(20000f, this.cliente.getSueldoNetoMensual());
 	}
 	
-	@Test
-	void testSueldo40000() {
-		assertEquals(40000f, cliente.getSueldoNetoMensual());
-	}
-	
-	////////////////////////////
-	
-	@Test
-	void testSueldoNetoAnual480000() {
-		assertEquals(480000f, cliente.getSueldoNetoAnual());
+	@Test 
+	void testGetSueldoNetoAnual() {
+		assertEquals(240000f, this.cliente.getSueldoNetoAnual());
 	}
 	
 	///////////////////////////
-	
+		
 	@Test
 	void testNombreNoPuedeEstarEnBlanco() {
-		assertThrows(RuntimeException.class, () -> Cliente.nuevo(""));
+	assertThrows(RuntimeException.class, () -> Cliente.nuevo(""));
 	}
+	
 }

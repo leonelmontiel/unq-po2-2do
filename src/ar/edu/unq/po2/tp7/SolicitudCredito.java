@@ -1,15 +1,19 @@
 package ar.edu.unq.po2.tp7;
 
-abstract public class SolicitudCredito {
-
+public abstract class SolicitudCredito {
+	
 	private Cliente cliente;
 	private Float monto;
 	private Integer plazo;
-
+	
 	public SolicitudCredito(Cliente cliente, Float monto, Integer plazo) {
 		this.cliente = cliente;
 		this.monto = monto;
 		this.plazo = plazo;
+	}
+
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
 	public Float getMonto() {
@@ -19,15 +23,23 @@ abstract public class SolicitudCredito {
 	public Integer getPlazo() {
 		return this.plazo;
 	}
-
+	
 	public Float getCuotaMensual() {
-		return getMonto() / getPlazo();
+		return this.getMonto() / this.getPlazo();
+	}
+	
+	public boolean valorCuotaSuperaPorcentajeRequeridoDeSueldo(Double porcentaje) {
+		return this.getCuotaMensual() > this.valorSueldoAplicadoPorcentajeRequerido(porcentaje);
 	}
 
-	public Cliente getCliente() {
-		return this.cliente;
+	public double valorSueldoAplicadoPorcentajeRequerido(Double porcentaje) {
+		return this.getCliente().getSueldoNetoMensual() * this.getPorcentajeRequerido(porcentaje);
 	}
 
-	protected abstract Boolean esAceptable();
+	public double getPorcentajeRequerido(Double porcentaje) {
+		return porcentaje / 100;
+	}
+
+	public abstract Boolean esAceptable();
 
 }

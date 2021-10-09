@@ -6,30 +6,27 @@ import org.junit.jupiter.api.Test;
 
 abstract class SolicitudCreditoTest {
 
-	protected SolicitudCredito solicitudCredito;
+	protected SolicitudCredito solicitud;
 	protected Cliente cliente;
 
-
 	@Test
-	void testMontoEs20000() {
-		assertEquals(20000f, solicitudCredito.getMonto());
+	void testGetCliente() {
+		assertEquals(this.cliente, solicitud.getCliente());
 	}
 	
 	@Test
-	void testPlazo12() {
-		assertEquals(12, solicitudCredito.getPlazo());
-	}
-	
-	//////////////////
-	
-	@Test
-	void testCuotaMensual1666_66667() {
-		assertEquals(1666.66667f, solicitudCredito.getCuotaMensual());
+	void testGetMonto() {
+		assertEquals(20000f, solicitud.getMonto());
 	}
 	
 	@Test
-	void testConoceAlClienteLeo() {		
-		assertEquals(cliente, solicitudCredito.getCliente());
+	void testGetPlazo() {
+		assertEquals(12, this.solicitud.getPlazo());
 	}
-
+	
+	@Test 
+	void testGetCuotaMensual(){
+		assertEquals(1666.66667f, this.solicitud.getCuotaMensual());
+	}
+	
 }
