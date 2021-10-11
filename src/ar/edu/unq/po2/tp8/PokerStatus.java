@@ -12,8 +12,9 @@ public class PokerStatus {
 		//this.verificarQueNoHayaIdenticas(cartas);
 		
 		return this.hayPoquer(cartas);
-	}*/
+	}
 	
+	VERIFICAR CON LAS POSIBLES JUGADAS (STRINGS)
 	public String verificar(String carta1, String carta2, String carta3, String carta4, String carta5) {	
 		List<String> cartas = Arrays.asList(carta1, carta2, carta3, carta4, carta5);
 		
@@ -65,6 +66,8 @@ public class PokerStatus {
 	                      .filter(c -> c.equals(cadena))
 	                      .count();
 	    return rep;
-	}
+	}*/
+	
+	
 
 }

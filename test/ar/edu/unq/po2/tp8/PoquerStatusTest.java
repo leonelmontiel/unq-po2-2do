@@ -46,7 +46,7 @@ class PoquerStatusTest {
 		
 		//verify
 		assertFalse(hayPoker);
-	}*/
+	}
 	
 	@Test
 	void testCartasSoloConSusValores() {
@@ -122,6 +122,8 @@ class PoquerStatusTest {
 		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
 		//Verify
 		assertTrue("Nada".equals(cadenaObtenida));
-	}
+	}*/
+	
+	
 
 }
