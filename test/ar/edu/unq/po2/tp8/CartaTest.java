@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class CartaTest {
 
 	private Carta carta1; //SUT
-	private Carta carta2; //Doc
+	private Carta carta2; 
 
 	@BeforeEach
 	void setUp() throws Exception {

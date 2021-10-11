@@ -11,22 +11,139 @@ import org.junit.jupiter.api.Test;
 class PoquerStatusTest {
 
 	private PokerStatus pokerStatus; //SUT
-	private String carta1;
-	private String carta2;
-	private String carta3;
-	private String carta4;
-	private String carta5;
+	private Carta carta1;
+	private Carta carta2;
+	private Carta carta3;
+	private Carta carta4;
+	private Carta carta5;
+	private List<Valor> listaValores;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		//Setup
 		pokerStatus = new PokerStatus();
-		carta1 = "2D";
+		/*carta1 = "2D";
 		carta2 = "2P";
 		carta3 = "2C";
 		carta4 = "2T";
-		carta5 = "QD";
+		carta5 = "QD";*/
+		carta1 = new Carta(Valor.DOS, Palo.DIAMANTE);
+		carta2 = new Carta(Valor.DOS, Palo.PICA);
+		carta3 = new Carta(Valor.DOS, Palo.CORAZON);
+		carta4 = new Carta(Valor.DOS, Palo.TREBOL);
+		carta5 = new Carta(Valor.Q, Palo.DIAMANTE);
+		
+		listaValores = Arrays.asList(Valor.DOS, Valor.DOS, Valor.DOS, Valor.DOS, Valor.Q);
+		
 	}
+	
+	@Test
+	void testHayPoquer() {
+		//Excercise
+		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
+		//Verify
+		assertTrue("Póquer".equals(cadenaObtenida));
+		assertFalse("Nada".equals(cadenaObtenida));
+	}
+	
+	@Test
+	void testNoHayPoquer() {
+		//SetUp
+		carta1 = new Carta(Valor.CINCO, Palo.PICA);
+		//Excercise
+		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
+		//Verify
+		assertFalse("Póquer".equals(cadenaObtenida));
+		assertTrue("Trío".equals(cadenaObtenida));
+	}
+	
+	@Test
+	void testCartasSoloConValores() {
+		//SetUp		
+		List<Carta> listaDeCartas = Arrays.asList(carta1, carta2, carta3, carta4, carta5);
+		//Excercise
+		List<Valor> listaValoresObtenidos = pokerStatus.cartasSoloConValores(listaDeCartas);
+		//Verify
+		assertEquals(listaValores, listaValoresObtenidos);
+	}
+	
+	@Test
+	void testCantValoresEquivaleA() {
+		//Excercise
+		boolean cantEquivaleANum = pokerStatus.cantValoresEquivaleA(listaValores, 4); //pongo 4 para que concuerde con los valores repetidos de la
+		//lista de valores (son 4 valores DOS)
+		//Verify
+		assertTrue(cantEquivaleANum);
+	}
+	
+	@Test
+	void testCantValoresNoEquivaleA() {
+		//SetUp
+		List<Valor> listaValores = Arrays.asList(Valor.DOS, Valor.DOS, Valor.DOS, Valor.CINCO, Valor.Q); //cambio uno de los valores DOS a CINCO
+		//Excercise
+		boolean cantEquivaleANum = pokerStatus.cantValoresEquivaleA(listaValores, 4); //pongo 4 para que no concuerde con los valores repetidos de la
+		//lista de valores (son 3 valores DOS)
+		//Verify
+		assertFalse(cantEquivaleANum);
+	}
+	
+	@Test
+	void testContarRepeticionesDeValor() {
+		//SetUp
+		long cantEsperada = 4;
+		//Excercise
+		long cantRepeticiones = pokerStatus.contarRepeticionesDeValor(Valor.DOS, listaValores); //hago que cuente las repeticiones del valor DOS en la lista
+		//de valores del setup
+		//Verify
+		assertEquals(cantEsperada, cantRepeticiones);
+	}
+	
+	@Test
+	void testContarRepeticionesDeValorMaleSal() {
+		//SetUp
+		long cantEsperada = 3; //se supone que en la lista de valores hay 4 DOS
+		//Excercise
+		long cantRepeticiones = pokerStatus.contarRepeticionesDeValor(Valor.DOS, listaValores); //hago que cuente las repeticiones del valor DOS en la lista
+		//de valores del setup
+		//Verify
+		assertNotEquals(cantEsperada, cantRepeticiones);
+	}
+	
+	@Test
+	void testHayTrio() {
+		//SetUp
+		carta1 = new Carta(Valor.A, Palo.PICA); // hago que solo haya 3 cartas del mismo valor
+		//Excercise
+		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
+		//Verify
+		assertTrue("Trío".equals(cadenaObtenida));
+		assertFalse("Nada".equals(cadenaObtenida));
+		assertFalse("Póquer".equals(cadenaObtenida));
+	}
+	
+	@Test
+	void testNoHayTrio() {
+		//Excercise
+		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
+		//Verify
+		assertFalse("Trío".equals(cadenaObtenida));
+		assertTrue("Póquer".equals(cadenaObtenida));
+		assertFalse("Nada".equals(cadenaObtenida));
+	}
+	
+	@Test
+	void testHayColor() {
+		//SetUp
+		carta2 = new Carta(Valor.A, Palo.DIAMANTE); carta3 = new Carta(Valor.J, Palo.DIAMANTE); carta4 = new Carta(Valor.SIETE, Palo.DIAMANTE);
+		// ahora las cinco cartas son del mismo palo
+		//Excercise
+		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
+		//Verify
+		assertTrue("Color".equals(cadenaObtenida));
+		assertFalse("Trío".equals(cadenaObtenida));
+		assertFalse("Nada".equals(cadenaObtenida));
+	}
+	
 
 	/*
 	@Test
