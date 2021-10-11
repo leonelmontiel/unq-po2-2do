@@ -19,24 +19,20 @@ public class PokerStatus {
 	/////////////////
 
 	public boolean hayPoquer(List<Carta> cartas) {
-		return cantValoresEquivaleA(this.cartasSoloConValores(cartas), 4);
+		return cantEquivaleA(this.cartasSoloConValores(cartas), 4);
 	}
 	
 	public boolean hayTrio(List<Carta> cartas) {
-		return cantValoresEquivaleA(this.cartasSoloConValores(cartas), 3);
+		return cantEquivaleA(this.cartasSoloConValores(cartas), 3);
 	}
 	
 	public boolean hayColor(List<Carta> cartas) {
-		return cantPalosEquivaleA(this.cartasSoloConPalos(cartas), 5);
+		return cantEquivaleA(this.cartasSoloConPalos(cartas), 5);
 	}
 	
-	//////////////// INTENTÉ QUE EL VALOR Y EL PALO IMPLEMENTARAN UNA INTERFACE PARA HACER GENÉRICOS LOS MENSAJES DONDE SE COMPARA LA CANTIDAD DE REPETIDOS
-	// PERO CUANDO INTENTO GUARDAR CUALQUIERA DE LOS ENUM EN UNA LISTA DE LA INTERFACE, ME DICE QUE NO ES POSIBLE
+	//////////////// 
+	/*
 	
-	public List<Valor> cartasSoloConValores(List<Carta> cartas) {
-		List<Valor> valores = cartas.stream().map(c -> c.getValor()).toList();		
-	    return valores;
-	}
 
 	public boolean cantValoresEquivaleA(List<Valor> valores, int num) {
 		return valores.stream().anyMatch(valor -> contarRepeticionesDeValor(valor, valores) == num);
@@ -55,16 +51,32 @@ public class PokerStatus {
 		return palos.stream().anyMatch(palo -> contarRepeticionesDePalos(palo, palos) == num);
 	}
 
-	public List<Palo> cartasSoloConPalos(List<Carta> cartas) {
-		List<Palo> palos = cartas.stream().map(c -> c.getPalo()).toList();		
-	    return palos;
-	}
+	
 	
 	public long contarRepeticionesDePalos(Palo palo, List<Palo> palos) {
 		long rep  = palos.stream()
                 .filter(p -> p == palo)
                 .count();
 		return rep;
+	}*/
+	
+	public boolean cantEquivaleA(List<Equivalente> elementos, int num) {
+		return elementos.stream().anyMatch(elem -> contarRepeticionesDe(elem, elementos) == num);
+	}
+	
+	public long contarRepeticionesDe(Equivalente elemento, List<Equivalente> elementos) {
+		long rep = elementos.stream().filter(elem -> elem == elemento).count();
+		return rep;
+	}
+	
+	public List<Equivalente> cartasSoloConValores(List<Carta> cartas) {
+		List<Equivalente> valores = cartas.stream().map(c -> c.getValor()).toList();		
+	    return valores;
+	}
+	
+	public List<Equivalente> cartasSoloConPalos(List<Carta> cartas) {
+		List<Equivalente> palos = cartas.stream().map(c -> c.getPalo()).toList();		
+	    return palos;
 	}
 
 	
