@@ -33,4 +33,10 @@ public class Carta {
 		return valorPrimera > valorSegunda;
 	}
 
+	public boolean tieneMismoPaloQue(Carta carta) {
+		Palo paloPrimera =  this.getPalo();
+		Palo paloSegunda = carta.getPalo();
+		return paloPrimera == paloSegunda;
+	}
+
 }
