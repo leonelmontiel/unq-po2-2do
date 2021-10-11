@@ -53,6 +53,7 @@ public class PokerStatus {
 	
 	public boolean cantPalosEquivaleA(List<Palo> palos, int num) {
 		return palos.stream().anyMatch(palo -> contarRepeticionesDePalos(palo, palos) == num);
+	}
 
 	public List<Palo> cartasSoloConPalos(List<Carta> cartas) {
 		List<Palo> palos = cartas.stream().map(c -> c.getPalo()).toList();		

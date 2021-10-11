@@ -144,6 +144,30 @@ class PoquerStatusTest {
 		assertFalse("Nada".equals(cadenaObtenida));
 	}
 	
+	@Test
+	void testNoHayColor() {
+		//Excercise
+		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
+		//Verify
+		assertFalse("Color".equals(cadenaObtenida));
+		assertTrue("Póquer".equals(cadenaObtenida));
+		assertFalse("Trío".equals(cadenaObtenida));
+		assertFalse("Nada".equals(cadenaObtenida));
+	}
+	
+	@Test
+	void testNoHayJugada() {
+		//SetUp
+		carta2 = new Carta(Valor.A, Palo.DIAMANTE); carta3 = new Carta(Valor.J, Palo.PICA); carta4 = new Carta(Valor.SIETE, Palo.CORAZON);
+		// ahora no hay jugadas posibles
+		//Excercise
+		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
+		//Verify
+		assertTrue("Nada".equals(cadenaObtenida));
+		assertFalse("Póquer".equals(cadenaObtenida));
+		assertFalse("Trío".equals(cadenaObtenida));
+		assertFalse("Color".equals(cadenaObtenida));
+	}
 
 	/*
 	@Test
