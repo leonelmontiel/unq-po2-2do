@@ -1,6 +1,7 @@
 package ar.edu.unq.po2.tp8;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,27 +12,27 @@ import org.junit.jupiter.api.Test;
 class PoquerStatusTest {
 
 	private PokerStatus pokerStatus; //SUT
-	private Carta carta1;
-	private Carta carta2;
-	private Carta carta3;
-	private Carta carta4;
-	private Carta carta5;
+	private Carta carta1 = mock(Carta.class);
+	private Carta carta2 = mock(Carta.class);
+	private Carta carta3 = mock(Carta.class);
+	private Carta carta4 = mock(Carta.class);
+	private Carta carta5 = mock(Carta.class);
 	private List<?> listaValores;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		//Setup
-		pokerStatus = new PokerStatus();
+		pokerStatus = new PokerStatus(); //SUT
 		/*carta1 = "2D";
 		carta2 = "2P";
 		carta3 = "2C";
 		carta4 = "2T";
 		carta5 = "QD";*/
-		carta1 = new Carta(Valor.DOS, Palo.DIAMANTE);
-		carta2 = new Carta(Valor.DOS, Palo.PICA);
-		carta3 = new Carta(Valor.DOS, Palo.CORAZON);
-		carta4 = new Carta(Valor.DOS, Palo.TREBOL);
-		carta5 = new Carta(Valor.Q, Palo.DIAMANTE);
+		when(this.carta1.getValor()).thenReturn(Valor.DOS); when(this.carta1.getPalo()).thenReturn(Palo.DIAMANTE);
+		when(this.carta2.getValor()).thenReturn(Valor.DOS); when(this.carta2.getPalo()).thenReturn(Palo.PICA);
+		when(this.carta3.getValor()).thenReturn(Valor.DOS); when(this.carta3.getPalo()).thenReturn(Palo.CORAZON);
+		when(this.carta4.getValor()).thenReturn(Valor.DOS); when(this.carta4.getPalo()).thenReturn(Palo.TREBOL);
+		when(this.carta5.getValor()).thenReturn(Valor.Q); when(this.carta5.getPalo()).thenReturn(Palo.DIAMANTE);
 		
 		listaValores = Arrays.asList(Valor.DOS, Valor.DOS, Valor.DOS, Valor.DOS, Valor.Q);
 		
@@ -49,7 +50,7 @@ class PoquerStatusTest {
 	@Test
 	void testNoHayPoquer() {
 		//SetUp
-		carta1 = new Carta(Valor.CINCO, Palo.PICA);
+		when(this.carta1.getValor()).thenReturn(Valor.CINCO); when(this.carta1.getPalo()).thenReturn(Palo.PICA);
 		//Excercise
 		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
 		//Verify
@@ -112,7 +113,7 @@ class PoquerStatusTest {
 	@Test
 	void testHayTrio() {
 		//SetUp
-		carta1 = new Carta(Valor.A, Palo.PICA); // hago que solo haya 3 cartas del mismo valor
+		when(this.carta1.getValor()).thenReturn(Valor.A); when(this.carta1.getPalo()).thenReturn(Palo.PICA);// hago que solo haya 3 cartas del mismo valor
 		//Excercise
 		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
 		//Verify
@@ -158,7 +159,9 @@ class PoquerStatusTest {
 	@Test
 	void testNoHayJugada() {
 		//SetUp
-		carta2 = new Carta(Valor.A, Palo.DIAMANTE); carta3 = new Carta(Valor.J, Palo.PICA); carta4 = new Carta(Valor.SIETE, Palo.CORAZON);
+		when(this.carta2.getValor()).thenReturn(Valor.A);
+		when(this.carta3.getValor()).thenReturn(Valor.J); when(this.carta2.getPalo()).thenReturn(Palo.PICA);
+		when(this.carta4.getValor()).thenReturn(Valor.SIETE); when(this.carta1.getPalo()).thenReturn(Palo.CORAZON);
 		// ahora no hay jugadas posibles
 		//Excercise
 		String cadenaObtenida = pokerStatus.verificar(carta1, carta2, carta3, carta4, carta5);
