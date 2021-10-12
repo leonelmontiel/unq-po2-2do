@@ -16,4 +16,8 @@ public enum Valor {
 	public Integer getRepresentacion() {
 		return this.valor;
 	}
+
+	boolean esMayorQue(Valor valor) {
+		return this.getRepresentacion() > valor.getRepresentacion();
+	}
 }

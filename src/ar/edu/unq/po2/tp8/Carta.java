@@ -28,13 +28,7 @@ public class Carta {
 	}
 
 	public boolean esMayorQue(Carta carta) {
-		Integer valorPrimera =  this.getValor(this);
-		Integer valorSegunda = getValor(carta);
-		return valorPrimera > valorSegunda;
-	}
-
-	public Integer getValor(Carta carta) {
-		return carta.getValor().getRepresentacion();
+		return this.getValor().esMayorQue(carta.getValor());
 	}
 
 	public boolean tieneMismoPaloQue(Carta carta) {
