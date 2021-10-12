@@ -13,7 +13,7 @@ public enum Valor implements Equivalente {
 		this.valor = valor;		
 	}
 
-	Integer getValor() {
+	public Integer getRepresentacion() {
 		return this.valor;
 	}
 }
