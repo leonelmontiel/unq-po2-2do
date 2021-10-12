@@ -31,6 +31,29 @@ public class PokerStatus {
 	}
 	
 	//////////////// 
+	
+	public List<Equivalente> cartasSoloConValores(List<Carta> cartas) {
+		List<Equivalente> valores = cartas.stream().map(Carta::getValor).toList();		
+	    return valores;
+	}
+	
+	public List<Equivalente> cartasSoloConPalos(List<Carta> cartas) {
+		List<Equivalente> palos = cartas.stream().map(Carta::getPalo).toList();		
+	    return palos;
+	}
+	
+	//////////////
+	
+	public boolean cantEquivaleA(List<Equivalente> elementos, int num) {
+		return elementos.stream().anyMatch(elem -> contarRepeticionesDe(elem, elementos) == num);
+	}
+	
+	public long contarRepeticionesDe(Equivalente elemento, List<Equivalente> elementos) {
+		long rep = elementos.stream().filter(elem -> elem.equals(elemento)).count();
+		return rep;
+	}
+	
+	
 	/*
 	
 
@@ -59,28 +82,6 @@ public class PokerStatus {
                 .count();
 		return rep;
 	}*/
-	
-	public boolean cantEquivaleA(List<Equivalente> elementos, int num) {
-		return elementos.stream().anyMatch(elem -> contarRepeticionesDe(elem, elementos) == num);
-	}
-	
-	public long contarRepeticionesDe(Equivalente elemento, List<Equivalente> elementos) {
-		long rep = elementos.stream().filter(elem -> elem.equals(elemento)).count();
-		return rep;
-	}
-	
-	public List<Equivalente> cartasSoloConValores(List<Carta> cartas) {
-		List<Equivalente> valores = cartas.stream().map(Carta::getValor).toList();		
-	    return valores;
-	}
-	
-	public List<Equivalente> cartasSoloConPalos(List<Carta> cartas) {
-		List<Equivalente> palos = cartas.stream().map(Carta::getPalo).toList();		
-	    return palos;
-	}
-
-	
-
 	
 
 	/* VERIFICAR VIEJO
