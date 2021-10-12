@@ -65,17 +65,17 @@ public class PokerStatus {
 	}
 	
 	public long contarRepeticionesDe(Equivalente elemento, List<Equivalente> elementos) {
-		long rep = elementos.stream().filter(elem -> elem == elemento).count();
+		long rep = elementos.stream().filter(elem -> elem.equals(elemento)).count();
 		return rep;
 	}
 	
 	public List<Equivalente> cartasSoloConValores(List<Carta> cartas) {
-		List<Equivalente> valores = cartas.stream().map(c -> c.getValor()).toList();		
+		List<Equivalente> valores = cartas.stream().map(Carta::getValor).toList();		
 	    return valores;
 	}
 	
 	public List<Equivalente> cartasSoloConPalos(List<Carta> cartas) {
-		List<Equivalente> palos = cartas.stream().map(c -> c.getPalo()).toList();		
+		List<Equivalente> palos = cartas.stream().map(Carta::getPalo).toList();		
 	    return palos;
 	}
 

@@ -16,7 +16,7 @@ class PoquerStatusTest {
 	private Carta carta3;
 	private Carta carta4;
 	private Carta carta5;
-	private List<Valor> listaValores;
+	private List<Equivalente> listaValores;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -62,7 +62,7 @@ class PoquerStatusTest {
 		//SetUp		
 		List<Carta> listaDeCartas = Arrays.asList(carta1, carta2, carta3, carta4, carta5);
 		//Excercise
-		List<Valor> listaValoresObtenidos = pokerStatus.cartasSoloConValores(listaDeCartas);
+		List<Equivalente> listaValoresObtenidos = pokerStatus.cartasSoloConValores(listaDeCartas);
 		//Verify
 		assertEquals(listaValores, listaValoresObtenidos);
 	}
@@ -70,7 +70,7 @@ class PoquerStatusTest {
 	@Test
 	void testCantValoresEquivaleA() {
 		//Excercise
-		boolean cantEquivaleANum = pokerStatus.cantValoresEquivaleA(listaValores, 4); //pongo 4 para que concuerde con los valores repetidos de la
+		boolean cantEquivaleANum = pokerStatus.cantEquivaleA(listaValores, 4); //pongo 4 para que concuerde con los valores repetidos de la
 		//lista de valores (son 4 valores DOS)
 		//Verify
 		assertTrue(cantEquivaleANum);
@@ -79,9 +79,9 @@ class PoquerStatusTest {
 	@Test
 	void testCantValoresNoEquivaleA() {
 		//SetUp
-		List<Valor> listaValores = Arrays.asList(Valor.DOS, Valor.DOS, Valor.DOS, Valor.CINCO, Valor.Q); //cambio uno de los valores DOS a CINCO
+		List<Equivalente> listaValores = Arrays.asList(Valor.DOS, Valor.DOS, Valor.DOS, Valor.CINCO, Valor.Q); //cambio uno de los valores DOS a CINCO
 		//Excercise
-		boolean cantEquivaleANum = pokerStatus.cantValoresEquivaleA(listaValores, 4); //pongo 4 para que no concuerde con los valores repetidos de la
+		boolean cantEquivaleANum = pokerStatus.cantEquivaleA(listaValores, 4); //pongo 4 para que no concuerde con los valores repetidos de la
 		//lista de valores (son 3 valores DOS)
 		//Verify
 		assertFalse(cantEquivaleANum);
@@ -92,7 +92,7 @@ class PoquerStatusTest {
 		//SetUp
 		long cantEsperada = 4;
 		//Excercise
-		long cantRepeticiones = pokerStatus.contarRepeticionesDeValor(Valor.DOS, listaValores); //hago que cuente las repeticiones del valor DOS en la lista
+		long cantRepeticiones = pokerStatus.contarRepeticionesDe(Valor.DOS, listaValores); //hago que cuente las repeticiones del valor DOS en la lista
 		//de valores del setup
 		//Verify
 		assertEquals(cantEsperada, cantRepeticiones);
@@ -103,7 +103,7 @@ class PoquerStatusTest {
 		//SetUp
 		long cantEsperada = 3; //se supone que en la lista de valores hay 4 DOS
 		//Excercise
-		long cantRepeticiones = pokerStatus.contarRepeticionesDeValor(Valor.DOS, listaValores); //hago que cuente las repeticiones del valor DOS en la lista
+		long cantRepeticiones = pokerStatus.contarRepeticionesDe(Valor.DOS, listaValores); //hago que cuente las repeticiones del valor DOS en la lista
 		//de valores del setup
 		//Verify
 		assertNotEquals(cantEsperada, cantRepeticiones);
