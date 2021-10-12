@@ -32,23 +32,23 @@ public class PokerStatus {
 	
 	//////////////// 
 	
-	public List<Equivalente> cartasSoloConValores(List<Carta> cartas) {
-		List<Equivalente> valores = cartas.stream().map(Carta::getValor).toList();		
+	public List<?> cartasSoloConValores(List<Carta> cartas) {
+		List<?> valores = cartas.stream().map(Carta::getValor).toList();		
 	    return valores;
 	}
 	
-	public List<Equivalente> cartasSoloConPalos(List<Carta> cartas) {
-		List<Equivalente> palos = cartas.stream().map(Carta::getPalo).toList();		
+	public List<?> cartasSoloConPalos(List<Carta> cartas) {
+		List<?> palos = cartas.stream().map(Carta::getPalo).toList();		
 	    return palos;
 	}
 	
 	//////////////
 	
-	public boolean cantEquivaleA(List<Equivalente> elementos, int num) {
+	public boolean cantEquivaleA(List<?> elementos, int num) {
 		return elementos.stream().anyMatch(elem -> contarRepeticionesDe(elem, elementos) == num);
 	}
 	
-	public long contarRepeticionesDe(Equivalente elemento, List<Equivalente> elementos) {
+	public long contarRepeticionesDe(Object elemento, List<?> elementos) {
 		long rep = elementos.stream().filter(elem -> elem.equals(elemento)).count();
 		return rep;
 	}

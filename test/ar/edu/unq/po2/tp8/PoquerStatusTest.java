@@ -16,7 +16,7 @@ class PoquerStatusTest {
 	private Carta carta3;
 	private Carta carta4;
 	private Carta carta5;
-	private List<Equivalente> listaValores;
+	private List<?> listaValores;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -62,7 +62,7 @@ class PoquerStatusTest {
 		//SetUp		
 		List<Carta> listaDeCartas = Arrays.asList(carta1, carta2, carta3, carta4, carta5);
 		//Excercise
-		List<Equivalente> listaValoresObtenidos = pokerStatus.cartasSoloConValores(listaDeCartas);
+		List<?> listaValoresObtenidos = pokerStatus.cartasSoloConValores(listaDeCartas);
 		//Verify
 		assertEquals(listaValores, listaValoresObtenidos);
 	}
@@ -79,7 +79,7 @@ class PoquerStatusTest {
 	@Test
 	void testCantValoresNoEquivaleA() {
 		//SetUp
-		List<Equivalente> listaValores = Arrays.asList(Valor.DOS, Valor.DOS, Valor.DOS, Valor.CINCO, Valor.Q); //cambio uno de los valores DOS a CINCO
+		List<?> listaValores = Arrays.asList(Valor.DOS, Valor.DOS, Valor.DOS, Valor.CINCO, Valor.Q); //cambio uno de los valores DOS a CINCO
 		//Excercise
 		boolean cantEquivaleANum = pokerStatus.cantEquivaleA(listaValores, 4); //pongo 4 para que no concuerde con los valores repetidos de la
 		//lista de valores (son 3 valores DOS)

@@ -19,11 +19,11 @@ public class Carta {
 		
 	}
 	
-	public Equivalente getValor() {
+	public Valor getValor() {
 		return this.valor;
 	}
 	
-	public Equivalente getPalo() {
+	public Palo getPalo() {
 		return this.palo;
 	}
 
@@ -38,8 +38,8 @@ public class Carta {
 	}
 
 	public boolean tieneMismoPaloQue(Carta carta) {
-		Equivalente paloPrimera =  this.getPalo();
-		Equivalente paloSegunda = carta.getPalo();
+		Palo paloPrimera =  this.getPalo();
+		Palo paloSegunda = carta.getPalo();
 		return paloPrimera == paloSegunda;
 	}
 
