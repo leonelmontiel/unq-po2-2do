@@ -1,13 +1,11 @@
 package ar.edu.unq.po2.composite;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 
 abstract class PelotonTest {
 	protected Peloton parteDelPeloton; //SUT
-	protected Peloton ingeniero = mock(Ingeniero.class); //Doc (Dummy)
 
 	@Test
 	void testUbicacionInicialEs0Pasos() {
@@ -17,22 +15,11 @@ abstract class PelotonTest {
 	}
 	
 	@Test
-	void testReclutarIngeniero() {
-		//Excercise
-		this.parteDelPeloton.reclutar(ingeniero);
-		boolean pelotonContieneAIngeniero = this.parteDelPeloton.getLuchadores().contains(ingeniero);
+	void testAvanzarHaciaDestino() {
+		int destino = 15;
+		this.parteDelPeloton.caminarHasta(destino);
 		//Verify
-		assertTrue(pelotonContieneAIngeniero);
-	}
-	
-	@Test
-	void testDesterrarDelPelotonAIngeniero() {
-		//Excercise
-		this.testReclutarIngeniero();
-		this.parteDelPeloton.desterrar(ingeniero);
-		boolean pelotonContieneAIngeniero = this.parteDelPeloton.getLuchadores().contains(ingeniero);
-		//Verify
-		assertFalse(pelotonContieneAIngeniero);
+		assertEquals(destino, this.parteDelPeloton.getUbicacion());
 	}
 
 }

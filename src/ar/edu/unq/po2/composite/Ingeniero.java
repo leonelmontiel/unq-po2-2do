@@ -50,18 +50,18 @@ public class Ingeniero extends Peloton{
 	}
 
 	@Override
-	public void reclutar(Peloton luchador) {
+	public void reclutar(Peloton soldado) {
 		System.out.println("No tiene la autoridad para reclutar");
 	}
 	
 	@Override
-	public List<Peloton> getLuchadores() {
+	public List<Peloton> getSoldados() {
 		System.out.println("No tiene la autoridad para estar a cargo de ningún pelotón");
 		return null;
 	}
 	
 	@Override
-	public void desterrar(Peloton luchador) {
+	public void desterrar(Peloton soldados) {
 		System.out.println("No tiene la autoridad para desterrar a ningún soldado");
 	}
 }

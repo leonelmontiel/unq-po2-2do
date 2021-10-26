@@ -43,27 +43,6 @@ class IngenieroTest extends PelotonTest{
 		assertTrue(((Ingeniero) this.parteDelPeloton).getLajas() == 0);
 	}
 	
-	@Override
-	@Test
-	void testReclutarIngeniero() {
-		// No puede reclutar
-	}
-	
-	@Test
-	void testNoPuedeReclutar() {
-		//Excercise
-		this.parteDelPeloton.reclutar(ingeniero);
-		boolean pelotonContieneAIngeniero = this.parteDelPeloton.luchadores.contains(ingeniero);
-		//Verify
-		assertFalse(pelotonContieneAIngeniero);
-	}
-	
-	@Override
-	@Test
-	void testDesterrarDelPelotonAIngeniero() {
-		// No puede desterrar a nadie ya que no puede reclutar
-	}
-	
 	@Test
 	void testDejarLaja() {
 		//Excercise
