@@ -27,15 +27,20 @@ public class Ingeniero extends Peloton{
 	}
 
 	public void caminarYDejarLajasHacia(Integer destino) {
-		for(int paso=0; paso<destino; paso++) {
+		for(int paso=1; paso<=destino; paso++) {
 			this.setUbicacion(paso);
 			this.dejarLaja();
 		}
 	}
 	
 	private void dejarLaja() {
-		setLajas(this.getLajas() - 1);
-		System.out.println("Se ha dejado una laja en el camino. Quedan: " + this.getLajas());		
+		if (this.getLajas() > 0) {
+			setLajas(this.getLajas() - 1);
+			System.out.println("Se ha dejado una laja en el camino. Quedan " + this.getLajas());
+		} else {
+			System.out.print("No hay más lajas en la bolsa para dejar. El Ingeniero continuará su camino normalmente. ");
+			System.out.println("Ya ha dado " + this.getUbicacion() + " pasos.");
+		}							
 	}
 
 	private Integer trazarCaminoCortoHacia(Integer destino) {
