@@ -1,0 +1,64 @@
+import parcela.*
+import porcion.*
+import soja.*
+import porcionPura.*
+import trigo.*
+import porcionMixta.*
+
+describe "Test Porción"{
+	const parcela = new Parcela()
+	
+	const soja = new Soja()
+	const trigo = new Trigo()
+	
+	const porcionPuraUno = new PorcionPura(cultivo = soja)
+	const porcionPuraDos = new PorcionPura(cultivo = trigo)
+	const porcionPuraTres = new PorcionPura(cultivo = soja)
+	const porcionPuraCuatro = new PorcionPura(cultivo = trigo)
+	
+	const unaPorcionMixta = new PorcionMixta()
+	
+	
+	method crearUnaPorcion() {
+		unaPorcionMixta.agregarRegion(porcionPuraUno)
+		unaPorcionMixta.agregarRegion(porcionPuraTres)
+		unaPorcionMixta.agregarRegion(porcionPuraDos)
+		unaPorcionMixta.agregarRegion(porcionPuraCuatro)
+	}
+	
+	method crearParcela() {
+		self.crearUnaPorcion()
+		parcela.agregarPorcion(porcionPuraUno)
+		parcela.agregarPorcion(porcionPuraDos)
+		parcela.agregarPorcion(porcionPuraTres)
+		parcela.agregarPorcion(unaPorcionMixta)
+	}
+	
+	test "Porcion Pura tiene a Soja como cultivo " {
+		assert.equals(porcionPuraUno.cultivo(), soja)
+	
+	}
+	
+	test "Parcela tiene dos cultivos puros de soja, uno de trigo y uno mixto" {
+		self.crearParcela()
+		assert.that(parcela.porciones().contains(porcionPuraUno))
+		assert.that(parcela.porciones().contains(porcionPuraDos))
+		assert.that(parcela.porciones().contains(porcionPuraTres))
+		assert.that(parcela.porciones().contains(unaPorcionMixta))
+	}
+	
+	test "Porción Mixta tiene dos cultivos puros de soja y dos de trigo" {
+		self.crearUnaPorcion()
+		assert.that(unaPorcionMixta.regiones().contains(porcionPuraUno))
+		assert.that(unaPorcionMixta.regiones().contains(porcionPuraDos))
+		assert.that(unaPorcionMixta.regiones().contains(porcionPuraTres))
+		assert.that(unaPorcionMixta.regiones().contains(porcionPuraCuatro))
+	}
+	
+	test "Total de porción mixta es 1700" {
+		self.crearParcela()
+		assert.equals(1700, parcela.gananciaAnual())
+	}
+	
+	
+}
