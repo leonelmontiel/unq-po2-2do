@@ -5,30 +5,64 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class IngenieroTest {
+class IngenieroTest extends PelotonTest{
 
-	private Ingeniero ingeniero;
+	private int lajas;
 
 	@BeforeEach
 	void setUp() throws Exception {
+		//SetUp
 		// comienza con 10 lajas en su bolsa
-		this.ingeniero = new Ingeniero(10);
+		this.lajas = 10;
+		this.parteDelPeloton = new Ingeniero(this.lajas);
+	}
+	
+	@Test
+	void testTiene10LajasEnSuBolsa() {
+		//Verify
+		assertEquals(((Ingeniero) this.parteDelPeloton).getLajas(), this.lajas);
 	}
 
 	@Test
 	void testCaminarDejandoLajasHaciendo5Pasos() {
+		//Excercise
 		System.out.println("\n" + "testCaminarDejandoLajasHaciendo5Pasos(): ");
 		Integer destino = 5; // representa los pasos hasta un determinado destino
-		this.ingeniero.caminarHasta(destino);
-		assertTrue(this.ingeniero.getLajas() == 5);
+		this.parteDelPeloton.caminarHasta(destino);
+		//Verify
+		assertTrue(((Ingeniero) this.parteDelPeloton).getLajas() == 5);
 	}
 	
 	@Test
 	void testCaminarDejandoLas10LajasHaciendo12Pasos() {
+		//Excercise
 		System.out.println("\n" + "testCaminarDejandoLas10LajasHaciendo12Pasos(): ");
 		Integer destino = 12; // representa los pasos hasta un determinado destino
-		this.ingeniero.caminarHasta(destino);
-		assertTrue(this.ingeniero.getLajas() == 0);
+		this.parteDelPeloton.caminarHasta(destino);
+		//Verify
+		assertTrue(((Ingeniero) this.parteDelPeloton).getLajas() == 0);
 	}
-
+	
+	@Override
+	@Test
+	void testReclutarIngeniero() {
+		// No puede reclutar
+	}
+	
+	@Test
+	void testNoPuedeReclutar() {
+		//Excercise
+		this.parteDelPeloton.reclutar(ingeniero);
+		boolean pelotonContieneAIngeniero = this.parteDelPeloton.luchadores.contains(ingeniero);
+		//Verify
+		assertFalse(pelotonContieneAIngeniero);
+	}
+	
+	@Override
+	@Test
+	void testDesterrarDelPelotonAIngeniero() {
+		// No puede desterrar a nadie ya que no puede reclutar
+	}
+	
+	
 }
