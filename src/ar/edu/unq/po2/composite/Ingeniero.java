@@ -33,7 +33,7 @@ public class Ingeniero extends Peloton{
 		}
 	}
 	
-	private void dejarLaja() {
+	public void dejarLaja() {
 		if (this.getLajas() > 0) {
 			setLajas(this.getLajas() - 1);
 			System.out.println("Se ha dejado una laja en el camino. Quedan " + this.getLajas());
@@ -43,7 +43,7 @@ public class Ingeniero extends Peloton{
 		}							
 	}
 
-	private Integer trazarCaminoCortoHacia(Integer destino) {
+	public Integer trazarCaminoCortoHacia(Integer destino) {
 		System.out.println("El Ingeniero ha trazado el camino hacia el destino. Se deben dar " + destino + " pasos.");
 		System.out.println("Dispone de  " + this.getLajas() + " lajas en su bolsa.");
 		return destino;

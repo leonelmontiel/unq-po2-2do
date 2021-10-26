@@ -64,5 +64,23 @@ class IngenieroTest extends PelotonTest{
 		// No puede desterrar a nadie ya que no puede reclutar
 	}
 	
+	@Test
+	void testDejarLaja() {
+		//Excercise
+		((Ingeniero) this.parteDelPeloton).dejarLaja();
+		int lajasEsperadas = this.lajas - 1;
+		int lajasQueQuedan = ((Ingeniero)this.parteDelPeloton).getLajas();
+		//Verify
+		assertEquals(lajasEsperadas, lajasQueQuedan);
+	}
+	
+	@Test
+	void testTrazarCamino() {
+		//Excercise
+		int destino = 15; //pasos
+		int pasosADar = ((Ingeniero) this.parteDelPeloton).trazarCaminoCortoHacia(destino);
+		//Verify
+		assertEquals(destino, pasosADar);
+	}
 	
 }
