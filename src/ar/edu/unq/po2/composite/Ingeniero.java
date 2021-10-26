@@ -3,6 +3,7 @@ package ar.edu.unq.po2.composite;
 import java.util.List;
 
 public class Ingeniero extends Peloton{
+	// HOJA
 
 	private int lajas;
 

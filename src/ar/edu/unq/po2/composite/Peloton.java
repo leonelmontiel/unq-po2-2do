@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Peloton {
+	// COMPUESTO
 
 	protected int ubicacion; // representa la cantidad de pasos hasta un determinado destino
 	protected List<Peloton> soldados = new ArrayList<Peloton>();

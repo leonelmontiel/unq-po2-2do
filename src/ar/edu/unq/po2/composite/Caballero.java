@@ -3,6 +3,7 @@ package ar.edu.unq.po2.composite;
 import java.util.List;
 
 public class Caballero extends Peloton {
+	// HOJA
 
 	@Override
 	public void caminarHasta(Integer destino) {
