@@ -2,10 +2,17 @@ package ar.edu.unq.po2.composite;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 abstract class PelotonTest {
 	protected Peloton parteDelPeloton; //SUT
+	protected int destino;
+	
+	@BeforeEach
+	void setUp() throws Exception {
+		this.destino = 15;
+	}
 
 	@Test
 	void testUbicacionInicialEs0Pasos() {
@@ -16,7 +23,6 @@ abstract class PelotonTest {
 	
 	@Test
 	void testAvanzarHaciaDestino() {
-		int destino = 15;
 		this.parteDelPeloton.caminarHasta(destino);
 		//Verify
 		assertEquals(destino, this.parteDelPeloton.getUbicacion());

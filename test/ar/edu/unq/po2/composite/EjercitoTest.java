@@ -2,7 +2,10 @@ package ar.edu.unq.po2.composite;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +21,15 @@ class EjercitoTest extends PelotonTest{
 		this.parteDelPeloton = new Ejercito();
 	}
 	
-	void reclutarA3(Peloton ingeniero, Peloton caballero, Peloton ejercito) {
+	void ejercitoReclutaAIngenieroYCaballero() {
+		List<Peloton> soldados = Arrays.asList(ingeniero, caballero);
+//		this.ejercito.reclutar(ingeniero);
+//		this.ejercito.reclutar(caballero);
+		when(this.ejercito.getSoldados()).thenReturn(soldados);
+	}
+	
+	void reclutarA3() {
+		this.ejercitoReclutaAIngenieroYCaballero();
 		this.parteDelPeloton.reclutar(ingeniero);
 		this.parteDelPeloton.reclutar(caballero);
 		this.parteDelPeloton.reclutar(ejercito);
@@ -48,7 +59,7 @@ class EjercitoTest extends PelotonTest{
 	@Test
 	void testReclutarALas3Partes() {
 		//Excercise
-		this.reclutarA3(ingeniero, caballero, ejercito);
+		this.reclutarA3();
 		boolean pelotonContieneAIngeniero = this.parteDelPeloton.getSoldados().contains(ingeniero);
 		boolean pelotonContieneACaballero = this.parteDelPeloton.getSoldados().contains(caballero);
 		boolean pelotonContieneAEjercito = this.parteDelPeloton.getSoldados().contains(ejercito);
@@ -67,6 +78,15 @@ class EjercitoTest extends PelotonTest{
 		boolean pelotonContieneAIngeniero = this.parteDelPeloton.getSoldados().contains(ingeniero);
 		//Verify
 		assertFalse(pelotonContieneAIngeniero);
+	}
+	
+	@Test
+	void testTodosAvanzaronADestino() {
+		this.reclutarA3();
+		this.testAvanzarHaciaDestino();
+		verify(this.ingeniero, times(2)).caminarHasta(destino); // debería enviarse el mensaje la primera vez directamente y la segunda desde el mock ejercito
+		verify(this.caballero, times(2)).caminarHasta(destino); // debería enviarse el mensaje la primera vez directamente y la segunda desde el mock ejercito
+		verify(this.ejercito, atLeast(1)).caminarHasta(destino);
 	}
 
 }
