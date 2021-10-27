@@ -14,18 +14,17 @@ class EjercitoTest extends PelotonTest{
 
 	protected Peloton ingeniero = mock(Ingeniero.class); //Doc (Dummy)
 	protected Peloton caballero = mock(Caballero.class); //Doc (Dummy)
-	protected Peloton ejercito = mock(Ejercito.class); //Doc (Dummy)
+	protected Peloton ejercito;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		this.parteDelPeloton = new Ejercito();
+		this.ejercito = new Ejercito();
 	}
 	
 	void ejercitoReclutaAIngenieroYCaballero() {
-		List<Peloton> soldados = Arrays.asList(ingeniero, caballero);
-//		this.ejercito.reclutar(ingeniero);
-//		this.ejercito.reclutar(caballero);
-		when(this.ejercito.getSoldados()).thenReturn(soldados);
+		this.ejercito.reclutar(ingeniero);
+		this.ejercito.reclutar(caballero);
 	}
 	
 	void reclutarA3() {
@@ -86,7 +85,6 @@ class EjercitoTest extends PelotonTest{
 		this.testAvanzarHaciaDestino();
 		verify(this.ingeniero, times(2)).caminarHasta(destino); // debería enviarse el mensaje la primera vez directamente y la segunda desde el mock ejercito
 		verify(this.caballero, times(2)).caminarHasta(destino); // debería enviarse el mensaje la primera vez directamente y la segunda desde el mock ejercito
-		verify(this.ejercito, atLeast(1)).caminarHasta(destino);
 	}
 
 }
