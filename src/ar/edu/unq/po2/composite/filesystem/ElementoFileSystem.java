@@ -12,9 +12,6 @@ public abstract class ElementoFileSystem implements IFileSystem{
 	}
 
 	@Override
-	public abstract int totalSize();
-	
-	@Override
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -22,6 +19,13 @@ public abstract class ElementoFileSystem implements IFileSystem{
 	protected void setNombre(String nombre) {
 		this.nombre = nombre;		
 	}
+	
+	protected void setSize(int size) {
+		this.totalSize = size;
+	}
+	
+	@Override
+	public abstract int totalSize();
 	
 	@Override
 	public abstract IFileSystem oldestElement(); // elemento más antiguo
@@ -36,11 +40,7 @@ public abstract class ElementoFileSystem implements IFileSystem{
 	
 	public abstract void agregarElemento(IFileSystem elemento);
 
-	public abstract LocalDate getUltimaModificacion();
-	
-	protected void setSize(int size) {
-		this.totalSize = size;
-	}
+	public abstract LocalDate getUltimaModificacion();	
 	
 	public abstract boolean contains(IFileSystem elemento);
 
