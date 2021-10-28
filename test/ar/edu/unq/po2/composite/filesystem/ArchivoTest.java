@@ -1,6 +1,9 @@
 package ar.edu.unq.po2.composite.filesystem;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ArchivoTest extends ElementoFileSystemTest{
 
@@ -9,5 +12,9 @@ class ArchivoTest extends ElementoFileSystemTest{
 		this.elemento = new Archivo("Elemento Genérico", 50);
 	}
 	
+	@Test
+	void testÚltimoElementoEsÉlMismo() {
+		assertEquals(this.elemento, this.elemento.oldestElement());
+	}
 
 }

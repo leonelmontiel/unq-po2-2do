@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 abstract class ElementoFileSystemTest {
 
-	protected IFyleSystem elemento;
+	protected IFileSystem elemento;
 
 	@Test
 	void testNombreEsElementoGenerico() {
