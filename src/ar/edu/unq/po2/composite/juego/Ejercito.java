@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.composite;
+package ar.edu.unq.po2.composite.juego;
 
 public class Ejercito extends Peloton {
 	//COMPONENTE

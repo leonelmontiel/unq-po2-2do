@@ -1,11 +1,8 @@
-package ar.edu.unq.po2.composite;
+package ar.edu.unq.po2.composite.juego;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -74,7 +71,7 @@ class EjercitoTest extends PelotonTest{
 		//Excercise
 		this.testReclutarIngeniero();
 		this.parteDelPeloton.desterrar(ingeniero);
-		boolean pelotonContieneAIngeniero = this.parteDelPeloton.getSoldados().contains(ingeniero);
+		boolean pelotonContieneAIngeniero = this.parteDelPeloton.contains(ingeniero);
 		//Verify
 		assertFalse(pelotonContieneAIngeniero);
 	}

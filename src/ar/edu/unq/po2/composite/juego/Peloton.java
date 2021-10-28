@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.composite;
+package ar.edu.unq.po2.composite.juego;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +23,16 @@ public abstract class Peloton {
 		this.soldados.add(luchador);
 	}
 	
-	public void desterrar(Peloton luchador) {
-		this.soldados.remove(luchador);
+	public void desterrar(Peloton soldado) {
+		this.soldados.remove(soldado);
 	}
 
 	public List<Peloton> getSoldados() {
 		return this.soldados ;
+	}
+	
+	public Boolean contains(Peloton soldado) {
+		return this.getSoldados().contains(soldado);
 	}
 
 }
