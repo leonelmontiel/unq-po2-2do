@@ -23,4 +23,9 @@ public class Archivo extends ElementoFileSystem {
 		return this;
 	}
 
+	@Override
+	public IFileSystem lastModified() {
+		return this;
+	}
+
 }
