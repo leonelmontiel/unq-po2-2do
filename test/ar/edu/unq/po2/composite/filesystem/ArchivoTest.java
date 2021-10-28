@@ -13,12 +13,12 @@ class ArchivoTest extends ElementoFileSystemTest{
 	}
 	
 	@Test
-	void estElementoM·sNuevoEs…lMismo() {
+	void estElementoM·sAntiguoEs…lMismo() {
 		assertEquals(this.elemento, this.elemento.oldestElement());
 	}
 	
 	@Test
-	void testElementoM·sAntiguoEs…lMismo() {
+	void testElementoM·sNuevoEs…lMismo() {
 		assertEquals(this.elemento, this.elemento.lastModified());
 	}
 	
