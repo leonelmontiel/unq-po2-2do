@@ -1,6 +1,6 @@
 package ar.edu.unq.po2.composite.filesystem;
 
-public abstract class ElementoFileSystem implements IFyleSystem{
+public abstract class ElementoFileSystem implements IFileSystem{
 	protected String nombre;
 	
 	public ElementoFileSystem(String nombre) {
@@ -18,5 +18,8 @@ public abstract class ElementoFileSystem implements IFyleSystem{
 	protected void setNombre(String nombre) {
 		this.nombre = nombre;		
 	}
+	
+	@Override
+	public abstract IFileSystem oldestElement();
 
 }

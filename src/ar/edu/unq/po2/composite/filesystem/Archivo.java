@@ -18,4 +18,9 @@ public class Archivo extends ElementoFileSystem {
 		return this.totalSize;
 	}
 
+	@Override
+	public IFileSystem oldestElement() {
+		return this;
+	}
+
 }
