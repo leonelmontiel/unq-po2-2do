@@ -6,8 +6,10 @@ public interface IFileSystem {
 
 	public String getNombre();
 
-	public IFileSystem oldestElement();
+	public IFileSystem oldestElement(); // elemento más antiguo
 
-	public IFileSystem lastModified();
+	public IFileSystem lastModified(); // elemento más nuevo
+
+	public void printStructure();
 
 }

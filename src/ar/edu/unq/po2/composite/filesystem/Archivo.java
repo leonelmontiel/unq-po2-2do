@@ -1,16 +1,13 @@
 package ar.edu.unq.po2.composite.filesystem;
 
-public class Archivo extends ElementoFileSystem {
+import java.time.LocalDate;
+import java.util.List;
 
-	private int totalSize;
+public class Archivo extends ElementoFileSystem {
 
 	public Archivo(String nombre, int size) {
 		super(nombre);
 		setSize(size);
-	}
-
-	private void setSize(int size) {
-		this.totalSize = size;
 	}
 
 	@Override
@@ -20,12 +17,42 @@ public class Archivo extends ElementoFileSystem {
 
 	@Override
 	public IFileSystem oldestElement() {
+		//elemento más antiguo
 		return this;
 	}
 
 	@Override
 	public IFileSystem lastModified() {
+		//elemento más nuevo
 		return this;
+	}
+	
+	@Override
+	public void printStructure() {
+		System.out.println(this.getNombre());
+	}
+	
+	@Override
+	public LocalDate getUltimaModificacion() {
+		//retorna la fecha actual ya que no hay ninguna forma de establecer una fecha puntual
+		return LocalDate.now();
+	}
+
+	@Override
+	public List<IFileSystem> getContenido() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void agregarElemento(IFileSystem elemento) {
+		// no puede agregar
+	}
+
+	@Override
+	public boolean contains(IFileSystem elemento) {
+		// no tiene permitido contener ningún elemento
+		return false;
 	}
 
 }
