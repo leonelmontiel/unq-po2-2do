@@ -20,8 +20,8 @@ public class Directorio extends ElementoFileSystem {
 
 	@Override
 	public int totalSize() {
-		
-		return 0;
+		Integer totalSize = this.getContenido().stream().mapToInt(IFileSystem::totalSize).sum();
+		return totalSize;
 	}
 
 	@Override

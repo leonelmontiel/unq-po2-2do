@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,16 +13,18 @@ import org.junit.jupiter.api.Test;
 class DirectorioTest {
 
 	private IFileSystem directorio; //SUT
-	private IFileSystem archivo = mock(Archivo.class);
-	private IFileSystem directorioAux = mock(Directorio.class);
+	private IFileSystem archivo = mock(Archivo.class); //Doc
+	private IFileSystem directorioAux; //Doc
 
 	@BeforeEach
 	void setUp() throws Exception {
 		this.directorio = new Directorio("RHCP");
+		this.directorioAux = new Directorio("Stadium Arcadium");
 		
 		//Config mocks
 		when(this.archivo.totalSize()).thenReturn(50);
-		when(this.directorioAux.totalSize()).thenReturn(50);
+		
+		((Directorio) this.directorioAux).agregarElemento(archivo);
 	}
 
 	@Test
@@ -67,15 +70,20 @@ class DirectorioTest {
 		//Verify
 		assertTrue(contieneAlArchivo);
 	}
-	/*
+	
 	@Test
 	void testTamañoTotalEs100BytesPorContenerArchivoYDirectorioConArchivo() {
+		//SetUp
+		List<IFileSystem> listaConArchivo = Arrays.asList(archivo);
 		// Excersice
+		((Directorio) this.directorio).agregarElemento(archivo);
+		((Directorio) this.directorio).agregarElemento(directorioAux);
 		int resultadoObtenido = this.directorio.totalSize();
 		//Verify
+		assertEquals(listaConArchivo, ((Directorio) this.directorioAux).getContenido());
 		assertEquals(100, resultadoObtenido);
 		verify(this.archivo, times(2)).totalSize();
-		verify(this.directorioAux, times(1)).totalSize();
-	}*/
+//		verify(this.directorioAux, times(1)).totalSize();
+	}
 
 }
