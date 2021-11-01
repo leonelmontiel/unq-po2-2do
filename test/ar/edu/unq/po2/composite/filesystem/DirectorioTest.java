@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Test;
 class DirectorioTest {
 
 	private IFileSystem directorio; //SUT
-	private IFileSystem archivo = mock(Archivo.class); //Doc
+	private IFileSystem archivoUno = mock(Archivo.class); //Doc
+	private IFileSystem archivoDos = mock(Archivo.class); //Doc
 	private IFileSystem directorioAux; //Doc
 
 	@BeforeEach
@@ -22,9 +23,10 @@ class DirectorioTest {
 		this.directorioAux = new Directorio("Stadium Arcadium");
 		
 		//Config mocks
-		when(this.archivo.totalSize()).thenReturn(50);
+		when(this.archivoUno.totalSize()).thenReturn(50);
+		when(this.archivoDos.totalSize()).thenReturn(100);
 		
-		((Directorio) this.directorioAux).agregarElemento(archivo);
+		((Directorio) this.directorioAux).agregarElemento(archivoDos);
 	}
 
 	@Test
@@ -56,7 +58,7 @@ class DirectorioTest {
 	@Test
 	void testGetContenidoNoEsVacío() {
 		//Excercise
-		((Directorio) this.directorio).agregarElemento(archivo);
+		((Directorio) this.directorio).agregarElemento(archivoUno);
 		List<IFileSystem> listaObtenida = ((Directorio) this.directorio).getContenido();
 		//Verify
 		assertFalse(listaObtenida.isEmpty());
@@ -65,25 +67,31 @@ class DirectorioTest {
 	@Test
 	void testContieneAlArchivo() {
 		//Excercise
-		((Directorio) this.directorio).agregarElemento(archivo);
-		boolean contieneAlArchivo = ((Directorio) this.directorio).contains(archivo);
+		((Directorio) this.directorio).agregarElemento(archivoUno);
+		boolean contieneAlArchivo = ((Directorio) this.directorio).contains(archivoUno);
 		//Verify
 		assertTrue(contieneAlArchivo);
 	}
 	
 	@Test
-	void testTamañoTotalEs100BytesPorContenerArchivoYDirectorioConArchivo() {
+	void testTamañoTotalEs1500BytesPorContenerArchivoYDirectorioConArchivo() {
 		//SetUp
-		List<IFileSystem> listaConArchivo = Arrays.asList(archivo);
+		List<IFileSystem> listaConArchivo = Arrays.asList(archivoDos);
 		// Excersice
-		((Directorio) this.directorio).agregarElemento(archivo);
+		((Directorio) this.directorio).agregarElemento(archivoUno);
 		((Directorio) this.directorio).agregarElemento(directorioAux);
 		int resultadoObtenido = this.directorio.totalSize();
 		//Verify
 		assertEquals(listaConArchivo, ((Directorio) this.directorioAux).getContenido());
-		assertEquals(100, resultadoObtenido);
-		verify(this.archivo, times(2)).totalSize();
+		assertEquals(150, resultadoObtenido);
+		verify(this.archivoUno, times(1)).totalSize();
+		verify(this.archivoDos, times(1)).totalSize();
 //		verify(this.directorioAux, times(1)).totalSize();
+	}
+	
+	@Test
+	void testElementoMásAntiguoEsArchivoUno() {
+		
 	}
 
 }
