@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 
 class CarroDeCompreasTest {
 
-	private CarroDeCompras carro;
-	private Product arroz = mock(Product.class);
-	private Product leche = mock(Product.class);
-	private Product queso = mock(Product.class);
+	private CarroDeCompras carro;//SUT
+	private Product arroz = mock(Product.class);//DOC
+	private Product leche = mock(Product.class);//DOC
+	private Product queso = mock(Product.class);//DOC
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -50,11 +50,29 @@ class CarroDeCompreasTest {
 	}
 	
 	@Test
+	void testTotalRoundedNODaRedondeadoA551() {
+		//Excercise
+		Float total = this.carro.total();
+		//Verify
+		assertNotEquals(551f, total);
+		verify(this.arroz).getPrice(); verify(this.leche).getPrice(); verify(this.queso).getPrice();
+	}
+	
+	@Test
 	void testTotalRoundedEs551Pesos() {
 		//Excercise
 		int total = this.carro.totalRounded();
 		//Verify
 		assertEquals(551, total);
+		verify(this.arroz).getPrice(); verify(this.leche).getPrice(); verify(this.queso).getPrice();
+	}
+	
+	@Test
+	void testTotalRoundedNOEs550Pesos() {
+		//Excercise
+		int total = this.carro.totalRounded();
+		//Verify
+		assertNotEquals(550, total);
 		verify(this.arroz).getPrice(); verify(this.leche).getPrice(); verify(this.queso).getPrice();
 	}
 

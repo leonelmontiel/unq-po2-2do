@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CarroDeCompras {
 
-	private List<Product> elements = new ArrayList<Product>();;
+	private List<Product> elements = new ArrayList<Product>();
 
 	public List<Product> getElements() {
 		return this.elements;
@@ -15,8 +15,8 @@ public class CarroDeCompras {
 		this.elements.add(producto);	
 	}
 
-	public Float total() {
-		Float total = (this.getElements().stream().map(p -> p.getPrice())).reduce(0f, (acum, valor) -> acum + valor);		
+	public float total() {
+		float total = (this.getElements().stream().map(p -> p.getPrice())).reduce(0f, (acum, valor) -> acum + valor);		
 		return total;
 	}
 
