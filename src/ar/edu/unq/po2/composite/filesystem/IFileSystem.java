@@ -4,8 +4,6 @@ public interface IFileSystem {
 
 	public int totalSize();
 
-	public String getNombre();
-
 	public IFileSystem oldestElement(); // elemento más antiguo
 
 	public IFileSystem lastModified(); // elemento más nuevo

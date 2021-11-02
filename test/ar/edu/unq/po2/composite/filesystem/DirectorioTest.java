@@ -19,12 +19,16 @@ class DirectorioTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.directorio = new Directorio("RHCP");
-		this.directorioAux = new Directorio("Stadium Arcadium");
+		this.directorio = new Directorio("RHCP", LocalDate.of(2021, 7, 29));
+		this.directorioAux = new Directorio("Stadium Arcadium", LocalDate.of(2021, 2, 20));
 		
 		//Config mocks
 		when(this.archivoUno.totalSize()).thenReturn(50);
+		when(((ElementoFileSystem) this.archivoUno).getFechaCreacion()).thenReturn(LocalDate.of(2019, 2, 25));
+		
 		when(this.archivoDos.totalSize()).thenReturn(100);
+		when(((ElementoFileSystem) this.archivoDos).getFechaCreacion()).thenReturn(LocalDate.of(2021, 2, 25));
+		
 		
 		((Directorio) this.directorioAux).agregarElemento(archivoDos);
 	}
@@ -32,7 +36,7 @@ class DirectorioTest {
 	@Test
 	void testNombreEsRHCP() {
 		//Excercise
-		String resultadoObtenido = this.directorio.getNombre();
+		String resultadoObtenido = ((ElementoFileSystem) this.directorio).getNombre();
 		//Verify
 		assertEquals("RHCP", resultadoObtenido);
 	}
@@ -40,7 +44,7 @@ class DirectorioTest {
 	@Test
 	void testFechaDeCreación() {
 		//Excercise
-		LocalDate fechaEsperada = LocalDate.now();
+		LocalDate fechaEsperada = LocalDate.of(2021, 7, 29);
 		LocalDate fechaObtenida = ((Directorio) this.directorio).getFechaCreacion();
 		//Verify
 		assertEquals(fechaEsperada, fechaObtenida);
@@ -74,7 +78,7 @@ class DirectorioTest {
 	}
 	
 	@Test
-	void testTamañoTotalEs1500BytesPorContenerArchivoYDirectorioConArchivo() {
+	void testTamañoTotalEs150BytesPorContenerArchivoYDirectorioConArchivo() {
 		//SetUp
 		List<IFileSystem> listaConArchivo = Arrays.asList(archivoDos);
 		// Excersice
@@ -90,8 +94,48 @@ class DirectorioTest {
 	}
 	
 	@Test
-	void testElementoMásAntiguoEsArchivoUno() {
+	void testElementoMásAntiguoEsArchivoRealUno() {
+		/*
+		 * usando archivos como mocks me tira este error aunque haya configurado lo que devuelve getFechaCreacion:
+		 * org.opentest4j.AssertionFailedError: expected: <Mock for Archivo, hashCode: 740827140> but was: <null>
+		 * 		
+		*/
 		
+		//SetUp
+		Archivo archivoRealUno = new Archivo("Snow", 50, LocalDate.of(2021, 1, 5));
+		Archivo archivoRealDos = new Archivo("Wet Sand", 100, LocalDate.of(2021, 11, 10));
+		((Directorio) this.directorio).agregarElemento(archivoRealUno);
+		((Directorio) this.directorio).agregarElemento(archivoRealDos);
+		((Directorio) this.directorio).agregarElemento(this.directorioAux); //2021, 2, 20
+		
+		//Excercise
+		IFileSystem elemMásAntiguo = this.directorio.oldestElement();
+		//Verify
+		assertEquals(archivoRealUno, elemMásAntiguo);
+		//verify(this.archivoUno, times(1)).oldestElement();
 	}
+	
+	@Test
+	void testElementoMásNuevoEsArchivoRealDos() {
+		/*
+		 * usando archivos como mocks me tira este error aunque haya configurado lo que devuelve getFechaCreacion:
+		 * org.opentest4j.AssertionFailedError: expected: <Mock for Archivo, hashCode: 740827140> but was: <null>
+		 * 		
+		*/
+		
+		//SetUp
+		Archivo archivoRealUno = new Archivo("Snow", 50, LocalDate.of(2021, 1, 5));
+		Archivo archivoRealDos = new Archivo("Wet Sand", 100, LocalDate.of(2021, 11, 10));
+		((Directorio) this.directorio).agregarElemento(archivoRealUno);
+		((Directorio) this.directorio).agregarElemento(archivoRealDos);
+		((Directorio) this.directorio).agregarElemento(this.directorioAux); //2021, 2, 20
+		
+		//Excercise
+		IFileSystem elemMásNuevo = this.directorio.lastModified();
+		//Verify
+		assertEquals(archivoRealDos, elemMásNuevo);
+	}
+	
+	
 
 }

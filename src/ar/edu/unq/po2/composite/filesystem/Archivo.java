@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Archivo extends ElementoFileSystem {
 
-	public Archivo(String nombre, int size) {
-		super(nombre);
+	public Archivo(String nombre,int size, LocalDate fecha) {
+		super(nombre, fecha);
 		setSize(size);
 	}
 

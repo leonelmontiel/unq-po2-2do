@@ -6,14 +6,21 @@ import java.util.List;
 public abstract class ElementoFileSystem implements IFileSystem{
 	protected String nombre;
 	protected int totalSize;
+	protected LocalDate fechaCreacion;
+	protected LocalDate lastModified;
 	
-	public ElementoFileSystem(String nombre) {
+	public ElementoFileSystem(String nombre, LocalDate fecha) {
 		setNombre(nombre);
+		setFechaCreacion(fecha);
+		setLastModified(LocalDate.now());
 	}
 
-	@Override
-	public String getNombre() {
-		return this.nombre;
+	private void setFechaCreacion(LocalDate fecha) {
+		this.fechaCreacion = fecha;
+	}
+	
+	private void setLastModified(LocalDate fecha) {
+		this.lastModified = fecha;		
 	}
 	
 	protected void setNombre(String nombre) {
@@ -22,6 +29,14 @@ public abstract class ElementoFileSystem implements IFileSystem{
 	
 	protected void setSize(int size) {
 		this.totalSize = size;
+	}
+	
+	public String getNombre() {
+		return this.nombre;
+	}
+	
+	public LocalDate getFechaCreacion() {
+		return this.fechaCreacion;
 	}
 	
 	@Override
@@ -43,5 +58,18 @@ public abstract class ElementoFileSystem implements IFileSystem{
 	public abstract LocalDate getUltimaModificacion();	
 	
 	public abstract boolean contains(IFileSystem elemento);
+
+	public IFileSystem elemMasAntiguo(IFileSystem elemento) {
+		return this.esMasAntiguoQue(elemento) ? this : elemento;
+	}
+
+	private boolean esMasAntiguoQue(IFileSystem elemento) {
+		return this.getFechaCreacion().isBefore(((ElementoFileSystem) elemento).getFechaCreacion());
+	}
+
+	public IFileSystem elemMasNuevo(IFileSystem elemento) {
+		// básicamente niego el resultado de la comparación entre los dos elementos para saber si el primero es más antiguo que el segundo
+		return !this.esMasAntiguoQue(elemento) ? this : elemento;
+	}
 
 }

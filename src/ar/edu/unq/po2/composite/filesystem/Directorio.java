@@ -5,17 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Directorio extends ElementoFileSystem {
-
-	private LocalDate fechaCreacion;
 	private List<IFileSystem> contenido = new ArrayList<IFileSystem>();
 
-	public Directorio(String nombre) {
-		super(nombre);
-		setFechaCreacion(LocalDate.now());
-	}
-
-	private void setFechaCreacion(LocalDate now) {
-		this.fechaCreacion = now;	
+	public Directorio(String nombre, LocalDate fecha) {
+		super(nombre, fecha);
 	}
 
 	@Override
@@ -24,26 +17,21 @@ public class Directorio extends ElementoFileSystem {
 		return totalSize;
 	}
 
-	@Override
 	public IFileSystem oldestElement() {
-		// TODO Auto-generated method stub
-		return null;
+		IFileSystem elemMasAntiguo = this.getContenido().stream().reduce(this, (elem, otro)-> ((ElementoFileSystem) elem).elemMasAntiguo(otro));
+		return elemMasAntiguo;
 	}
 
 	@Override
 	public IFileSystem lastModified() {
-		// TODO Auto-generated method stub
-		return null;
+		IFileSystem elemMasNuevo = this.getContenido().stream().reduce(this, (elem, otro)-> ((ElementoFileSystem) elem).elemMasNuevo(otro));
+		return elemMasNuevo;
 	}
 
 	@Override
 	public void printStructure() {
 		// TODO Auto-generated method stub
 
-	}
-	
-	public LocalDate getFechaCreacion() {
-		return this.fechaCreacion;
 	}
 
 	@Override
