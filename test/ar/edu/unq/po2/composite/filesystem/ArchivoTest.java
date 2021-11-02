@@ -13,13 +13,13 @@ class ArchivoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.archivo = new Archivo("Snow.mp3", 50);
+		this.archivo = new Archivo("Snow.mp3", 50, LocalDate.of(2021, 5, 10));
 	}
 	
 	@Test
 	void testNombreEsSnow_mp3() {
 		//Excercise
-		String resultadoObtenido = this.archivo.getNombre();
+		String resultadoObtenido = ((ElementoFileSystem) this.archivo).getNombre();
 		//Verify
 		assertEquals("Snow.mp3", resultadoObtenido);
 	}

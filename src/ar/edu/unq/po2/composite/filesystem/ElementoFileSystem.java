@@ -39,6 +39,10 @@ public abstract class ElementoFileSystem implements IFileSystem{
 		return this.fechaCreacion;
 	}
 	
+	public LocalDate getUltimaModificacion() {
+		return this.lastModified;
+	}
+	
 	@Override
 	public abstract int totalSize();
 	
