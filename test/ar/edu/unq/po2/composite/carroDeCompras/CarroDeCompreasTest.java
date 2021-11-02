@@ -21,7 +21,7 @@ class CarroDeCompreasTest {
 		this.carro = new CarroDeCompras();
 		
 		//Config Mocks
-		when((this.arroz).getPrice()).thenReturn(60f);
+		when((this.arroz).getPrice()).thenReturn(60.65f);
 		when((this.leche).getPrice()).thenReturn(90f);
 		when((this.queso).getPrice()).thenReturn(400f);
 		
@@ -41,11 +41,11 @@ class CarroDeCompreasTest {
 	}
 	
 	@Test
-	void testTotalRoundedEs550Pesos() {
+	void testTotalEs550PesosCon65() {
 		//Excercise
-		Float total = this.carro.totalRounded();
+		Float total = this.carro.total();
 		//Verify
-		assertEquals(550f, total);
+		assertEquals(550.65f, total);
 		verify(this.arroz).getPrice(); verify(this.leche).getPrice(); verify(this.queso).getPrice();
 	}
 
