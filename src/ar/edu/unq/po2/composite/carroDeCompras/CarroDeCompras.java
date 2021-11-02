@@ -15,4 +15,9 @@ public class CarroDeCompras {
 		this.elements.add(producto);	
 	}
 
+	public Float totalRounded() {
+		Float total = this.getElements().stream().map(p -> p.getPrice()).reduce(0f, (acum, valor) -> acum + valor);		
+		return total;
+	}
+
 }

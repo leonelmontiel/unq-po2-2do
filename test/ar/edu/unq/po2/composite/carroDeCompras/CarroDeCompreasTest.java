@@ -19,16 +19,34 @@ class CarroDeCompreasTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		this.carro = new CarroDeCompras();
+		
+		//Config Mocks
+		when((this.arroz).getPrice()).thenReturn(60f);
+		when((this.leche).getPrice()).thenReturn(90f);
+		when((this.queso).getPrice()).thenReturn(400f);
+		
+		this.carro.agregar(arroz);
+		this.carro.agregar(leche);
+		this.carro.agregar(queso);
 	}
 
 	@Test
 	void testGetElements() {
 		//SetUp		
-		List<Product> listaEsperada = Arrays.asList(this.arroz, this.leche, this.queso);
+		List<Product> listaEsperada = Arrays.asList(arroz, leche, queso);
 		//Excercise
-		this.carro.agregar(this.arroz); this.carro.agregar(this.leche); this.carro.agregar(this.queso);
 		List<Product> listaObtenida = this.carro.getElements();
+		//verify
 		assertEquals(listaEsperada , listaObtenida);
+	}
+	
+	@Test
+	void testTotalRoundedEs550Pesos() {
+		//Excercise
+		Float total = this.carro.totalRounded();
+		//Verify
+		assertEquals(550f, total);
+		verify(this.arroz).getPrice(); verify(this.leche).getPrice(); verify(this.queso).getPrice();
 	}
 
 }
