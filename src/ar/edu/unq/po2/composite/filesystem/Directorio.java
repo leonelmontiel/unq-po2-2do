@@ -40,12 +40,6 @@ public class Directorio extends ElementoFileSystem {
 	}
 
 	@Override
-	public LocalDate getUltimaModificacion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void agregarElemento(IFileSystem elemento) {
 		this.contenido.add(elemento);		
 	}
@@ -53,6 +47,14 @@ public class Directorio extends ElementoFileSystem {
 	@Override
 	public boolean contains(IFileSystem elemento) {
 		return this.getContenido().contains(elemento);
+	}
+
+	@Override
+	protected String estructuraPrint(String separador) {
+		String estructura = separador + "•" + this.getNombre() + "\n";
+		String subSeparador = separador + "   ";
+		return this.getContenido().stream().map(elem -> ((Directorio) elem).estructuraPrint(subSeparador))
+				.reduce(estructura, (acum, nuevo)-> acum + nuevo + "\n");
 	}
 
 }

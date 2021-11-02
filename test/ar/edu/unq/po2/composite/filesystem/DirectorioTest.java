@@ -136,6 +136,20 @@ class DirectorioTest {
 		assertEquals(archivoRealDos, elemMásNuevo);
 	}
 	
-	
+	@Test
+	void testPrintEstructureDirectorio() {
+		//Config Mocks
+		when(((ElementoFileSystem) this.archivoUno).getNombre()).thenReturn("Snow");
+		when(((ElementoFileSystem) this.archivoDos).getNombre()).thenReturn("Wet Sand");
+		when(((Archivo) this.archivoUno).estructuraPrint("   ")).thenReturn("   •Snow");
+		when(((Archivo) this.archivoDos).estructuraPrint("   ")).thenReturn("   •Wet Sand");
+		// SetUp
+		((Directorio) this.directorio).agregarElemento(archivoUno);
+		((Directorio) this.directorio).agregarElemento(archivoDos);
+		((Directorio) this.directorio).agregarElemento(directorioAux);
+		
+		//excercise
+		this.directorio.printStructure();
+	}
 
 }

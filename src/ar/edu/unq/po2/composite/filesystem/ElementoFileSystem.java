@@ -48,14 +48,9 @@ public abstract class ElementoFileSystem implements IFileSystem{
 	@Override
 	public abstract IFileSystem lastModified(); // elemento más nuevo
 	
-	@Override
-	public abstract void printStructure();
-	
 	public abstract List<IFileSystem> getContenido();
 	
 	public abstract void agregarElemento(IFileSystem elemento);
-
-	public abstract LocalDate getUltimaModificacion();	
 	
 	public abstract boolean contains(IFileSystem elemento);
 
@@ -71,5 +66,12 @@ public abstract class ElementoFileSystem implements IFileSystem{
 		// básicamente niego el resultado de la comparación entre los dos elementos para saber si el primero es más antiguo que el segundo
 		return !this.esMasAntiguoQue(elemento) ? this : elemento;
 	}
+	
+	@Override
+	public void printStructure() {
+		System.out.println(this.estructuraPrint(""));
+	}
+
+	protected abstract String estructuraPrint(String string);
 
 }

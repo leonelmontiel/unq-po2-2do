@@ -31,12 +31,6 @@ public class Archivo extends ElementoFileSystem {
 	public void printStructure() {
 		System.out.println(this.getNombre());
 	}
-	
-	@Override
-	public LocalDate getUltimaModificacion() {
-		//retorna la fecha actual ya que no hay ninguna forma de establecer una fecha puntual
-		return LocalDate.now();
-	}
 
 	@Override
 	public List<IFileSystem> getContenido() {
@@ -53,6 +47,11 @@ public class Archivo extends ElementoFileSystem {
 	public boolean contains(IFileSystem elemento) {
 		// no tiene permitido contener ningún elemento
 		return false;
+	}
+
+	@Override
+	protected String estructuraPrint(String separador) {
+		return separador + "-" + this.getNombre();
 	}
 
 }
