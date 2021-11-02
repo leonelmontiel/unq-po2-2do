@@ -16,21 +16,26 @@ class DirectorioTest {
 	private IFileSystem archivoUno = mock(Archivo.class); //Doc
 	private IFileSystem archivoDos = mock(Archivo.class); //Doc
 	private IFileSystem directorioAux; //Doc
+	
+	private IFileSystem archivoRealUno;
+	private IFileSystem archivoRealDos;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		this.directorio = new Directorio("RHCP", LocalDate.of(2021, 7, 29));
 		this.directorioAux = new Directorio("Stadium Arcadium", LocalDate.of(2021, 2, 20));
 		
+		this.archivoRealUno = new Archivo("Snow", 50, LocalDate.of(2021, 1, 5));
+		this.archivoRealDos = new Archivo("Wet Sand", 100, LocalDate.of(2021, 11, 10));
+		
 		//Config mocks
 		when(this.archivoUno.totalSize()).thenReturn(50);
 		when(((ElementoFileSystem) this.archivoUno).getFechaCreacion()).thenReturn(LocalDate.of(2019, 2, 25));
+//		when(((ElementoFileSystem) this.archivoUno).estructuraPrint(" ")).thenReturn(" -Snow");
 		
 		when(this.archivoDos.totalSize()).thenReturn(100);
-		when(((ElementoFileSystem) this.archivoDos).getFechaCreacion()).thenReturn(LocalDate.of(2021, 2, 25));
-		
-		
-		((Directorio) this.directorioAux).agregarElemento(archivoDos);
+		when(((ElementoFileSystem) this.archivoDos).getFechaCreacion()).thenReturn(LocalDate.of(2021, 2, 25));	
+//		when(((ElementoFileSystem) this.archivoDos).estructuraPrint(" ")).thenReturn(" -Wet Sand");
 	}
 
 	@Test
@@ -82,6 +87,7 @@ class DirectorioTest {
 		//SetUp
 		List<IFileSystem> listaConArchivo = Arrays.asList(archivoDos);
 		// Excersice
+		((Directorio) this.directorioAux).agregarElemento(archivoDos);
 		((Directorio) this.directorio).agregarElemento(archivoUno);
 		((Directorio) this.directorio).agregarElemento(directorioAux);
 		int resultadoObtenido = this.directorio.totalSize();
@@ -124,8 +130,7 @@ class DirectorioTest {
 		*/
 		
 		//SetUp
-		Archivo archivoRealUno = new Archivo("Snow", 50, LocalDate.of(2021, 1, 5));
-		Archivo archivoRealDos = new Archivo("Wet Sand", 100, LocalDate.of(2021, 11, 10));
+		
 		((Directorio) this.directorio).agregarElemento(archivoRealUno);
 		((Directorio) this.directorio).agregarElemento(archivoRealDos);
 		((Directorio) this.directorio).agregarElemento(this.directorioAux); //2021, 2, 20
@@ -138,18 +143,19 @@ class DirectorioTest {
 	
 	@Test
 	void testPrintEstructureDirectorio() {
-		//Config Mocks
-		when(((ElementoFileSystem) this.archivoUno).getNombre()).thenReturn("Snow");
-		when(((ElementoFileSystem) this.archivoDos).getNombre()).thenReturn("Wet Sand");
-		when(((Archivo) this.archivoUno).estructuraPrint("   ")).thenReturn("   •Snow");
-		when(((Archivo) this.archivoDos).estructuraPrint("   ")).thenReturn("   •Wet Sand");
-		// SetUp
-		((Directorio) this.directorio).agregarElemento(archivoUno);
-		((Directorio) this.directorio).agregarElemento(archivoDos);
-		((Directorio) this.directorio).agregarElemento(directorioAux);
+		// hago este test con archivos reales porque con mocks no funciona como quisiera
+		// excercise
+		((Directorio) this.directorioAux).agregarElemento(this.archivoRealUno);
+		((Directorio) this.directorioAux).agregarElemento(this.archivoRealDos);
 		
-		//excercise
+		((Directorio) this.directorio).agregarElemento(this.archivoRealUno);
+		((Directorio) this.directorio).agregarElemento(this.archivoRealDos);
+		((Directorio) this.directorio).agregarElemento(this.directorioAux);
+		
+		((Directorio) this.directorio).agregarElemento(this.archivoRealUno);
+		
 		this.directorio.printStructure();
+		
 	}
 
 }

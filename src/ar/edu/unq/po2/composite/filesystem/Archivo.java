@@ -26,11 +26,6 @@ public class Archivo extends ElementoFileSystem {
 		//elemento más nuevo
 		return this;
 	}
-	
-	@Override
-	public void printStructure() {
-		System.out.println(this.getNombre());
-	}
 
 	@Override
 	public List<IFileSystem> getContenido() {

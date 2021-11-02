@@ -29,12 +29,6 @@ public class Directorio extends ElementoFileSystem {
 	}
 
 	@Override
-	public void printStructure() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public List<IFileSystem> getContenido() {
 		return this.contenido;
 	}
@@ -52,8 +46,8 @@ public class Directorio extends ElementoFileSystem {
 	@Override
 	protected String estructuraPrint(String separador) {
 		String estructura = separador + "•" + this.getNombre() + "\n";
-		String subSeparador = separador + "   ";
-		return this.getContenido().stream().map(elem -> ((Directorio) elem).estructuraPrint(subSeparador))
+		String subSeparador = separador + "  ";
+		return this.getContenido().stream().map(elem -> ((ElementoFileSystem) elem).estructuraPrint(subSeparador))
 				.reduce(estructura, (acum, nuevo)-> acum + nuevo + "\n");
 	}
 
