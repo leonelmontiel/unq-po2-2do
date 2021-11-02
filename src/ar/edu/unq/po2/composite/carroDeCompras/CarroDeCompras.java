@@ -20,4 +20,8 @@ public class CarroDeCompras {
 		return total;
 	}
 
+	public int totalRounded() {
+		return Math.round(this.total());
+	}
+
 }

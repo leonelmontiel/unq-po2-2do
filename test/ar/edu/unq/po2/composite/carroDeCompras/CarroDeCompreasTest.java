@@ -48,5 +48,14 @@ class CarroDeCompreasTest {
 		assertEquals(550.65f, total);
 		verify(this.arroz).getPrice(); verify(this.leche).getPrice(); verify(this.queso).getPrice();
 	}
+	
+	@Test
+	void testTotalRoundedEs551Pesos() {
+		//Excercise
+		int total = this.carro.totalRounded();
+		//Verify
+		assertEquals(551, total);
+		verify(this.arroz).getPrice(); verify(this.leche).getPrice(); verify(this.queso).getPrice();
+	}
 
 }
