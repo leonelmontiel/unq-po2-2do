@@ -5,7 +5,6 @@ import java.util.List;
 
 public abstract class ShapeShifter implements IShapeShifter{
 	
-	//una lista con dos partes de ShapeShifter
 	protected List<IShapeShifter> elementos = new ArrayList<IShapeShifter>();
 	
 

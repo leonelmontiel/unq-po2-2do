@@ -16,12 +16,20 @@ class NodoTest {
 	private Nodo nodoTres;
 	private ShapeShifter hojaUno = mock(Hoja.class);
 	private ShapeShifter hojaDos = mock(Hoja.class);
+	private ShapeShifter hojaTres = mock(Hoja.class);
+	private ShapeShifter hojaCuatro = mock(Hoja.class);
 
 	@BeforeEach
 	void setUp() throws Exception {
+		//Config Mocks
+		when(this.hojaUno.flat()).thenReturn(this.hojaUno);
+		when(this.hojaDos.flat()).thenReturn(this.hojaDos);
+		when(this.hojaTres.flat()).thenReturn(this.hojaTres);
+		when(this.hojaCuatro.flat()).thenReturn(this.hojaCuatro);
+		
 		this.nodoUno = new Nodo(this.hojaUno, this.hojaDos);
-		this.nodoDos = new Nodo(this.nodoUno, this.hojaUno);
-		this.nodoTres = new Nodo(this.nodoUno, this.nodoDos);
+		this.nodoDos = new Nodo(this.hojaTres, this.hojaCuatro);
+		this.nodoTres = new Nodo(this.nodoUno, this.hojaUno);
 	}
 	
 	@Test
@@ -68,20 +76,38 @@ class NodoTest {
 	}
 	
 	@Test
-	void testNodoDosProfundidadEsDos() {
+	void testNodoTresProfundidadEsDos() {
 		//Excercise
-		int profundidadObtenida = this.nodoDos.deepest();
+		int profundidadObtenida = this.nodoTres.deepest();
 		//Verify
 		//NodoDos está compuesto por NodoUno (prof 1) y HojaUno (prof 0). Por ende se espera que la profundidad del nodoDos sea de 2
 		assertEquals(2, profundidadObtenida);
 	}
 	
 	@Test
-	void testNodoTresProfundidadEs3() {
+	void testNodoCuatroProfundidadEs3() {
+		//SetUp
+		IShapeShifter nodoCuatro = new Nodo(this.nodoUno, this.nodoTres);
 		//Excercise		
-		int profundidadObtenida = this.nodoTres.deepest();
+		int profundidadObtenida = nodoCuatro.deepest();
 		//Verify
-		//NodoTres está compuesto por NodoUno (prof 1) y nodoDos (prof 2). Por ende se espera que la profundidad del nodoTres sea de 3
+		//NodoTres está compuesto por NodoUno (prof 1) y nodoTres (prof 2). Por ende se espera que la profundidad del nodoTres sea de 3
 		assertEquals(3, profundidadObtenida);
+	}
+	
+	@Test
+	void testNodoFlatEsUnNuevoShapeShifterConProfundidadUno() {
+		//setUp
+		//listaElementosEsperados = nodoUno: this.hojaUno, this.hojaDos + nodoDos: this.hojaTres, this.hojaCuatro TOTAL: 4
+		IShapeShifter nodo = new Nodo(this.nodoUno, this.nodoDos);
+		//Excercise
+		IShapeShifter shapeAchatado = nodo.flat();
+		int cantElementosAchatados = ((ShapeShifter) shapeAchatado).getElementos().size();
+		//Verify
+		assertEquals(4, cantElementosAchatados);
+		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaUno));
+		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaDos));
+		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaTres));
+		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaCuatro));
 	}
 }
