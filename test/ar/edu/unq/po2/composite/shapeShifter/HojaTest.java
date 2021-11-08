@@ -63,5 +63,13 @@ class HojaTest {
 		//Verify
 		assertEquals(0, profundidadObtenida);
 	}
+	
+	@Test
+	void testHojaUnoFlatEsElMismoShapeShifter() {
+		//Excercise
+		IShapeShifter shapeAchatado = this.hojaUno.flat();
+		//Verify
+		assertEquals(this.hojaUno, shapeAchatado);
+	}
 
 }
