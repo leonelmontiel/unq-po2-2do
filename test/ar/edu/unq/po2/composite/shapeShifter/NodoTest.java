@@ -55,4 +55,22 @@ class NodoTest {
 		//Verify
 		assertEquals(composicionEsperada, ((ShapeShifter) composicion).getElementos());
 	}
+	
+	@Test
+	void testNodoUnoProfundidadEsUno() {
+		//Excercise
+		int profundidadObtenida = this.nodoUno.deepest();
+		//Verify
+		//NodoUno está compuesto por HojaUno y HojaDos, de profundidad 0 cada una. Por ende se espera que la profundidad del nodo sea de 1
+		assertEquals(1, profundidadObtenida);
+	}
+	
+	@Test
+	void testNodoDosProfundidadEsDos() {
+		//Excercise
+		int profundidadObtenida = this.nodoDos.deepest();
+		//Verify
+		//NodoDos está compuesto por NodoUno (prof 1) y HojaUno (prof 0). Por ende se espera que la profundidad del nodoDos sea de 2
+		assertEquals(2, profundidadObtenida);
+	}
 }

@@ -17,7 +17,7 @@ public abstract class ShapeShifter implements IShapeShifter{
 
 	@Override
 	public int deepest() {
-		// TODO Auto-generated method stub
+		// 0 es la profundidad base de una hoja
 		return 0;
 	}
 
