@@ -13,7 +13,7 @@ class HojaTest {
 
 	private Hoja hojaUno;
 	private Hoja hojaDos;
-	private Nodo nodoUno;
+	private ShapeShifter nodoUno;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -23,7 +23,7 @@ class HojaTest {
 		List<IShapeShifter> composicionPrueba = Arrays.asList(this.hojaUno, this.hojaDos);
 		
 		//Config Mocks
-		when(this.nodoUno.getElementos()).thenReturn(composicionPrueba);
+		when((this.nodoUno).getElementos()).thenReturn(composicionPrueba);
 	}
 
 	@Test
@@ -38,7 +38,12 @@ class HojaTest {
 	
 	@Test
 	void testHojaNoPuedeContenerElementos() {
-		assertEquals(null,this.hojaUno.getElementos());
+		assertFalse(this.hojaUno.contiene(hojaDos));
+	}
+	
+	@Test
+	void testHojaNoPuedeSerUnaComposición() {
+		assertEquals(null,this.hojaUno.getElementos());		
 	}
 	
 	@Test
