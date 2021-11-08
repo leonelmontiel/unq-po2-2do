@@ -13,6 +13,7 @@ class NodoTest {
 	
 	private Nodo nodoUno;
 	private Nodo nodoDos;
+	private Nodo nodoTres;
 	private ShapeShifter hojaUno = mock(Hoja.class);
 	private ShapeShifter hojaDos = mock(Hoja.class);
 
@@ -20,6 +21,7 @@ class NodoTest {
 	void setUp() throws Exception {
 		this.nodoUno = new Nodo(this.hojaUno, this.hojaDos);
 		this.nodoDos = new Nodo(this.nodoUno, this.hojaUno);
+		this.nodoTres = new Nodo(this.nodoUno, this.nodoDos);
 	}
 	
 	@Test
@@ -72,5 +74,14 @@ class NodoTest {
 		//Verify
 		//NodoDos está compuesto por NodoUno (prof 1) y HojaUno (prof 0). Por ende se espera que la profundidad del nodoDos sea de 2
 		assertEquals(2, profundidadObtenida);
+	}
+	
+	@Test
+	void testNodoTresProfundidadEs3() {
+		//Excercise		
+		int profundidadObtenida = this.nodoTres.deepest();
+		//Verify
+		//NodoTres está compuesto por NodoUno (prof 1) y nodoDos (prof 2). Por ende se espera que la profundidad del nodoTres sea de 3
+		assertEquals(3, profundidadObtenida);
 	}
 }
