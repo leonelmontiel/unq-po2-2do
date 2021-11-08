@@ -32,6 +32,10 @@ public abstract class ShapeShifter implements IShapeShifter{
 		return null;
 	}
 	
+	public Boolean contiene(ShapeShifter elemento) {
+		return this.getElementos().contains(elemento);
+	}
+	
 	public List<IShapeShifter> getElementos() {
 		return this.elementos;
 	}
