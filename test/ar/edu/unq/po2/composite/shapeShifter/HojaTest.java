@@ -17,8 +17,8 @@ class HojaTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.hojaUno = new Hoja();
-		this.hojaDos = new Hoja();
+		this.hojaUno = new Hoja(1);
+		this.hojaDos = new Hoja(2);
 		this.nodoUno = mock(Nodo.class);
 		List<IShapeShifter> composicionPrueba = Arrays.asList(this.hojaUno, this.hojaDos);
 		
@@ -70,6 +70,24 @@ class HojaTest {
 		IShapeShifter shapeAchatado = this.hojaUno.flat();
 		//Verify
 		assertEquals(this.hojaUno, shapeAchatado);
+	}
+	
+	@Test
+	void testHojaUnoGetValue() {
+		//Excercise
+		int value = this.hojaUno.getValue();
+		//Verify
+		assertEquals(1, value);
+	}
+	
+	@Test
+	void testHojaUnoListaConSuValor() {
+		//SetUp
+		List<Integer> listaEsperada = Arrays.asList(1);
+		//Excercise
+		List<Integer> listaConValor = this.hojaUno.values();
+		//Verify
+		assertEquals(listaEsperada, listaConValor);
 	}
 
 }

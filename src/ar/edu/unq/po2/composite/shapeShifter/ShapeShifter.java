@@ -28,10 +28,7 @@ public abstract class ShapeShifter implements IShapeShifter{
 	}
 
 	@Override
-	public List<Integer> values() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract List<Integer> values();
 	
 	public Boolean contiene(ShapeShifter elemento) {
 		return this.getElementos().contains(elemento);

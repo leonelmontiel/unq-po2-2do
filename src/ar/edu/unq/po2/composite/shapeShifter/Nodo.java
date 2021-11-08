@@ -31,8 +31,18 @@ public class Nodo extends ShapeShifter {
 	@Override
 	public IShapeShifter flat() {
 		List<IShapeShifter> elementosAchatados = new ArrayList<IShapeShifter>();
+		//por cada elemento hace un append a la lista de elementosAchatados si tuviera otros dentro
 		this.getElementos().stream().forEach(elem -> elementosAchatados.addAll(((ShapeShifter) elem).getElementos()));
 		return new Nodo(elementosAchatados);
+	}
+	
+	@Override
+	public List<Integer> values() {
+		 /*List<Integer> valores = ((ShapeShifter) this.flat()).getElementos().stream().map(elem -> elem.getValue()).toList();
+		  * En teoría funciona, pero por un bug de eclipse no compila "Cannot infer type argument(s) for <R> map(Function<? super T,? extends R>)"*/
+		List<Integer> valores = new ArrayList<Integer>();
+		this.getElementos().stream().forEach(elem -> valores.addAll(elem.values()));
+		return valores;
 	}
 	
 }

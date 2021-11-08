@@ -27,9 +27,14 @@ class NodoTest {
 		when(this.hojaTres.flat()).thenReturn(this.hojaTres);
 		when(this.hojaCuatro.flat()).thenReturn(this.hojaCuatro);
 		
+		when(this.hojaUno.values()).thenReturn(Arrays.asList(1));
+		when(this.hojaDos.values()).thenReturn(Arrays.asList(2));
+		when(this.hojaTres.values()).thenReturn(Arrays.asList(3));
+		when(this.hojaCuatro.values()).thenReturn(Arrays.asList(4));
+		
 		this.nodoUno = new Nodo(this.hojaUno, this.hojaDos);
 		this.nodoDos = new Nodo(this.hojaTres, this.hojaCuatro);
-		this.nodoTres = new Nodo(this.nodoUno, this.hojaUno);
+		this.nodoTres = new Nodo(this.nodoUno, this.hojaTres);
 	}
 	
 	@Test
@@ -109,5 +114,45 @@ class NodoTest {
 		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaDos));
 		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaTres));
 		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaCuatro));
+	}
+	
+	@Test
+	void testNodoTresFlatEsUnNuevoShapeShifterConProfundidadUno() {
+		//setUp
+		when(this.hojaTres.getElementos()).thenReturn(Arrays.asList(this.hojaTres));
+		//listaElementosEsperados = nodoUno: this.hojaUno, this.hojaDos + nodoDos: this.hojaTres TOTAL: 3
+		//Excercise
+		IShapeShifter shapeAchatado = nodoTres.flat();
+		int cantElementosAchatados = ((ShapeShifter) shapeAchatado).getElementos().size();
+		//Verify
+		assertEquals(3, cantElementosAchatados);
+		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaUno));
+		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaDos));
+		assertTrue(((ShapeShifter) shapeAchatado).contiene(this.hojaTres));
+	}
+	
+	@Test
+	void testNodoUnoListaConValoresDeSusElementos() {
+		//SetUp
+		List<Integer> listaEsperada = Arrays.asList(1, 2);
+		//Excercise
+		List<Integer> listaConValores = this.nodoUno.values();
+		//Verify
+		assertEquals(listaEsperada, listaConValores);
+		verify(this.hojaUno).values();
+		verify(this.hojaDos).values();
+	}
+	
+	@Test
+	void testNodoTresListaConValoresDeSusElementos() {
+		//SetUp
+		List<Integer> listaEsperada = Arrays.asList(1, 2, 3);
+		//Excercise
+		List<Integer> listaConValores = this.nodoTres.values();
+		//Verify
+		assertEquals(listaEsperada, listaConValores);
+		verify(this.hojaUno).values();
+		verify(this.hojaDos).values();
+		verify(this.hojaTres).values();
 	}
 }
