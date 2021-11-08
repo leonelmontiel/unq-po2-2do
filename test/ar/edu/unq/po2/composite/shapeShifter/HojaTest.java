@@ -55,5 +55,13 @@ class HojaTest {
 		//Verify
 		assertEquals(composicionEsperada, ((ShapeShifter) composicion).getElementos());
 	}
+	
+	@Test
+	void testHojaProfundidadEsCero() {
+		//Excercise
+		int profundidadObtenida = this.hojaUno.deepest();
+		//Verify
+		assertEquals(0, profundidadObtenida);
+	}
 
 }
