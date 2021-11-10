@@ -16,6 +16,7 @@ public class Nodo extends ShapeShifter {
 		this.profundidad = mayorProfundidadEntre(shapeShifter, otroShapeShifter) + 1;
 	}
 	
+	// existe para el método flat() que devuelve un nuevo nodo con los elementos achatados que le paso por parámetro
 	public Nodo(List<IShapeShifter> elementosAchatados) {
 		this.elementos = elementosAchatados;
 	}
