@@ -30,7 +30,7 @@ public abstract class ShapeShifter implements IShapeShifter{
 	@Override
 	public abstract List<Integer> values();
 	
-	public Boolean contiene(ShapeShifter elemento) {
+	public Boolean contiene(IShapeShifter elemento) {
 		return this.getElementos().contains(elemento);
 	}
 	

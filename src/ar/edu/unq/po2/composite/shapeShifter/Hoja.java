@@ -17,7 +17,7 @@ public class Hoja extends ShapeShifter {
 	}
 	
 	@Override
-	public Boolean contiene(ShapeShifter elemento) {
+	public Boolean contiene(IShapeShifter elemento) {
 		System.out.println("Una hoja no puede contener elementos de IShapeShifter");
 		return false;
 	}

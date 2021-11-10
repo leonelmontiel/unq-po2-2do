@@ -42,11 +42,6 @@ class HojaTest {
 	}
 	
 	@Test
-	void testHojaNoPuedeSerUnaComposición() {
-		assertEquals(null,this.hojaUno.getElementos());		
-	}
-	
-	@Test
 	void testHojaUnoFormaUnaComposiciónConNodo() {
 		//SetUp
 		List<IShapeShifter> composicionEsperada = Arrays.asList(this.hojaUno, this.nodoUno);
