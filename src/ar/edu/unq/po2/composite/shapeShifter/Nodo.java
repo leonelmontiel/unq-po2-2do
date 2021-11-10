@@ -21,7 +21,7 @@ public class Nodo extends ShapeShifter {
 		this.elementos = elementosAchatados;
 	}
 
-	public int mayorProfundidadEntre(IShapeShifter shapeShifter, IShapeShifter otroShapeShifter) {
+	int mayorProfundidadEntre(IShapeShifter shapeShifter, IShapeShifter otroShapeShifter) {
 		return Math.max(shapeShifter.deepest(), otroShapeShifter.deepest());
 	}
 

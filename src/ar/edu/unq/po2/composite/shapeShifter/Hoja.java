@@ -32,4 +32,17 @@ public class Hoja extends ShapeShifter {
 		return Arrays.asList(this.getValue());
 	}
 
+	@Override
+	public IShapeShifter flat() {
+		/* Si el IShapeShifter posee una profundidad máxima >= 1, entonces retorna un IShapeShifter de profundidad maxima 1 con todos los 
+		IShapeShifter de profundidad 0 contenidos. En cualquier otro caso, retorna el mismo IShapeShifter.*/
+		return this;
+	}
+
+	@Override
+	public int deepest() {
+		// 0 es la profundidad base de una hoja
+		return 0;
+	}
+
 }
