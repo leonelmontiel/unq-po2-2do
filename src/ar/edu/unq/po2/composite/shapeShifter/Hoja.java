@@ -11,6 +11,7 @@ public class Hoja extends ShapeShifter {
 		this.value = value;
 	}
 
+	@Override
 	public List<IShapeShifter> getElementos() {
 		//se devuelve a sí misma en una lista porque esto es útil para el método flat() en nodo
 		return Arrays.asList(this);

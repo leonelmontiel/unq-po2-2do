@@ -5,11 +5,12 @@ import java.util.List;
 
 public class Nodo extends ShapeShifter {
 	
+	private List<IShapeShifter> elementos = new ArrayList<IShapeShifter>();
 	private int profundidad;
 	
 	public Nodo() {}
 
-	public Nodo(ShapeShifter shapeShifter, IShapeShifter otroShapeShifter) {
+	public Nodo(IShapeShifter shapeShifter, IShapeShifter otroShapeShifter) {
 		this.elementos.add(shapeShifter);
 		this.elementos.add(otroShapeShifter);
 		this.profundidad = mayorProfundidadEntre(shapeShifter, otroShapeShifter) + 1;
@@ -19,7 +20,7 @@ public class Nodo extends ShapeShifter {
 		this.elementos = elementosAchatados;
 	}
 
-	public int mayorProfundidadEntre(ShapeShifter shapeShifter, IShapeShifter otroShapeShifter) {
+	public int mayorProfundidadEntre(IShapeShifter shapeShifter, IShapeShifter otroShapeShifter) {
 		return Math.max(shapeShifter.deepest(), otroShapeShifter.deepest());
 	}
 
@@ -43,6 +44,16 @@ public class Nodo extends ShapeShifter {
 		List<Integer> valores = new ArrayList<Integer>();
 		this.getElementos().stream().forEach(elem -> valores.addAll(elem.values()));
 		return valores;
+	}
+
+	@Override
+	public Boolean contiene(IShapeShifter elemento) {
+		return this.getElementos().contains(elemento);
+	}
+
+	@Override
+	public List<IShapeShifter> getElementos() {
+		return this.elementos;
 	}
 	
 }

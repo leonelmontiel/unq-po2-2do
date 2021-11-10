@@ -1,12 +1,7 @@
 package ar.edu.unq.po2.composite.shapeShifter;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ShapeShifter implements IShapeShifter{
-	
-	protected List<IShapeShifter> elementos = new ArrayList<IShapeShifter>();
-	
+public abstract class ShapeShifter implements IShapeShifter{	
 
 	@Override
 	public IShapeShifter compose(IShapeShifter elemento) {
@@ -30,12 +25,8 @@ public abstract class ShapeShifter implements IShapeShifter{
 	@Override
 	public abstract List<Integer> values();
 	
-	public Boolean contiene(IShapeShifter elemento) {
-		return this.getElementos().contains(elemento);
-	}
+	public abstract Boolean contiene(IShapeShifter elemento);
 	
-	public List<IShapeShifter> getElementos() {
-		return this.elementos;
-	}
+	public abstract List<IShapeShifter> getElementos();
 
 }
