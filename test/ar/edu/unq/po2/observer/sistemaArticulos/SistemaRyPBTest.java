@@ -29,7 +29,6 @@ class SistemaRyPBTest {
 		//config mock
 		Set<String> palabrasClaves = new HashSet<>(Arrays.asList("Wollok"));
 		when(this.articuloWollok.getPalabrasClaves()).thenReturn(palabrasClaves);
-		when(this.lectorUno.getIntereses()).thenReturn(palabrasClaves);
 		
 	}
 
@@ -83,14 +82,27 @@ class SistemaRyPBTest {
 	}
 	
 	@Test
-	void testNotificarNuevoArticuloSobreWollok() {
+	void testNotificarNuevoArticuloSobreWollokOK() {
 		//config mock
 		Set<String> palabrasClaves = this.articuloWollok.getPalabrasClaves();
 		when(this.lectorUno.estaInteresadoEnAlgunaPalabraDe(palabrasClaves)).thenReturn(true);		
 		//exercise
-		this.sistema.notificarNuevoArticulo(this.sistema, this.articuloWollok);		
+		this.sistema.notificarNuevoArticulo(this.articuloWollok);		
 		//verify
+		verify(this.lectorUno).estaInteresadoEnAlgunaPalabraDe(articuloWollok.getPalabrasClaves());
 		verify(this.lectorUno).recibirNuevoArticulo(this.sistema, this.articuloWollok);
+	}
+	
+	@Test
+	void testNotificarNuevoArticuloSobreWollokNoOKNoEstaInteresado() {
+		//config mock
+		Set<String> palabrasClaves = this.articuloWollok.getPalabrasClaves();
+		when(this.lectorUno.estaInteresadoEnAlgunaPalabraDe(palabrasClaves)).thenReturn(false);		
+		//exercise
+		this.sistema.notificarNuevoArticulo(this.articuloWollok);		
+		//verify
+		verify(this.lectorUno).estaInteresadoEnAlgunaPalabraDe(articuloWollok.getPalabrasClaves());
+		verify(this.lectorUno, never()).recibirNuevoArticulo(this.sistema, this.articuloWollok);
 	}
 
 }

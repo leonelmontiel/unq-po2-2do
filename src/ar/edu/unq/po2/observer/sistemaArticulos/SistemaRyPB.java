@@ -1,8 +1,6 @@
 package ar.edu.unq.po2.observer.sistemaArticulos;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class SistemaRyPB {
@@ -11,7 +9,7 @@ public class SistemaRyPB {
 	private Set<ArticuloCientifico> articulos = new HashSet<ArticuloCientifico>();;
 
 	public void suscribirA(LectorCientificoListener lector) {
-		this.getSuscriptores().put(lector, lector.getIntereses());		
+		this.getSuscriptores().add(lector);		
 	}
 
 	public Set<LectorCientificoListener> getSuscriptores() {
