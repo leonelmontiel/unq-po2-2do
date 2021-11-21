@@ -3,6 +3,10 @@ package ar.edu.unq.po2.observer.sistemaArticulos;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +25,10 @@ class SistemaRyPBTest {
 		this.articuloWollok = mock(ArticuloCientifico.class);
 		
 		this.sistema.suscribirA(this.lectorUno);
+		
+		//config mock
+		Set<String> palabrasClaves = new HashSet<>(Arrays.asList("Wollok"));
+		when(this.articuloWollok.getPalabrasClaves()).thenReturn(palabrasClaves);
 		
 	}
 
@@ -72,5 +80,16 @@ class SistemaRyPBTest {
 		//verify
 		assertEquals(1, longitudArticulos);
 	}
+	/*
+	@Test
+	void testNotificarNuevoArticuloSobreWollok() {
+		//config mock
+		Set<String> palabrasClaves = this.articuloWollok.getPalabrasClaves();
+		when(this.lectorUno.estaInteresadoEnAlgunaPalabraDe(palabrasClaves)).thenReturn(true);		
+		//exercise
+		this.sistema.notificarNuevoArticulo(this.sistema, this.articuloWollok);		
+		//verify
+		verify(this.lectorUno).recibirArticuloSiEstaInteresado(palabrasClaves);
+	}*/
 
 }
