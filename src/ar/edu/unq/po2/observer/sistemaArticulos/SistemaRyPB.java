@@ -16,7 +16,7 @@ public class SistemaRyPB {
 		return this.suscriptores;
 	}
 
-	public Boolean contieneA(LectorCientificoListener lector) {
+	Boolean contieneA(LectorCientificoListener lector) {
 		return this.getSuscriptores().contains(lector);
 	}
 
@@ -33,18 +33,22 @@ public class SistemaRyPB {
 		return this.articulos;
 	}
 
-	public Boolean contienePublicado(ArticuloCientifico articulo) {
+	Boolean contienePublicado(ArticuloCientifico articulo) {
 		return this.getArticulos().contains(articulo);
 	}
 
-	public void notificarNuevoArticulo(ArticuloCientifico articulo) {
+	void notificarNuevoArticulo(ArticuloCientifico articulo) {
 		this.getSuscriptores().stream().forEach(lector -> this.notificarArticuloSiEstaInteresado(lector, articulo));
 	}
 
 	private void notificarArticuloSiEstaInteresado(LectorCientificoListener lector, ArticuloCientifico articulo) {
-		if (lector.estaInteresadoEnAlgunaPalabraDe(articulo.getPalabrasClaves())) {
+		if (esta_InteresadoEn_(lector, articulo)) {
 			lector.recibirNuevoArticulo(this, articulo);
 		}
+	}
+
+	private Boolean esta_InteresadoEn_(LectorCientificoListener lector, ArticuloCientifico articulo) {
+		return lector.estaInteresadoEnAlgunaPalabraDe(articulo.getPalabrasClaves());
 	}
 
 }
