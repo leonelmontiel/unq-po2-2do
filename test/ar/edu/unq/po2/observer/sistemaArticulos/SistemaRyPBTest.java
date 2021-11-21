@@ -29,6 +29,7 @@ class SistemaRyPBTest {
 		//config mock
 		Set<String> palabrasClaves = new HashSet<>(Arrays.asList("Wollok"));
 		when(this.articuloWollok.getPalabrasClaves()).thenReturn(palabrasClaves);
+		when(this.lectorUno.getIntereses()).thenReturn(palabrasClaves);
 		
 	}
 
@@ -80,7 +81,7 @@ class SistemaRyPBTest {
 		//verify
 		assertEquals(1, longitudArticulos);
 	}
-	/*
+	
 	@Test
 	void testNotificarNuevoArticuloSobreWollok() {
 		//config mock
@@ -89,7 +90,7 @@ class SistemaRyPBTest {
 		//exercise
 		this.sistema.notificarNuevoArticulo(this.sistema, this.articuloWollok);		
 		//verify
-		verify(this.lectorUno).recibirArticuloSiEstaInteresado(palabrasClaves);
-	}*/
+		verify(this.lectorUno).recibirNuevoArticulo(this.sistema, this.articuloWollok);
+	}
 
 }

@@ -4,9 +4,7 @@ import java.util.Set;
 
 public interface LectorCientificoListener {
 
-	void recibirNuevoArticulo(SistemaRyPB sistema, ArticuloCientifico articuloWollok);
-
-	void recibirArticuloSiEstaInteresado(Set<String> palabrasClaves);
+	void recibirNuevoArticulo(SistemaRyPB sistema, ArticuloCientifico articulo);
 
 	Boolean estaInteresadoEnAlgunaPalabraDe(Set<String> palabrasClaves);
 
