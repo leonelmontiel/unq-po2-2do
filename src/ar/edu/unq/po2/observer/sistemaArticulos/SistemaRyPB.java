@@ -4,6 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SistemaRyPB {
+	
+	/**
+	 *
+	 * @author Leonel Montiel
+	 * @version 1.0
+	 *
+	 * Utilicé el patrón Observer para que las clases que implementen la interfaz LectorCientificoListener reciban nuevos artículos según
+	 * sus intereses. Opté por la estrategia de Observer con Listener para que, justamente, reciban los aspectos que cambiaron en el sistema y de
+	 * los cuáles estén interesados. Y en adición, opté por esto para que los listeners se suscriban a más de un sistema.
+	 * 
+	 * ROLES:
+	 *  - Observable -> SistemaRyPB
+	 *  - Observador -> LectorCientificoListener
+	 * 
+	 */
 
 	private Set<LectorCientificoListener> suscriptores = new HashSet<LectorCientificoListener>();
 	private Set<ArticuloCientifico> articulos = new HashSet<ArticuloCientifico>();;
