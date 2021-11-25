@@ -12,13 +12,15 @@ class PartidoTest {
 
 	private String resultadoEsperado;
 	private Partido partido;
-	private List<String> contrincantesEsperados;
+	private List<Contrincante> contrincantesEsperados;
 	private Deporte deporteEsperado;
+	private Contrincante contrincante;
+	private Contrincante contrincanteDos;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		this.resultadoEsperado = "2-0";
-		this.contrincantesEsperados = Arrays.asList("San Lorenzo", "Huracan");
+		this.contrincantesEsperados = Arrays.asList(this.contrincante, this.contrincanteDos);
 		this.deporteEsperado = Deporte.FUTBOL;
 		this.partido = new Partido(this.resultadoEsperado, this.contrincantesEsperados, this.deporteEsperado);
 	}
@@ -31,7 +33,7 @@ class PartidoTest {
 	
 	@Test
 	void testGetContrincantesSanLorenzoHuracan() {
-		List<String> contrincantesObtenidos = this.partido.getContrincantes();
+		List<Contrincante> contrincantesObtenidos = this.partido.getContrincantes();
 		assertEquals(this.contrincantesEsperados, contrincantesObtenidos);
 	}
 	
