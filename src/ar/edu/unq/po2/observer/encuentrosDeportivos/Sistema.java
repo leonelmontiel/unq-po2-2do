@@ -19,20 +19,18 @@ public class Sistema implements ServidorObservado{
 		this.getObservadores().get(aspecto).add(observador);		
 	}
 
-	private Map<AspectoDeInteres, Set<Observador>> getObservadores() {
+	public Map<AspectoDeInteres, Set<Observador>> getObservadores() {
 		return this.observadores;
 	}
 
 	@Override
 	public void desuscribirA(Observador observador, AspectoDeInteres aspecto) {
-		// TODO Auto-generated method stub
-		
+		this.getObservadores().get(aspecto).remove(observador);		
 	}
 
 	@Override
 	public void notificarPartido(Partido partido) {
-		// TODO Auto-generated method stub
-		
+		this.getObservadores().get(partido.getDeporte()).stream().forEach(obs -> obs.recibirPartido(partido));
 	}
 
 }
