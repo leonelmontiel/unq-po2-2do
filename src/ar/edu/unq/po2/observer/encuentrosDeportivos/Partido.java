@@ -5,7 +5,7 @@ import java.util.List;
 public class Partido {
 
 	private String resultado;
-	private List<String> contrincantes;
+	private List<String> contrincantes; //podría ser un Set para que no contengan contrincantes repetidos
 	private Deporte deporte;
 
 	public Partido(String resultado, List<String> contrincantes, Deporte deporte) {
