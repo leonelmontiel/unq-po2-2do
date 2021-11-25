@@ -1,9 +1,20 @@
 package ar.edu.unq.po2.template.sueldo;
 
 public abstract class Empleado {
+	
+	private Float sueldoBasico;
+	
+	public Empleado(Float sueldoBasico) {
+		this.setSueldoBasico(sueldoBasico);
+	}
+
+	protected void setSueldoBasico(Float sueldoBasico) {
+		this.sueldoBasico = sueldoBasico;		
+	}
 
 	protected Float sueldo() {
-		Float montoTotal = this.montoHorasTrabajadas() + this.sueldoBasico() + this.bonoPorHijos();
+		Float montoTotal = this.getSueldoBasico() + this.extras();
+		// this.sueldoBasico() + this.extras();
 		return this.montoConDescuentos(montoTotal);
 	}
 
@@ -12,10 +23,15 @@ public abstract class Empleado {
 		return monto * 0.87f;
 	}
 
-	protected abstract Float bonoPorHijos();
+	// CREAR UN METÓDO "EXTRAS" QUE IMPLEMENTEN ESTAS FUNCIONES
+	protected abstract Float extras();
+	
+	//protected abstract Float bonoPorHijos(); //extra
 
-	protected abstract Float sueldoBasico();
+	protected Float getSueldoBasico() {
+		return this.sueldoBasico;
+	}
 
-	protected abstract Float montoHorasTrabajadas();
+	//protected abstract Float montoHorasTrabajadas(); //extra
 
 }
