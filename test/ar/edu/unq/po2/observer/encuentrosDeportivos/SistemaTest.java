@@ -2,7 +2,9 @@ package ar.edu.unq.po2.observer.encuentrosDeportivos;
 
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class SistemaTest {
 
 	private Observador servidor;
-	private ServidorObservado sistema;
+	private Sistema sistema;
 	@SuppressWarnings("rawtypes")
 	private Map asociacionMock;
 	private Partido partido;
@@ -54,17 +56,21 @@ class SistemaTest {
 	}
 	
 	@Test
-	void testNotificarPartido() {
+	void testAgregarYNotificarPartido() {
 		//config mocks
 		when(this.partido.getDeporte()).thenReturn(this.deporte);
 		Set<Observador> observadoresSpy = spy(new HashSet<Observador>());
 		when(this.asociacionMock.get(this.deporte)).thenReturn(observadoresSpy);
+		List<Partido> listaPartidosSpy = spy(new ArrayList<Partido>());
+		this.sistema.setPartidos(listaPartidosSpy);
 		//exercise
 		this.sistema.suscribirA(this.servidor, this.deporte);	
-		this.sistema.notificarPartido(this.partido);
+		this.sistema.agregarPartido(this.partido);
 		//verify
 		verify(observadoresSpy).add(this.servidor);
+		verify(listaPartidosSpy).add(this.partido);
 		verify(this.servidor).recibirPartido(this.partido);
 	}
+
 
 }

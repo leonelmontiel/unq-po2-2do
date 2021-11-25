@@ -5,10 +5,10 @@ import java.util.List;
 public class Partido {
 
 	private String resultado;
-	private List<String> contrincantes; //podría ser un Set para que no contengan contrincantes repetidos
+	private List<Contrincante> contrincantes; //podría ser un Set para que no contengan contrincantes repetidos
 	private Deporte deporte;
 
-	public Partido(String resultado, List<String> contrincantes, Deporte deporte) {
+	public Partido(String resultado, List<Contrincante> contrincantes, Deporte deporte) {
 		this.setContrincantes(contrincantes);
 		this.setResultado(resultado);
 		this.setDeporte(deporte);
@@ -18,7 +18,7 @@ public class Partido {
 		this.deporte = deporte;		
 	}
 
-	private void setContrincantes(List<String> contrincantes) {
+	private void setContrincantes(List<Contrincante> contrincantes) {
 		this.contrincantes = contrincantes;		
 	}
 
@@ -30,7 +30,7 @@ public class Partido {
 		return this.resultado;
 	}
 
-	public List<String> getContrincantes() {
+	public List<Contrincante> getContrincantes() {
 		return this.contrincantes;
 	}
 
