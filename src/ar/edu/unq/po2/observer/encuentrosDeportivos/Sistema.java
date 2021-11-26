@@ -42,7 +42,7 @@ public class Sistema implements ServidorObservado{
 		this.notificarPartido(partido);
 	}
 
-	private List<Partido> getPartidos() {
+	public List<Partido> getPartidos() {
 		return this.partidos;
 	}
 
