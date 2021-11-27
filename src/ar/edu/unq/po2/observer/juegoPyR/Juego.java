@@ -2,6 +2,7 @@ package ar.edu.unq.po2.observer.juegoPyR;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Juego implements IJuego{
 	/*
@@ -11,6 +12,8 @@ public class Juego implements IJuego{
 	private Set<IJugador> jugadores;
 	private ProveedorDeCuestionarios proveedorCuestionarios;
 	private Boolean estado;
+	private Cuestionario cuestionarioActual;
+	private Puntaje puntajes;
 	
 	public Juego(ProveedorDeCuestionarios provCuestionarios) {
 		this.jugadores = new HashSet<IJugador>();
@@ -53,8 +56,14 @@ public class Juego implements IJuego{
 	}
 
 	private Cuestionario getSiguienteCuestionario() {
+		Cuestionario cuestionario = this.proveedorCuestionarios.getCuestionario();
+		this.setCuestionarioActual(cuestionario);
 		// por simplicidad solo toma el primero de la lista de cuestionario. Pero debería existir una lógica que tome cuestionarios de manera aleatoria
-		return this.proveedorCuestionarios.getCuestionario();
+		return cuestionario;
+	}
+
+	void setCuestionarioActual(Cuestionario cuestionario) {
+		this.cuestionarioActual	= cuestionario;	
 	}
 
 	@Override
@@ -63,19 +72,42 @@ public class Juego implements IJuego{
 		this.getJugadores().stream().forEach(jugador -> jugador.actualizarEstadoDeJuego(this));
 	}
 
-	private void iniciado(Boolean estado) {
+	void iniciado(Boolean estado) {
 		this.estado = estado;		
 	}
 
 	@Override
 	public void notificarJuegoFinalizado() {
-		//
+		
 	}
 
 	@Override
 	public void recibirRespuesta(String pregunta, String respuesta, IJugador jugador) {
-		// TODO Auto-generated method stub
+		if (!this.iniciado()) {
+			jugador.accionNoPermitida();
+		} else {
+			this.evaluarRespuesta(pregunta, respuesta, jugador);
+		}
+	}
+
+	private void evaluarRespuesta(String pregunta, String respuesta, IJugador jugador) {
+		if (this.cuestionarioActual.evaluarRespuesta(pregunta, respuesta)) {
+			this.getPuntajes().contabilizarRC(jugador);
+			jugador.recibirNotificacionRC();
+			this.notificarRCATodos(jugador, pregunta);
+		} else {
+			jugador.recibirNotificacionRInc();
+		}
 		
+	}
+
+	Puntaje getPuntajes() {
+		return this.puntajes;
+	}
+
+	private void notificarRCATodos(IJugador jugador, String pregunta) {
+		Stream<IJugador> jugadoresNoGanadores = this.getJugadores().stream().filter(jug -> !jug.equals(jugador));
+		jugadoresNoGanadores.forEach(jug -> jug.recibirNotificacionJugadorRC(jugador.getNombre(), pregunta));		
 	}
 
 	void setJugadores(Set<IJugador> jugadores) {
@@ -84,6 +116,10 @@ public class Juego implements IJuego{
 
 	void setProveedorCuestionarios(ProveedorDeCuestionarios provCuestionarios) {
 		this.proveedorCuestionarios = provCuestionarios;
+	}
+
+	void setPuntajes(Puntaje puntaje) {
+		this.puntajes = puntaje;		
 	}
 
 }

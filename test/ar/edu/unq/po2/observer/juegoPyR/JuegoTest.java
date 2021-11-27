@@ -15,6 +15,7 @@ class JuegoTest {
 	private IJugador jugadorDos;
 	private Cuestionario cuestionario;
 	private ProveedorDeCuestionarios provCuestionarios;
+	private Puntaje puntaje;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -22,6 +23,7 @@ class JuegoTest {
 		this.jugador = mock(IJugador.class);
 		this.jugadorDos = mock(IJugador.class);
 		this.cuestionario = mock(Cuestionario.class);
+		this.puntaje = mock(Puntaje.class);
 		
 		this.juego = new Juego(this.provCuestionarios);
 	}
@@ -82,6 +84,57 @@ class JuegoTest {
 		//verify
 		verify(this.jugador).actualizarEstadoDeJuego(this.juego);
 		verify(this.jugadorDos).actualizarEstadoDeJuego(this.juego);
+	}
+	
+	@Test
+	void testRecibirRespuestaConJuegoNoIniciado() {
+		this.juego.recibirRespuesta("pregunta", "respuesta", this.jugador);
+		//verify
+		verify(this.jugador).accionNoPermitida();
+	}
+	
+	@Test
+	void testRecibirRespuestaCorrectaConJuegoIniciado() {
+		/*
+		 * notifica al jugador que ganó la ronda
+		 * contabiliza el puntaje del jugador
+		 * notifica a todos el nombre del jugador y la pregunta
+		 * 
+		 */
+		//setUp
+		when(this.jugador.getNombre()).thenReturn("lalolanda");
+		when(this.cuestionario.evaluarRespuesta("pregunta", "respuesta")).thenReturn(true);
+		this.juego.iniciado(true);
+		this.juego.setCuestionarioActual(this.cuestionario);
+		
+		Set<IJugador> jugadores = new HashSet<IJugador>();
+		jugadores.add(this.jugador);
+		jugadores.add(this.jugadorDos);
+		this.juego.setJugadores(jugadores);
+		this.juego.setPuntajes(this.puntaje);
+		
+		//exercise
+		this.juego.recibirRespuesta("pregunta", "respuesta", this.jugador);
+		
+		//verify
+		verify(this.jugador).recibirNotificacionRC();
+		verify(this.jugador, never()).accionNoPermitida();
+		verify(this.jugadorDos).recibirNotificacionJugadorRC("lalolanda", "pregunta");
+		verify(this.puntaje).contabilizarRC(this.jugador);
+		verify(this.cuestionario).evaluarRespuesta("pregunta", "respuesta");
+	}
+	
+	@Test
+	void testRecibirRespuestaIncorrectaConJuegoIniciado() {
+		//setUp
+		when(this.cuestionario.evaluarRespuesta("pregunta", "respuesta")).thenReturn(false);
+		this.juego.iniciado(true);
+		this.juego.setCuestionarioActual(this.cuestionario);		
+		//exercise
+		this.juego.recibirRespuesta("pregunta", "respuesta", this.jugador);
+		//verify
+		verify(this.cuestionario).evaluarRespuesta("pregunta", "respuesta");
+		verify(this.jugador).recibirNotificacionRInc();
 	}
 
 }

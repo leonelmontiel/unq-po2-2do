@@ -8,4 +8,14 @@ public interface IJugador {
 
 	void actualizarEstadoDeJuego(Juego juego);
 
+	void accionNoPermitida(); //este método debería imprimir en consola
+
+	void recibirNotificacionRC();
+
+	String getNombre();
+
+	void recibirNotificacionJugadorRC(String nombreJugador, String pregunta);
+
+	void recibirNotificacionRInc();
+
 }

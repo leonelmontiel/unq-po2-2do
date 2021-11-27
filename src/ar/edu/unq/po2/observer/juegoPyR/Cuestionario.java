@@ -6,4 +6,6 @@ public interface Cuestionario {
 
 	public Set<String> getPreguntas();
 
+	public Boolean evaluarRespuesta(String pregunta, String respuesta);
+
 }
