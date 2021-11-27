@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.template.sueldo;
+package ar.edu.unq.po2.templateAdapter.sueldo;
 
 public class Pasante extends Empleado {
 
