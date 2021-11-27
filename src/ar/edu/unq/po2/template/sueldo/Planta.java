@@ -4,8 +4,8 @@ public class Planta extends Empleado {
 
 	private int cantHijos;
 
-	public Planta(int hijos) {
-		super();
+	public Planta(Float sueldoBasico, int hijos) {
+		super(sueldoBasico);
 		this.setCantHijos(hijos);
 	}
 
@@ -13,9 +13,12 @@ public class Planta extends Empleado {
 		this.cantHijos = hijos;		
 	}
 
-	@Override
-	protected Float bonoPorHijos() {
-		return this.getCantHijos() * 150f;
+	public Float bonoPorHijos() {
+		return this.getCantHijos() * valorPorHijo();
+	}
+
+	private Float valorPorHijo() {
+		return 150f;
 	}
 
 	private float getCantHijos() {
@@ -23,14 +26,8 @@ public class Planta extends Empleado {
 	}
 
 	@Override
-	protected Float sueldoBasico() {
-		return 3000f;
-	}
-
-	@Override
-	protected Float montoHorasTrabajadas() {
-		// Método HOOK
-		return 0f;
+	protected Float extras() {
+		return this.bonoPorHijos();
 	}
 
 }

@@ -22,16 +22,9 @@ public abstract class Empleado {
 		// el descuento por aportes y jubilación es del 13% del monto total
 		return monto * 0.87f;
 	}
-
-	// CREAR UN METÓDO "EXTRAS" QUE IMPLEMENTEN ESTAS FUNCIONES
 	protected abstract Float extras();
 	
-	//protected abstract Float bonoPorHijos(); //extra
-
 	protected Float getSueldoBasico() {
 		return this.sueldoBasico;
 	}
-
-	//protected abstract Float montoHorasTrabajadas(); //extra
-
 }

@@ -4,8 +4,8 @@ public class Pasante extends Empleado {
 
 	private int horasTrabajadas;
 	
-	public Pasante(int horasTrabajadas) {
-		super();
+	public Pasante(float sueldoBasico, int horasTrabajadas) {
+		super(sueldoBasico);
 		this.setHorasTrabajadas(horasTrabajadas);
 	}
 
@@ -13,25 +13,21 @@ public class Pasante extends Empleado {
 		this.horasTrabajadas = horasTrabajadas;
 	}
 
-	@Override
-	protected Float bonoPorHijos() {
-		// Método HOOK
-		return 0f;
+	public Float montoHorasTrabajadas() {
+		return this.getHorasTrabajadas() * valorPorHora();
 	}
 
-	@Override
-	protected Float sueldoBasico() {
-		// Método HOOK
-		return 0f;
-	}
-
-	@Override
-	protected Float montoHorasTrabajadas() {
-		return this.getHorasTrabajadas() * 40f;
+	private Float valorPorHora() {
+		return 40f;
 	}
 
 	public int getHorasTrabajadas() {
 		return this.horasTrabajadas;
+	}
+
+	@Override
+	protected Float extras() {
+		return this.montoHorasTrabajadas();
 	}
 
 }

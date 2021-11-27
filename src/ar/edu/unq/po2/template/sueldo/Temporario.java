@@ -6,8 +6,8 @@ public class Temporario extends Empleado {
 	private Boolean esCasado;
 	private int cantHijos;
 
-	public Temporario(Integer horasTrabajadas, Boolean esCasado, int hijos) {
-		super();
+	public Temporario(Float sueldoBasico, Integer horasTrabajadas, Boolean esCasado, int hijos) {
+		super(sueldoBasico);
 		this.setHorasTrabajadas(horasTrabajadas);
 		this.setEsCasado(esCasado);
 		this.setCantHijos(hijos);
@@ -24,13 +24,9 @@ public class Temporario extends Empleado {
 	private void setHorasTrabajadas(Integer horasTrabajadas) {
 		this.horasTrabajadas = horasTrabajadas;		
 	}
-
-	@Override
-	protected Float bonoPorHijos() {
-		/* NO ME CIERRA ESTO DE USAR DOS RETURN */
-		if (this.validarBonoPorHijos()) {
-			return 1000f;
-		} return 0f;
+	
+	public Float bonoPorHijos() {
+		return this.validarBonoPorHijos() ? 100f : 0f;
 	}
 
 	private Boolean validarBonoPorHijos() {
@@ -49,18 +45,18 @@ public class Temporario extends Empleado {
 		return this.cantHijos;
 	}
 
-	@Override
-	protected Float sueldoBasico() {
-		return 1000f;
-	}
-
-	@Override
-	protected Float montoHorasTrabajadas() {
+	
+	public Float montoHorasTrabajadas() {
 		return this.getHorasTrabajadas() * 5f;
 	}
 
 	public int getHorasTrabajadas() {
 		return this.horasTrabajadas;
+	}
+
+	@Override
+	protected Float extras() {		
+		return this.montoHorasTrabajadas() + this.bonoPorHijos();
 	}
 
 }
