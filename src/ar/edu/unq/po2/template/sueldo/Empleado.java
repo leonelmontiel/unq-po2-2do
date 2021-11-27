@@ -5,6 +5,7 @@ public abstract class Empleado {
 	private Float sueldoBasico;
 	
 	public Empleado(Float sueldoBasico) {
+		// todas sus subclases deben indicar por parámetro cuánto es el valor de su sueldo básico
 		this.setSueldoBasico(sueldoBasico);
 	}
 
@@ -14,13 +15,16 @@ public abstract class Empleado {
 
 	protected Float sueldo() {
 		Float montoTotal = this.getSueldoBasico() + this.extras();
-		// this.sueldoBasico() + this.extras();
 		return this.montoConDescuentos(montoTotal);
 	}
 
 	private Float montoConDescuentos(Float monto) {
 		// el descuento por aportes y jubilación es del 13% del monto total
-		return monto * 0.87f;
+		return monto * this.descuentoRetenciones();
+	}
+
+	private float descuentoRetenciones() {
+		return 0.87f;
 	}
 	protected abstract Float extras();
 	

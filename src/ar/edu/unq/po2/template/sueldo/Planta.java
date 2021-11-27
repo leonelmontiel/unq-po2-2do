@@ -14,7 +14,7 @@ public class Planta extends Empleado {
 	}
 
 	public Float bonoPorHijos() {
-		return this.getCantHijos() * valorPorHijo();
+		return this.getCantHijos() * this.valorPorHijo();
 	}
 
 	private Float valorPorHijo() {

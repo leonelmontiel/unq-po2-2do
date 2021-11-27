@@ -14,7 +14,7 @@ public class Pasante extends Empleado {
 	}
 
 	public Float montoHorasTrabajadas() {
-		return this.getHorasTrabajadas() * valorPorHora();
+		return this.getHorasTrabajadas() * this.valorPorHora();
 	}
 
 	private Float valorPorHora() {
