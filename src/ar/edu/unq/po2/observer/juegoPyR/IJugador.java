@@ -18,4 +18,6 @@ public interface IJugador {
 
 	void recibirNotificacionRInc();
 
+	void recibirNotificacionGanador(String nombre);
+
 }

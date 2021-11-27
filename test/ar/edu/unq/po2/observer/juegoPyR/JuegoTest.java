@@ -133,8 +133,40 @@ class JuegoTest {
 		//exercise
 		this.juego.recibirRespuesta("pregunta", "respuesta", this.jugador);
 		//verify
-		verify(this.cuestionario).evaluarRespuesta("pregunta", "respuesta");
+		verify(this.cuestionario, atLeast(1)).evaluarRespuesta("pregunta", "respuesta"); //como se usa un if, se evalúa por cada rama de condiciones (refactorizar)
+		verify(this.cuestionario, never()).esUltimaPregunta("pregunta"); //nunca llega a evaluarse porque se utilizó un circuito corto
 		verify(this.jugador).recibirNotificacionRInc();
+	}
+	
+	@Test
+	void testUltimaPreguntaRespondidaCorrectamente() {
+		//setUp
+		when(this.jugador.getNombre()).thenReturn("lalolanda");
+		when(this.cuestionario.evaluarRespuesta("pregunta", "respuesta")).thenReturn(true);
+		when(this.cuestionario.esUltimaPregunta("pregunta")).thenReturn(true);
+		when(this.cuestionario.getNombreGanador()).thenReturn("Max Power");
+		this.juego.iniciado(true);
+		this.juego.setCuestionarioActual(this.cuestionario);
+		
+		Set<IJugador> jugadores = new HashSet<IJugador>();
+		jugadores.add(this.jugador);
+		jugadores.add(this.jugadorDos);
+		this.juego.setJugadores(jugadores);
+		this.juego.setPuntajes(this.puntaje);
+		
+		//exercise
+		this.juego.recibirRespuesta("pregunta", "respuesta", this.jugador);
+		
+		//verify
+		verify(this.jugador).recibirNotificacionGanador("Max Power");
+		verify(this.jugador).recibirNotificacionRC();
+		verify(this.jugador, never()).accionNoPermitida();
+		verify(this.jugadorDos).recibirNotificacionJugadorRC("lalolanda", "pregunta");
+		verify(this.jugadorDos).recibirNotificacionGanador("Max Power");
+		verify(this.puntaje).contabilizarRC(this.jugador);
+		verify(this.cuestionario, atLeast(1)).evaluarRespuesta("pregunta", "respuesta"); //como se usa un if, se evalúa por cada rama de condiciones (refactorizar)
+		verify(this.cuestionario, atLeast(1)).esUltimaPregunta("pregunta");
+		verify(this.cuestionario).getNombreGanador();
 	}
 
 }

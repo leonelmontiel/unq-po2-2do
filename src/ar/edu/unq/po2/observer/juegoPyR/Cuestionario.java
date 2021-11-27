@@ -8,4 +8,8 @@ public interface Cuestionario {
 
 	public Boolean evaluarRespuesta(String pregunta, String respuesta);
 
+	public Boolean esUltimaPregunta(String string);
+
+	public String getNombreGanador();
+
 }

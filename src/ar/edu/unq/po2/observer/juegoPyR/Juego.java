@@ -91,14 +91,39 @@ public class Juego implements IJuego{
 	}
 
 	private void evaluarRespuesta(String pregunta, String respuesta, IJugador jugador) {
-		if (this.cuestionarioActual.evaluarRespuesta(pregunta, respuesta)) {
-			this.getPuntajes().contabilizarRC(jugador);
-			jugador.recibirNotificacionRC();
-			this.notificarRCATodos(jugador, pregunta);
+		if (esRespuestaCorrecta(pregunta, respuesta) && !esUltimaPregunta(pregunta)) {
+			procederRC(pregunta, jugador);
+		} else if (esRespuestaCorrecta(pregunta, respuesta) && esUltimaPregunta(pregunta)) {
+			this.procederRC(pregunta, jugador);
+			this.notificarGanadorPartida();
+			this.finalizar();
 		} else {
 			jugador.recibirNotificacionRInc();
 		}
 		
+	}
+
+	private Boolean esUltimaPregunta(String pregunta) {
+		return this.cuestionarioActual.esUltimaPregunta(pregunta);
+	}
+
+	private Boolean esRespuestaCorrecta(String pregunta, String respuesta) {
+		return this.cuestionarioActual.evaluarRespuesta(pregunta, respuesta);
+	}
+
+	private void finalizar() {
+		this.iniciado(false);		
+	}
+
+	private void notificarGanadorPartida() {
+		String nombreGanador = this.cuestionarioActual.getNombreGanador();
+		this.getJugadores().stream().forEach(jug -> jug.recibirNotificacionGanador(nombreGanador));
+	}
+
+	private void procederRC(String pregunta, IJugador jugador) {
+		this.getPuntajes().contabilizarRC(jugador);
+		jugador.recibirNotificacionRC();
+		this.notificarRCATodos(jugador, pregunta);
 	}
 
 	Puntaje getPuntajes() {
