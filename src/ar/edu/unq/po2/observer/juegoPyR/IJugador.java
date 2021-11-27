@@ -6,4 +6,6 @@ public interface IJugador {
 
 	void recibirPreguntas(Juego juego, Set<String> preguntasDummy);
 
+	void actualizarEstadoDeJuego(Juego juego);
+
 }

@@ -14,13 +14,16 @@ class JuegoTest {
 	private IJugador jugador;
 	private IJugador jugadorDos;
 	private Cuestionario cuestionario;
+	private ProveedorDeCuestionarios provCuestionarios;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.juego = new Juego();
+		this.provCuestionarios = mock(ProveedorDeCuestionarios.class);
 		this.jugador = mock(IJugador.class);
 		this.jugadorDos = mock(IJugador.class);
 		this.cuestionario = mock(Cuestionario.class);
+		
+		this.juego = new Juego(this.provCuestionarios);
 	}
 
 	@Test
@@ -51,12 +54,10 @@ class JuegoTest {
 	@Test
 	void testNotificarListoParaJugar() {
 		//setUp
-		ProveedorDeCuestionarios provCuestionarios = mock(ProveedorDeCuestionarios.class);
 		@SuppressWarnings("unchecked")
 		Set<String> preguntasDummy = mock(Set.class);
 		when(this.cuestionario.getPreguntas()).thenReturn(preguntasDummy);
-		when(provCuestionarios.getCuestionario()).thenReturn(this.cuestionario);
-		this.juego.setProveedorCuestionarios(provCuestionarios);
+		when(this.provCuestionarios.getCuestionario()).thenReturn(this.cuestionario);
 		Set<IJugador> jugadores = new HashSet<IJugador>();
 		jugadores.add(this.jugador);
 		jugadores.add(this.jugadorDos);
@@ -67,6 +68,20 @@ class JuegoTest {
 		//verify
 	 	verify(this.jugador).recibirPreguntas(this.juego, preguntasDummy);
 	 	verify(this.jugadorDos).recibirPreguntas(this.juego, preguntasDummy);
+	}
+	
+	@Test
+	void testNotificarJuegoIniciado() {
+		//setUp
+		Set<IJugador> jugadores = new HashSet<IJugador>();
+		jugadores.add(this.jugador);
+		jugadores.add(this.jugadorDos);
+		this.juego.setJugadores(jugadores);
+		//exercise
+		this.juego.notificarJuegoIniciado();
+		//verify
+		verify(this.jugador).actualizarEstadoDeJuego(this.juego);
+		verify(this.jugadorDos).actualizarEstadoDeJuego(this.juego);
 	}
 
 }
