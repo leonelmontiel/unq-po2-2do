@@ -8,6 +8,7 @@ public class Juego implements IJuego{
 	 * */
 
 	private Set<IJugador> jugadores;
+	private ProveedorDeCuestionarios proveedorCuestionarios;
 
 	@Override
 	public void solicitaIngreso(IJugador jugador) {
@@ -30,13 +31,21 @@ public class Juego implements IJuego{
 
 	@Override
 	public void notificarListoParaJugar() {
-		// TODO Auto-generated method stub
-		
+		Set<String> preguntas = this.getPreguntasPartida();
+		this.getJugadores().stream().forEach(jugador -> jugador.recibirPreguntas(this, preguntas));
+	}
+
+	private Set<String> getPreguntasPartida() {
+		return getSiguienteCuestionario().getPreguntas();
+	}
+
+	private Cuestionario getSiguienteCuestionario() {
+		// por simplicidad solo toma el primero de la lista de cuestionario. Pero debería existir una lógica que tome cuestionarios de manera aleatoria
+		return this.proveedorCuestionarios.getCuestionario();
 	}
 
 	@Override
 	public void notificarJuegoIniciado() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -54,6 +63,10 @@ public class Juego implements IJuego{
 
 	void setJugadores(Set<IJugador> jugadores) {
 		this.jugadores = jugadores;		
+	}
+
+	void setProveedorCuestionarios(ProveedorDeCuestionarios provCuestionarios) {
+		this.proveedorCuestionarios = provCuestionarios;
 	}
 
 }

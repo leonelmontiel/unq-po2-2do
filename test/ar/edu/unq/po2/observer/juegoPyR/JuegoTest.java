@@ -12,11 +12,15 @@ class JuegoTest {
 
 	private Juego juego;
 	private IJugador jugador;
+	private IJugador jugadorDos;
+	private Cuestionario cuestionario;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		this.juego = new Juego();
 		this.jugador = mock(IJugador.class);
+		this.jugadorDos = mock(IJugador.class);
+		this.cuestionario = mock(Cuestionario.class);
 	}
 
 	@Test
@@ -42,6 +46,27 @@ class JuegoTest {
 		//verify
 		verify(jugadoresMock).size();
 		verify(jugadoresMock, never()).add(this.jugador);
+	}
+	
+	@Test
+	void testNotificarListoParaJugar() {
+		//setUp
+		ProveedorDeCuestionarios provCuestionarios = mock(ProveedorDeCuestionarios.class);
+		@SuppressWarnings("unchecked")
+		Set<String> preguntasDummy = mock(Set.class);
+		when(this.cuestionario.getPreguntas()).thenReturn(preguntasDummy);
+		when(provCuestionarios.getCuestionario()).thenReturn(this.cuestionario);
+		this.juego.setProveedorCuestionarios(provCuestionarios);
+		Set<IJugador> jugadores = new HashSet<IJugador>();
+		jugadores.add(this.jugador);
+		jugadores.add(this.jugadorDos);
+		this.juego.setJugadores(jugadores);
+		//exercise
+		//Envía la notificación de manera arbitraria (sin contar con la cantidad de jugadores necesarios) para probar la funcionalidad
+	 	this.juego.notificarListoParaJugar();	 	
+		//verify
+	 	verify(this.jugador).recibirPreguntas(this.juego, preguntasDummy);
+	 	verify(this.jugadorDos).recibirPreguntas(this.juego, preguntasDummy);
 	}
 
 }
