@@ -25,7 +25,7 @@ class JuegoTest {
 		this.cuestionario = mock(Cuestionario.class);
 		this.puntaje = mock(Puntaje.class);
 		
-		this.juego = new Juego(this.provCuestionarios);
+		this.juego = new Juego(this.provCuestionarios, this.puntaje);
 	}
 
 	@Test
@@ -111,7 +111,6 @@ class JuegoTest {
 		jugadores.add(this.jugador);
 		jugadores.add(this.jugadorDos);
 		this.juego.setJugadores(jugadores);
-		this.juego.setPuntajes(this.puntaje);
 		
 		//exercise
 		this.juego.recibirRespuesta("pregunta", "respuesta", this.jugador);
@@ -152,7 +151,6 @@ class JuegoTest {
 		jugadores.add(this.jugador);
 		jugadores.add(this.jugadorDos);
 		this.juego.setJugadores(jugadores);
-		this.juego.setPuntajes(this.puntaje);
 		
 		//exercise
 		this.juego.recibirRespuesta("pregunta", "respuesta", this.jugador);

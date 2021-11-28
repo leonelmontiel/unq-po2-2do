@@ -4,4 +4,6 @@ public interface Puntaje {
 
 	void contabilizarRC(IJugador jugador);
 
+	void clear();
+
 }

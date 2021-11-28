@@ -4,9 +4,9 @@ import java.util.Set;
 
 public interface IJugador {
 
-	void recibirPreguntas(Juego juego, Set<String> preguntasDummy);
+	void recibirPreguntas(IJuego juego, Set<String> preguntas);
 
-	void actualizarEstadoDeJuego(Juego juego);
+	void actualizarEstadoDeJuego(IJuego juego);
 
 	void accionNoPermitida(); //este método debería imprimir en consola
 

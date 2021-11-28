@@ -8,8 +8,9 @@ public interface IJuego {
 	
 	void notificarJuegoIniciado();
 	
-	void notificarJuegoFinalizado();
-	
 	void recibirRespuesta(String pregunta, String respuesta, IJugador jugador);
 
+	void notificarGanadorPartida();
+	
+	void notificarRCATodos(IJugador jugador, String pregunta);
 }

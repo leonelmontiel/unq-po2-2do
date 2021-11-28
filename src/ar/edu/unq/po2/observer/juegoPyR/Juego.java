@@ -15,10 +15,11 @@ public class Juego implements IJuego{
 	private Cuestionario cuestionarioActual;
 	private Puntaje puntajes;
 	
-	public Juego(ProveedorDeCuestionarios provCuestionarios) {
+	public Juego(ProveedorDeCuestionarios provCuestionarios, Puntaje puntaje) {
 		this.jugadores = new HashSet<IJugador>();
 		this.proveedorCuestionarios = provCuestionarios;
 		this.estado = false;
+		this.puntajes = puntaje;
 	}
 
 	@Override
@@ -77,11 +78,6 @@ public class Juego implements IJuego{
 	}
 
 	@Override
-	public void notificarJuegoFinalizado() {
-		
-	}
-
-	@Override
 	public void recibirRespuesta(String pregunta, String respuesta, IJugador jugador) {
 		if (!this.iniciado()) {
 			jugador.accionNoPermitida();
@@ -112,10 +108,12 @@ public class Juego implements IJuego{
 	}
 
 	private void finalizar() {
-		this.iniciado(false);		
+		this.iniciado(false);	
+		this.getPuntajes().clear();
 	}
 
-	private void notificarGanadorPartida() {
+	@Override
+	public void notificarGanadorPartida() {
 		String nombreGanador = this.cuestionarioActual.getNombreGanador();
 		this.getJugadores().stream().forEach(jug -> jug.recibirNotificacionGanador(nombreGanador));
 	}
@@ -126,11 +124,12 @@ public class Juego implements IJuego{
 		this.notificarRCATodos(jugador, pregunta);
 	}
 
-	Puntaje getPuntajes() {
+	private Puntaje getPuntajes() {
 		return this.puntajes;
 	}
 
-	private void notificarRCATodos(IJugador jugador, String pregunta) {
+	@Override
+	public void notificarRCATodos(IJugador jugador, String pregunta) {
 		Stream<IJugador> jugadoresNoGanadores = this.getJugadores().stream().filter(jug -> !jug.equals(jugador));
 		jugadoresNoGanadores.forEach(jug -> jug.recibirNotificacionJugadorRC(jugador.getNombre(), pregunta));		
 	}
@@ -141,10 +140,6 @@ public class Juego implements IJuego{
 
 	void setProveedorCuestionarios(ProveedorDeCuestionarios provCuestionarios) {
 		this.proveedorCuestionarios = provCuestionarios;
-	}
-
-	void setPuntajes(Puntaje puntaje) {
-		this.puntajes = puntaje;		
 	}
 
 }
