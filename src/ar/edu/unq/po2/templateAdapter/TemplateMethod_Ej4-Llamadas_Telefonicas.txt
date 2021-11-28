@@ -1,0 +1,14 @@
+- TP TemplateMethod -
+Ej. 4 - Llamadas telefónicas
+
+Template Method:
+ • costoFinal(): porque es quién tiene una estructura predeterminada de ejecución, dejando a las subclases que implementen el comportamiento que puede llegar a variar.
+
+Operaciones Primitivas:
+ • esHoraPico(): es el único método abstracto que existe en la clase padre. Este necesita ser implementado por las subclases.
+
+Operaciones Concretas:
+ • getTiempo() y getHoraDelDia(): son concretas porque son implementadas en la clase padre, otorgando un comportamiento predeterminado que no necesitan ser redefinidos por los hijos.
+
+Hook method:
+ • costoNeto(): si bien es implementado en la clase padre para darle un comportamiento predeterminado, las extensiones de la super clase pueden optar por redefinirlas o no.
