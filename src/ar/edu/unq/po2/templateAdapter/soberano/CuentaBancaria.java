@@ -12,7 +12,7 @@ public abstract class CuentaBancaria {
 	private List<String> movimientos;
 
 	// Template Method
-	public void extraer(int monto) {
+	public final void extraer(int monto) {
 		/*
 		 * Los cambios realizados son:
 		 *  - nueva operación primitiva "validarExtraccion" para que cada subclase implemente la condición que permita el retiro del dinero
