@@ -34,7 +34,7 @@ public class ActividadSemanal{
 	
 	@Override
 	public String toString() {
-		String print = "Deporte: " + getDeporte() + ". Día: " + getDia() + " a las: " + getHora() + ". Duración: " + getDuracion() + " hora(s)";
+		String print = "Deporte: " + this.getDeporte() + ". Día: " + this.getDia() + " a las: " + this.getHora() + ". Duración: " + this.getDuracion() + " hora(s)";
 		return print;
 	}
 	
