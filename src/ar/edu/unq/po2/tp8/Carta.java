@@ -6,8 +6,8 @@ public class Carta {
 	private Palo palo;
 
 	public Carta(Valor valor, Palo palo) {
-		setValor(valor);
-		setPalo(palo);
+		this.setValor(valor);
+		this.setPalo(palo);
 	}
 
 	private void setValor(Valor valor) {

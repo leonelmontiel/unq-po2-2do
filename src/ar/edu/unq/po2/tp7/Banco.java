@@ -10,11 +10,11 @@ public class Banco {
 	List<SolicitudCredito> solicitudes = new ArrayList<SolicitudCredito>();
 	
 	public List<Cliente> getClientes() {
-		return clientes;
+		return this.clientes;
 	}
 
 	public List<SolicitudCredito> getSolicitudes() {
-		return solicitudes;
+		return this.solicitudes;
 	}
 
 	public Boolean tieneClientes() {
