@@ -8,7 +8,7 @@ public class ProductoCooperativa extends Producto{
 	
 	@Override
 	protected double getPrecio() {
-		return this.precio - descuentoIVA();
+		return this.precio - this.descuentoIVA();
 	}
 
 	private double descuentoIVA() {

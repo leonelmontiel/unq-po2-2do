@@ -7,15 +7,15 @@ public class MercadoCentral {
 	List<Producto> stock = new ArrayList<Producto>();
 	
 	public void addProducto(Producto producto) {
-		stock.add(producto);
+		this.stock.add(producto);
 	}
 
 	public boolean hayStockDe(Producto producto) {
-		return stock.contains(producto);
+		return this.stock.contains(producto);
 	}
 
 	public void decrementarStockDe(Producto producto) {
-		stock.remove(producto);		
+		this.stock.remove(producto);		
 	}
 
 	public List<Producto> getStock() {

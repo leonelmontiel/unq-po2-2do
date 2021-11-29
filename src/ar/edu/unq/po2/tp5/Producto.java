@@ -5,8 +5,8 @@ public class Producto {
 	protected double precio;
 	
 	public Producto(String marca, double precio) {
-		setMarca(marca);
-		setPrecio(precio);
+		this.setMarca(marca);
+		this.setPrecio(precio);
 	}
 
 	private void setMarca(String marca) {

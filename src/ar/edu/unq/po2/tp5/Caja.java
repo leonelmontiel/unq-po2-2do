@@ -7,7 +7,7 @@ public class Caja {
 	MercadoCentral mercado;
 	
 	public Caja(MercadoCentral mercado) {
-		setMercado(mercado);
+		this.setMercado(mercado);
 	}
 	
 	private void setMercado(MercadoCentral mercado) {
@@ -15,13 +15,13 @@ public class Caja {
 	}
 	
 	public double registrarProductos(List<Producto> productos) {
-		resetearCaja();
+		this.resetearCaja();
 		
 		productos.stream().forEach((p) -> {
-			cobrarSiHayStockDe(p);
+			this.cobrarSiHayStockDe(p);
 			});
 		
-		return getMontoACobrar();
+		return this.getMontoACobrar();
 	}
 
 	public double getMontoACobrar() {
@@ -29,7 +29,7 @@ public class Caja {
 	}
 
 	private void resetearCaja() {
-		setMontoACobrar(0);		
+		this.setMontoACobrar(0);		
 	}
 	
 	private void setMontoACobrar(double valor) {
@@ -37,19 +37,19 @@ public class Caja {
 	}
 	
 	public void cobrarSiHayStockDe(Producto producto) {
-		if (mercado.hayStockDe(producto)) {
-			mercado.decrementarStockDe(producto);
-			cobrarProducto(producto);
+		if (this.mercado.hayStockDe(producto)) {
+			this.mercado.decrementarStockDe(producto);
+			this.cobrarProducto(producto);
 		}
 	}
 	
 	public void cobrarProducto(Producto producto) {
-		setMontoACobrar(getMontoACobrar() + producto.getPrecio());
+		this.setMontoACobrar(getMontoACobrar() + producto.getPrecio());
 	}
 
 	public void registrarFactura(Factura factura, Agencia agencia) {
-		setMontoACobrar(factura.getMontoAPagar());
-		notificarPagoAAgencia(factura, agencia);		
+		this.setMontoACobrar(factura.getMontoAPagar());
+		this.notificarPagoAAgencia(factura, agencia);		
 	}
 
 	private void notificarPagoAAgencia(Factura factura, Agencia agencia) {

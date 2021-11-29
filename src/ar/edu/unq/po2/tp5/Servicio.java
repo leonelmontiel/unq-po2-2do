@@ -5,8 +5,8 @@ public class Servicio implements Factura{
 	private int cantUnidadesConsumidas;
 	
 	public Servicio(double costo, int cantidad) {
-		setCosto(costo);
-		setUnidadesConsumidas(cantidad);
+		this.setCosto(costo);
+		this.setUnidadesConsumidas(cantidad);
 	}
 
 	private void setCosto(double costo) {
@@ -27,7 +27,7 @@ public class Servicio implements Factura{
 	
 	@Override
 	public double getMontoAPagar() {
-		double calculo = getCosto() * getUnidadesConsumidas();
+		double calculo = this.getCosto() * this.getUnidadesConsumidas();
 		return calculo;
 	}
 
