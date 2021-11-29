@@ -33,7 +33,7 @@ public class EsperandoInicio extends EstadoMaquina {
 
 	@Override
 	protected void finalizarJuego(Maquina maquina) {
-		// mismo caso que en estado inicial
+		//no hace nada porque no hay un juego que finalizar
 	}
 
 }
