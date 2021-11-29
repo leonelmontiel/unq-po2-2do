@@ -15,3 +15,4 @@ public abstract class EstadoReproductorMP3 {
 
 	protected abstract void stop(ReproductorMP3 reproductorMP3);
 
+}
