@@ -11,4 +11,4 @@ Operaciones Concretas:
  • getTiempo() y getHoraDelDia(): son concretas porque son implementadas en la clase padre, otorgando un comportamiento predeterminado que no necesitan ser redefinidos por los hijos.
 
 Hook method:
- • costoNeto(): si bien es implementado en la clase padre para darle un comportamiento predeterminado, las extensiones de la super clase pueden optar por redefinirlas o no.
+ • costoNeto(): es llamado en el método plantilla, y si bien es implementado en la clase padre para darle un comportamiento predeterminado, las extensiones de la super clase pueden optar por redefinirlas o no.

@@ -6,6 +6,12 @@ public class IntercambioVocal extends EstrategiaEncriptado {
 	private String claves;
 	private String valores;
 	
+	/*
+	 *  siempre que se quiera crear una instancia de IntercambioVocal, debe llamarse al método estático getInstance() para evaluar retornar una
+	 *  nueva instancia de la clase o si ya hay una, devolver esta (respeta el patrón Singleton para que exista una única instancia en el sistema).
+	 *  Esto es para seguir la misma lógica que posee IntercambioNumerico
+	 */
+	
 	public static EstrategiaEncriptado getInstance() {
 		if (instance == null) {
 			instance = new IntercambioVocal();

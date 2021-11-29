@@ -9,6 +9,13 @@ public class IntercambioNumerico extends EstrategiaEncriptado {
 	private Map<String, String> memoria;
 	private String codigo;
 	
+	/*
+	 * siempre que se quiera crear una instancia de IntercambioVocal, debe llamarse al método estático getInstance() para evaluar retornar una
+	 *  nueva instancia de la clase o si ya hay una, devolver esta (respeta el patrón Singleton para que exista una única instancia en el sistema).
+	 *  Esto es para que al crear un nuevo IntercambioNumerico la memoria no se resetee, y asi permitir desencriptar la frase anteriormente
+	 *  convertida a números
+	 */
+	
 	public static EstrategiaEncriptado getInstance() {
 		if (instance == null) {
 			instance = new IntercambioNumerico();

@@ -1,6 +1,9 @@
 package ar.edu.unq.po2.stateStrategy.encriptacion;
 
 public class EncriptadorNaive {
+	/*
+	 * Delega las peticiones a la instancia de EstrategiaEncriptado que contiene, la cuál puede elegirse manualmente a través del setter
+	 */
 
 	private EstrategiaEncriptado estrategia;
 
