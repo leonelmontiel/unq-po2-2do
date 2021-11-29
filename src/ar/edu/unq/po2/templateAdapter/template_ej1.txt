@@ -1,0 +1,11 @@
+2. a) ¿Dónde se define el esqueleto del algoritmo?
+ • se define en el método plantilla (template method) implementado en la clase abstracta padre.
+   
+   b) ¿Se puede redefinir el esquelo?
+ • el esqueleto no se debería redefinir, por ese motivo el template method debería ser un "final". Esto es para que ninguna subclase le de otro comportamiento, la intención del método plantilla es justamente tener el mismo comportamiento para todas las extensiones.
+ 
+   c) ¿Qué es lo que se puede redefinir?
+ • lo que se puede redefinir son las operaciones primitivas y los hooks method.
+
+   d) ¿Qué es un hook method?
+ • un hook method es un método implementado como predeterminado en la super clase que puede ser, o no, redefinido por las sub clases.

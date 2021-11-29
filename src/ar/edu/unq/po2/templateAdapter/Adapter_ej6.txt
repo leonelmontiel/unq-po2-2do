@@ -1,0 +1,30 @@
+- TP Strategy -
+Ej. 6
+
+1. Existe más de un tipo de adaptadores, estos son:
+  • Adaptador de clases: la petición de la super clase Objetivo es implementada delegando el comportamiento a la petición concreta de la clase extendida Adaptable.
+    - La ventaja de esto es que permite redefinir tanto las operaciones de la clase Objetivo como también de la Adaptable.
+    - La desventaja radica en que solo adapta una clase Adaptable concreta a Objetivo, es decir, no se puede adaptar a las subclases si las tuviera.
+
+ • Adaptador de objetos:
+   - Este tipo de estrategia permite que un mismo Adaptador funcione con la clase Adaptable y sus subclases, otorgando la posibilidad de añadir funcionalidad a todos los Adaptables a la vez. Esto se logra haciendo que el Adaptador guarde una instancia de la interfaz Adaptable para interactuar con ella.
+   - La parte mala de esta estrategia es que se hace más difícil redefinir el comportamiento de Adaptable. Se necesitará crear una subclase de esta y hacer que el Adaptador se refiera a la subclase en vez de la clase padre en sí.
+
+2. ¿En qué se diferencia un tipo de adaptador de otro?
+ • En que el adaptador de clases usa la herencia múltiple para adaptar una interfaz a otra, y la de objetos se basa en la composición de objetos.
+
+3. ¿Se puede utilizar ambas alternativas de implementación del patrón en Java?
+ • No es posible utilizar ambas alternativas, ya que el adaptador de clases necesita hacer uso de la herencia múltiple, funcionalidad que el lenguaje Java no permite.
+
+4. Retorna una instancia de Enumeration que a su vez implementa el protocolo dado por la misma interfaz. El adaptador en sí es el método elements(), ya que permite que se interactúe con la interfaz Enumeration a través de las implementaciones de las firmas.
+  Los roles son:
+   • Objetivo -> clase Vector
+   • Adaptable -> interfaz Enumeration
+   • Adaptador/petición -> método elements()
+
+5. El método iterator() de la clase ArrayList retorna una intancia de la clase privada Itr, el cual implementa la interfaz Iterator. Se utiliza la implementación del adaptador de clases.
+  Los roles son:
+   • Objetivo -> clase ArrayList
+   • Adaptable -> interfaz Iterator
+   • Adaptador -> clase privada Itr
+   • Petición -> método iterator() de la clase ArrayList
