@@ -18,7 +18,7 @@ public class IntercambioNumerico extends EstrategiaEncriptado {
 	
 	private IntercambioNumerico() {
 		this.memoria = new HashMap<String, String>();
-		this.codigo = " abcdefghijklmnopqrstuvwyz";
+		this.codigo = " abcdefghijklmnopqrstuvwxyz";
 	}
 
 	@Override

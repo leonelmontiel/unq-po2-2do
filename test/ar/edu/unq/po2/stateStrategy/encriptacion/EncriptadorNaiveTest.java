@@ -8,57 +8,58 @@ import org.junit.jupiter.api.Test;
 class EncriptadorNaiveTest {
 
 	private EncriptadorNaive encriptador;
+	private String frase;
+	private String fraseEsperada;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		this.encriptador = new EncriptadorNaive();
+		this.frase = "san lorenzo";
 	}
 	
 	@Test
 	void testEncriptarIntercanbioVocal() {
 		//setup
 		this.encriptador.setEstrategia(IntercambioVocal.getInstance());
-		String stringOrigen = "Frase a encriptar";
-		String stringEsperado = "Fresi e incropter";
+		this.fraseEsperada = "sen lurinzu";
 		
 		//verify
-		assertEquals(stringEsperado, this.encriptador.enciptar(stringOrigen));
+		assertEquals(this.fraseEsperada, this.encriptador.enciptar(this.frase));
 	}
 	
 	@Test
 	void testDesencriptarIntercanbioVocal() {
 		//setup
 		this.encriptador.setEstrategia(IntercambioVocal.getInstance());
-		String stringOrigen = "Fresi e incropter";
-		String stringEsperado = "Frase a encriptar";
+		this.fraseEsperada = this.frase;
+		this.frase = "sen lurinzu";
 		
 		//verify
-		assertEquals(stringEsperado, this.encriptador.desencriptar(stringOrigen));
+		assertEquals(this.fraseEsperada, this.encriptador.desencriptar(this.frase));
 	}
 
 	@Test
 	void testEncriptarIntercanbioNumerico() {
 		//setup
 		this.encriptador.setEstrategia(IntercambioNumerico.getInstance());
-		String stringOrigen = "frase a encriptar";
-		String stringEsperado = "618119501051431891620118";
+		this.fraseEsperada = "1911401215185142615";
 		
 		//verify
-		assertEquals(stringEsperado, this.encriptador.enciptar(stringOrigen));
+		assertEquals(this.fraseEsperada, this.encriptador.enciptar(this.frase));
 	}
 	
 	@Test
 	void testDesencriptarIntercanbioNumerico() {
 		//setup
 		this.encriptador.setEstrategia(IntercambioNumerico.getInstance());
-		String stringOrigen = "618119501051431891620118";
-		String stringEsperado = "frase a encriptar";
+		this.fraseEsperada = this.frase;
+		this.frase = "1911401215185142615";
 
 		//exercise (es necesario para que se pueda desencriptar que se haya encriptado previamente)
-		this.encriptador.enciptar(stringEsperado);
+		this.encriptador.enciptar(this.fraseEsperada);
 		
 		//verify
-		assertEquals(stringEsperado, this.encriptador.desencriptar(stringOrigen));
+		assertEquals(this.fraseEsperada, this.encriptador.desencriptar(this.frase));
 	}
 	
 }
