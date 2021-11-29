@@ -10,8 +10,8 @@ public class Supermercado {
 	private List<Producto> productos = new ArrayList<Producto>();
 
 	public Supermercado(String nombre, String direccion) {
-		setNombre(nombre);
-		setDireccion(direccion);
+		this.setNombre(nombre);
+		this.setDireccion(direccion);
 	}
 
 	private void setNombre(String nombre) {
@@ -23,15 +23,15 @@ public class Supermercado {
 	}
 
 	public Integer getCantidadDeProductos() {
-		return productos.size();
+		return this.productos.size();
 	}
 
 	public void agregarProducto(Producto producto) {
-		productos.add(producto);
+		this.productos.add(producto);
 	}
 
 	public Double getPrecioTotal() {
-		double precioTotal = productos.stream().mapToDouble(p -> p.getPrecio())
+		double precioTotal = this.productos.stream().mapToDouble(p -> p.getPrecio())
 												.sum();
 		return precioTotal;
 	}
