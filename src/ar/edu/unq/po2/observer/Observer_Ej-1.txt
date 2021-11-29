@@ -1,0 +1,14 @@
+Tercera alternativa (ComplexWithListeners):
+ - Ventajas:
+   * ya no es necesario extenderse de la clase Observable dada por el lenguaje.
+   * ahora adémas de notificar el objeto actualizado, se pasa el sensor a sí mismo para que los observadores sepan de dónde proviene la actualización.
+   * aplica polimorfismo al momento de notificar, ya que dependiendo el aspecto que cambió, notifica a los observadores enviándoles el mensaje acorde a este para que cada uno sepa qué acción realizar. Por ejemplo:
+   private void notificarTemperaturaExterior() {
+			for (SensorListener listener : this.listeners) {
+				listener.temperaturaExteriorModificada(this, this.getTemperaturaExterior());
+			}
+		}
+
+Ej. 0
+• ¿Cómo extendería las soluciones para los casos en que la misma clase observadora se encuentre observando simultáneamente a más de un sensor?
+- Instanciaría una lista de sensores, y allí ir agregando a los sensores a los que la clase observadora se suscribió. No va a haber problemas con esta implementación ya que cuando algún aspecto cambia en alguna clase observable, esta se pasa a sí misma en el mensaje de notificación. De esta manera el boservador sabrá de qué sensor, de los tantos que conoce, proviene el cambio.
