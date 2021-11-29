@@ -1,4 +1,4 @@
-package cuenta;
+package ar.edu.unq.po2.refactoring.cuenta;
 
 public interface HistorialMovimientos {
 
