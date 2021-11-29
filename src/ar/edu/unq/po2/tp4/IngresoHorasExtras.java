@@ -6,7 +6,7 @@ public class IngresoHorasExtras extends Ingreso {
 
 	public IngresoHorasExtras(String mes, String concepto, double monto, int horasExtras) {
 		super(mes, concepto, monto);
-		setHorasExtras(horasExtras);
+		this.setHorasExtras(horasExtras);
 	}
 
 	private void setHorasExtras(int horasExtras) {

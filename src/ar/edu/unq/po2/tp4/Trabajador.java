@@ -8,17 +8,17 @@ public class Trabajador {
 	private List<Ingreso> ingresos = new ArrayList<Ingreso>();
 	
 	public void agregarIngreso(Ingreso ingreso) {
-		ingresos.add(ingreso);
+		this.ingresos.add(ingreso);
 	}
 
 	public double getTotalPercibido() {
-		double total = ingresos.stream().mapToDouble(i -> i.getMonto())
+		double total = this.ingresos.stream().mapToDouble(i -> i.getMonto())
 										.sum();
 		return total;
 	}
 
 	public double getMontoImponible() {
-		double total = ingresos.stream().mapToDouble(i -> i.getMontoImponible())
+		double total = this.ingresos.stream().mapToDouble(i -> i.getMontoImponible())
 										.sum();
 		return total;
 	}
@@ -26,7 +26,7 @@ public class Trabajador {
 	public double getImpuestoAPagar() {
 		// el impuesto a pagar es un 2% del monto imponible
 		// intenté hacer "double porcentaje = 2 / 100" para multiplicar este resultado en el return, pero retorna 0 así
-		return getMontoImponible() * 2 / 100;
+		return this.getMontoImponible() * 2 / 100;
 	}
 	
 	

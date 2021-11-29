@@ -7,9 +7,9 @@ public class Ingreso {
 	private Double monto;
 
 	public Ingreso(String mes, String concepto, double monto) {
-		setMes(mes);
-		setConcepto(concepto);
-		setMonto(monto);
+		this.setMes(mes);
+		this.setConcepto(concepto);
+		this.setMonto(monto);
 	}
 
 	private void setMes(String mes) {
