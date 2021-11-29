@@ -10,14 +10,14 @@ public class Producto {
 	public Producto() {}
 	
 	public Producto(String nombre, double precio) {
-		setNombre(nombre);
-		setPrecio(precio);
+		this.setNombre(nombre);
+		this.setPrecio(precio);
 	}
 
 	public Producto(String nombre, double precio, boolean pCuidado) {
-		setNombre(nombre);
-		setPrecio(precio);
-		setEsPrecioCuidado(pCuidado);		
+		this.setNombre(nombre);
+		this.setPrecio(precio);
+		this.setEsPrecioCuidado(pCuidado);		
 	}
 
 	private void setEsPrecioCuidado(boolean pCuidado) {
@@ -45,7 +45,7 @@ public class Producto {
 	}
 
 	public void aumentarPrecio(double valor) {
-		setPrecio(getPrecio() + valor);
+		this.setPrecio(this.getPrecio() + valor);
 	}
 
 }

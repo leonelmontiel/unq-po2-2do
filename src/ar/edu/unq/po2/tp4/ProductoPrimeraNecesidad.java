@@ -4,7 +4,7 @@ public class ProductoPrimeraNecesidad extends Producto{
 
 	public ProductoPrimeraNecesidad(String nombre, double precio, boolean pCuidado, double descuento) {
 		super();
-		setPrecio(precio, descuento);
+		this.setPrecio(precio, descuento);
 	}
 	
 	private void setPrecio(double precio, double descuento) {
